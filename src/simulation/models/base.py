@@ -1,8 +1,8 @@
 from mesa import Model
 from mesa.time import RandomActivation
 from mesa.datacollection import DataCollector
-from agents.base import BaseAgent
-from networks.base import BaseNetwork
+from simulation.agents.base import BaseAgent
+from simulation.networks.base import BaseNetwork
 
 
 class BaseModel(Model):
@@ -16,8 +16,8 @@ class BaseModel(Model):
 
         # Create agents
         for i in range(self.num_agents):
-            a = self.add_agent(i)
-            self.schedule.add(a)
+            agent = self.add_agent(i)
+            self.schedule.add(agent)
 
     def step(self):
         self.custom_step()

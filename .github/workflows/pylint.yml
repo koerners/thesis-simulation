@@ -14,12 +14,12 @@ jobs:
       with:
         python-version: 3.9
     - name: Set Pythonpath
-      run: | 
-          export PYTHONPATH=${PYTHONPATH}:src/simulation
+      run: |
+          export PYTHONPATH=${PYTHONPATH}:src
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint `ls -R|grep .py$|xargs`
+        pylint src

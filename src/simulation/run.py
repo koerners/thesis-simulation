@@ -1,5 +1,5 @@
 from mesa.batchrunner import BatchRunner
-from models.base import BaseModel
+from simulation.models.base import BaseModel
 
 fixed_params = {}
 variable_params = {"N": [1000]}
