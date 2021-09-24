@@ -10,6 +10,8 @@ mesa = "*"
 networkx = "*"
 matplotlib = "*"
 scipy = "*"
+pylint = "*"
 
 [scripts]
 run="python src/simulation/run.py"
+lint="pylint src"
