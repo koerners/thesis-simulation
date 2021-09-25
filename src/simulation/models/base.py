@@ -3,7 +3,7 @@ from mesa.time import RandomActivation
 from mesa.datacollection import DataCollector
 from simulation.agents.base import BaseAgent
 from simulation.models.utils.datacollector import \
-    get_data_collector, get_experiment_id, get_total_agent_count
+    get_current_network, get_data_collector, get_experiment_id, get_total_agent_count
 from simulation.networks.base import BaseNetwork
 
 
@@ -20,6 +20,7 @@ class BaseModel(Model):
         self.datacollector = DataCollector(
             {'total_agents': get_total_agent_count,
              'experiment_id': get_experiment_id,
+             'network': get_current_network,
              'datacollector': get_data_collector})
 
         # Create agents

@@ -11,3 +11,7 @@ def get_experiment_id(self) -> int:
 
 def get_data_collector(self) -> DataCollector:
     return self.datacollector
+
+
+def get_current_network(self):
+    return self.network
