@@ -41,7 +41,7 @@ class BaseModel(Model):
         BaseAgent(self)
 
     def init_social_network(self) -> BaseNetwork:
-        return BaseNetwork(self)
+        return BaseNetwork()
 
     def init_scheduler(self) -> RandomActivation:
         return RandomActivation(self)

@@ -35,7 +35,7 @@ batch_run = BatchRunnerMP(model_cls=ReproductionModel,
                           variable_parameters=reproduction_model_params,
                           fixed_parameters=fixed_params,
                           iterations=1,
-                          max_steps=100,
+                          max_steps=50,
                           model_reporters={
                               **base_reporter, **extended_reporter}
                           )

@@ -4,9 +4,8 @@ from simulation.networks.utils.draw import save_network_visualization
 
 
 class BaseNetwork:
-    def __init__(self, model):
+    def __init__(self):
         self.graph = nx.Graph()
-        self.model = model
 
     def add_node(self, node):
         self.graph.add_node(node)

@@ -13,5 +13,8 @@ def get_data_collector(self) -> DataCollector:
     return self.datacollector
 
 
-def get_current_network(self):
-    return self.network
+def get_current_network(self, step=10):
+    """Returns the current network every 10 steps"""
+    if self.schedule.steps % step == 0:
+        return self.network
+    return None
