@@ -129,3 +129,6 @@ dmypy.json
 .vscode/settings.json
 
 out/*
+*.out
+slurm.sh
+slurm-other-options.txt

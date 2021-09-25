@@ -40,8 +40,9 @@ class BaseModel(Model):
     def add_agent(self) -> None:
         BaseAgent(self)
 
-    def init_social_network(self) -> BaseNetwork:
-        return BaseNetwork()
-
     def init_scheduler(self) -> RandomActivation:
         return RandomActivation(self)
+
+    @staticmethod
+    def init_social_network() -> BaseNetwork:
+        return BaseNetwork()
