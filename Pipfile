@@ -4,13 +4,13 @@ verify_ssl = true
 
 [dev-packages]
 nose2="*"
+pylint = "*"
 
 [packages]
 mesa = "*"
 networkx = "*"
 matplotlib = "*"
 scipy = "*"
-pylint = "*"
 
 [scripts]
 run="python src/simulation/run.py"
