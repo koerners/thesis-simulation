@@ -39,4 +39,6 @@ class ReproducingAgent(AgingAgent):
             self.reproduce()
 
     def reproduce(self) -> None:
-        ReproducingAgent(self.model)
+        child = ReproducingAgent(self.model)
+        self.model.network.add_node_connection(self, child, Relationship.CHILD.value)
+        self.model.network.add_node_connection(self.partner, child, Relationship.CHILD.value)

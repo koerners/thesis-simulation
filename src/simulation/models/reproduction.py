@@ -3,13 +3,13 @@ from simulation.models.aging import AgingModel
 
 
 class ReproductionModel(AgingModel):
-    def __init__(self, num_agents, network_visualization_steps,
+    def __init__(self, num_agents, network_saving_steps,
                  min_lifeexpectancy, max_lifeexpectancy, genderless, agent_limit, run_id):
         self.genderless_agents = genderless
         self.agent_limit = agent_limit
         self.suitable_mates = []
         super().__init__(num_agents=num_agents,
-                         network_visualization_steps=network_visualization_steps,
+                         network_saving_steps=network_saving_steps,
                          min_lifeexpectancy=min_lifeexpectancy,
                          max_lifeexpectancy=max_lifeexpectancy,
                          run_id=run_id)
