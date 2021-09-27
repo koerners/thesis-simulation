@@ -24,13 +24,13 @@ class Commandline:
         self._max_steps = int(_args.Steps) if _args.Steps else 100
 
     @property
-    def nr_of_processes(self):
+    def nr_of_processes(self) -> int:
         return self._nr_of_processes
 
     @property
-    def iterations(self):
+    def iterations(self) -> int:
         return self._iterations
 
     @property
-    def max_steps(self):
+    def max_steps(self) -> int:
         return self._max_steps

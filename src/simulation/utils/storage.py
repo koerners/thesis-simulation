@@ -9,7 +9,7 @@ class SizeUnit(enum.Enum):
     GB = 4
 
 
-def convert_unit(size_in_bytes, unit):
+def convert_unit(size_in_bytes: int, unit: SizeUnit) -> float:
     """ Convert the size from bytes to other units like KB, MB or GB"""
     if unit == SizeUnit.KB:
         out = size_in_bytes/1024
@@ -22,7 +22,7 @@ def convert_unit(size_in_bytes, unit):
     return round(out, 2)
 
 
-def get_file_size(file_name, size_type=SizeUnit.MB):
+def get_file_size(file_name: str, size_type=SizeUnit.MB) -> float:
     """ Get file in size in given unit like KB, MB or GB"""
     size = os.path.getsize(file_name)
     return convert_unit(size, size_type)

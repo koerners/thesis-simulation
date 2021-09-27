@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from simulation.utils.directory import create_dir
 
 
-def save_network_visualization(self, out) -> None:
+def save_network_visualization(self, out: str) -> None:
     full_path = create_dir(out)
     plt.figure(figsize=(10, 6))
     pos = nx.spring_layout(self.graph, k=0.8)

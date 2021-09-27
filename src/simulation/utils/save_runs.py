@@ -13,7 +13,7 @@ def get_data_collector_for_step(collector) -> Dict:
     return pd.DataFrame(dictionary)
 
 
-def pre_edit_run_data(run_data) -> DataFrame:
+def pre_edit_run_data(run_data: DataFrame) -> DataFrame:
     run_data.sort_index(axis=1, inplace=True)
     if 'datacollector' in run_data:
         run_data['datacollector'] = run_data['datacollector'].apply(
@@ -21,7 +21,7 @@ def pre_edit_run_data(run_data) -> DataFrame:
     return run_data
 
 
-def save_to_pickle(dataframe, path):
+def save_to_pickle(dataframe, path: str):
     full_path = create_dir(path)
     dataframe.to_pickle(full_path)
     print(
