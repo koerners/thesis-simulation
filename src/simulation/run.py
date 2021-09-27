@@ -1,7 +1,7 @@
 from mesa.batchrunner import BatchRunnerMP
 from simulation.models.reproduction import ReproductionModel
 from simulation.models.utils.datacollector import \
-    get_data_collector, get_experiment_id, get_total_agent_count
+    get_experiment_id, get_steps_data, get_total_agent_count
 from simulation.utils.commandline import Commandline
 from simulation.utils.save_runs import pre_edit_run_data, save_to_pickle
 from simulation.utils.time import get_current_timestring
@@ -24,10 +24,10 @@ reproduction_model_params = {**aging_model_params,
                              'agent_limit': [5000]}
 
 # MODEL REPORTER
-base_reporter = {'total_agents': get_total_agent_count,
+base_reporter = {'final_agents': get_total_agent_count,
                  'experiment_id': get_experiment_id}
 
-extended_reporter = {'datacollector': get_data_collector}
+extended_reporter = {'steps': get_steps_data}
 
 
 if __name__ == "__main__":

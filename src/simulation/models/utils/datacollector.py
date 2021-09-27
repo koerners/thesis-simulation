@@ -1,4 +1,4 @@
-from mesa.datacollection import DataCollector
+from typing import Dict
 
 
 def get_total_agent_count(self) -> int:
@@ -9,8 +9,9 @@ def get_experiment_id(self) -> int:
     return self.experiment_id
 
 
-def get_data_collector(self) -> DataCollector:
-    return self.datacollector
+def get_steps_data(self) -> Dict:
+    keep = ['total_agents']
+    return [{key: value} for (key, value) in self.datacollector.model_vars.items() if key in keep]
 
 
 def get_current_network(self, step=10):

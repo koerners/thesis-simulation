@@ -15,9 +15,6 @@ def get_data_collector_for_step(collector) -> Dict:
 
 def pre_edit_run_data(run_data: DataFrame) -> DataFrame:
     run_data.sort_index(axis=1, inplace=True)
-    if 'datacollector' in run_data:
-        run_data['datacollector'] = run_data['datacollector'].apply(
-            get_data_collector_for_step)
     return run_data
 
 
