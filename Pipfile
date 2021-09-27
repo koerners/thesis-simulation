@@ -4,6 +4,7 @@ verify_ssl = true
 
 [dev-packages]
 autopep8 = "*"
+nose2="*"
 
 [packages]
 mesa = "*"
@@ -16,3 +17,4 @@ pylint = "*"
 run="python src/simulation/run.py"
 lint="pylint src"
 clear="rm -rf out/"
+test="python -m nose2"

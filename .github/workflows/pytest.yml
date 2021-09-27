@@ -1,4 +1,4 @@
-name: Pylint
+name: Lint and Test
 
 on: [push]
 
@@ -21,3 +21,6 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pipenv run lint
+    - name: Running tests
+      run: |
+        pipenv run test
