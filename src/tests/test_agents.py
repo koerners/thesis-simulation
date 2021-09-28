@@ -17,13 +17,13 @@ class NetworksTest(unittest.TestCase):
 
     def test_aging(self):
         model = AgingModel(num_agents=0, network_saving_steps=None, run_id=None,
-                           min_lifeexpectancy=0, max_lifeexpectancy=0)
+                           lifeexpectancy=(0, 0))
         agent = AgingAgent(model)
         self.assertIsInstance(agent, AgingAgent)
 
     def test_reproducing(self):
         model = ReproductionModel(num_agents=0, network_saving_steps=None, run_id=None,
-                                  min_lifeexpectancy=0, max_lifeexpectancy=0, agent_limit=0,
+                                  lifeexpectancy=(0, 0), agent_limit=0,
                                   genderless=False)
         agent = ReproducingAgent(model)
         self.assertIsInstance(agent, ReproducingAgent)

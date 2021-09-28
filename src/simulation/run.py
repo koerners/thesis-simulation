@@ -16,8 +16,7 @@ fixed_params = {"network_saving_steps": None,
 variable_base_params = {"num_agents": [10]}
 
 aging_model_params = {**variable_base_params,
-                      'min_lifeexpectancy': [30],
-                      'max_lifeexpectancy': [50]}
+                      'lifeexpectancy': [(30, 50)]}
 
 reproduction_model_params = {**aging_model_params,
                              'genderless': [True],
