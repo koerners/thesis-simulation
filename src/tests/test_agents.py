@@ -33,7 +33,7 @@ class NetworksTest(unittest.TestCase):
     def test_eating(self):
         model = EatingModel(num_agents=0, network_saving_steps=None, run_id=None,
                             lifeexpectancy=(0, 0), agent_limit=0,
-                            genderless=False, foodlimit_multiplicator=None)
+                            genderless=False, foodlimit_multiplicator=None, finding_max=0)
         agent = EatingAgent(model)
         self.assertIsInstance(agent, EatingAgent)
 

@@ -24,7 +24,9 @@ reproduction_model_params = {**aging_model_params,
 
 eating_mode_params = {**reproduction_model_params,
                       # will be multiplied by the amount of initial agents
-                      'foodlimit_multiplicator': [None],
+                      'foodlimit_multiplicator': range(0, 5),
+                      # maximum amount of food one agent can find per step
+                      'finding_max': [3],
                       }
 
 
@@ -53,7 +55,7 @@ if __name__ == "__main__":
     batch_run.run_all()
 
     run_data = batch_run.get_model_vars_dataframe()
-    run_data = pre_edit_run_data(run_data.head())
+    run_data = pre_edit_run_data(run_data)
 
-    print(run_data)
+    print(run_data.head())
     save_to_pickle(run_data, f"{RUN_ID}/run_data.pkl")
