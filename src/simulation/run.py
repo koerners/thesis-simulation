@@ -10,17 +10,17 @@ RUN_ID = get_current_timestring()
 
 
 # PARAMETERS
-fixed_params = {"network_saving_steps": 10,
+fixed_params = {"network_saving_steps": None,
                 'run_id': RUN_ID}
 
 variable_base_params = {"num_agents": [10]}
 
 aging_model_params = {**variable_base_params,
-                      'lifeexpectancy': [(30, 50)]}
+                      'lifeexpectancy': [(20, 30), (50, 60)]}
 
 reproduction_model_params = {**aging_model_params,
                              'genderless': [True, False],
-                             'agent_limit': [5000]}
+                             'agent_limit': [1000]}
 
 # MODEL REPORTER
 base_reporter = {'final_agents': get_total_agent_count,

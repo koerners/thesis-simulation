@@ -14,7 +14,8 @@ class ReproductionModel(AgingModel):
                          run_id=run_id)
 
     def add_agent(self) -> None:
-        ReproducingAgent(self, gender_less=self.genderless_agents)
+        ReproducingAgent(self, gender_less=self.genderless_agents,
+                         lifeexpectancy=self.lifeexpectancy)
 
     def step(self) -> None:
         self.suitable_mates = list(filter(lambda agent: (agent.age > 14 and agent.age <

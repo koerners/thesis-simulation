@@ -21,3 +21,4 @@ if __name__ == '__main__':
     print(all_run_data.head())
 
     plot_population_growth(all_run_data, "agent_growth", "genderless")
+    plot_population_growth(all_run_data, "agent_growth", "lifeexpectancy")
