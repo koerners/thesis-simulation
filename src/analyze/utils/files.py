@@ -16,6 +16,7 @@ def get_iterations(run_id):
 
 
 def get_run_data(run_id):
+    print(f"Loading data for {run_id}")
     try:
         return pd.read_pickle(f"./out/{run_id}/run_data.pkl")
     except IOError as error:

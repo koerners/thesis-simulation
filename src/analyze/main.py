@@ -11,9 +11,7 @@ all_run_data = pd.DataFrame()
 
 if __name__ == '__main__':
 
-    for run in ALL_RUNS:
-        run_data = get_run_data(run)
-        all_run_data = all_run_data.append(run_data)
+    all_run_data = all_run_data.append(get_run_data(ALL_RUNS[-1]))
 
     all_run_data['agent_growth'] = all_run_data['steps'].apply(
         lambda x: np.array(x[0].get("total_agents")))
