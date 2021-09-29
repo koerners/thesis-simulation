@@ -33,8 +33,6 @@ class BaseModel(Model):
             self.network.save(
                 f"{self.run_id}/{self.experiment_id}/Step_{self.schedule.steps}.pkl")
         self.schedule.step()
-        if get_total_agent_count(self) < 1:
-            self.running = False
 
     def add_agent(self) -> None:
         BaseAgent(self)

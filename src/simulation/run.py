@@ -1,5 +1,5 @@
 from mesa.batchrunner import BatchRunnerMP
-from simulation.models.reproduction import ReproductionModel
+from simulation.models.eating import EatingModel
 from simulation.models.utils.datacollector import \
     get_experiment_id, get_steps_data, get_total_agent_count
 from simulation.utils.commandline import Commandline
@@ -16,11 +16,17 @@ fixed_params = {"network_saving_steps": None,
 variable_base_params = {"num_agents": [10]}
 
 aging_model_params = {**variable_base_params,
-                      'lifeexpectancy': [(20, 30), (50, 60)]}
+                      'lifeexpectancy': [(20, 30)]}
 
 reproduction_model_params = {**aging_model_params,
                              'genderless': [True, False],
                              'agent_limit': [1000]}
+
+eating_mode_params = {**reproduction_model_params,
+                      # will be multiplied by the amount of initial agents
+                      'foodlimit_multiplicator': [None],
+                      }
+
 
 # MODEL REPORTER
 base_reporter = {'final_agents': get_total_agent_count,
@@ -33,9 +39,9 @@ if __name__ == "__main__":
     commandline_args = Commandline()
 
     # BATCH RUNNER
-    batch_run = BatchRunnerMP(model_cls=ReproductionModel,
+    batch_run = BatchRunnerMP(model_cls=EatingModel,
                               nr_processes=commandline_args.nr_of_processes,
-                              variable_parameters=reproduction_model_params,
+                              variable_parameters=eating_mode_params,
                               fixed_parameters=fixed_params,
                               iterations=commandline_args.iterations,
                               max_steps=commandline_args.max_steps,
@@ -47,7 +53,7 @@ if __name__ == "__main__":
     batch_run.run_all()
 
     run_data = batch_run.get_model_vars_dataframe()
-    run_data = pre_edit_run_data(run_data)
+    run_data = pre_edit_run_data(run_data.head())
 
-    print(run_data.head())
+    print(run_data)
     save_to_pickle(run_data, f"{RUN_ID}/run_data.pkl")

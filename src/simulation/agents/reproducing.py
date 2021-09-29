@@ -12,8 +12,8 @@ class Gender(Enum):
 
 
 class ReproducingAgent(AgingAgent):
-    def __init__(self, model):
-        super().__init__(model=model)
+    def __init__(self, model, age=None):
+        super().__init__(model=model, age=age)
         self.gender = self.random.choice(
             [Gender.MALE, Gender.FEMALE]) if not model.genderless else Gender.GENDERLESS
         self.partner = None
@@ -31,7 +31,7 @@ class ReproducingAgent(AgingAgent):
             self.reproduce()
 
     def reproduce(self) -> None:
-        child = ReproducingAgent(self.model)
+        child = self.bear_child()
         self.model.network.add_node_connection(
             self, child, Relationship.CHILD.value)
         self.model.network.add_node_connection(
@@ -47,3 +47,6 @@ class ReproducingAgent(AgingAgent):
             self.partner.partner = self
             self.model.network.add_node_connection(
                 self, self.partner, Relationship.PARTNER.value)
+
+    def bear_child(self):
+        return ReproducingAgent(self.model, age=0)

@@ -22,3 +22,5 @@ if __name__ == '__main__':
 
     plot_population_growth(all_run_data, "agent_growth", "genderless")
     plot_population_growth(all_run_data, "agent_growth", "lifeexpectancy")
+    plot_population_growth(all_run_data, "agent_growth",
+                           "foodlimit_multiplicator")

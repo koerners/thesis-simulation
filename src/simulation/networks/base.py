@@ -1,4 +1,5 @@
 import networkx as nx
+from networkx.exception import NetworkXError
 
 from simulation.networks.utils.draw import save_network
 
@@ -11,7 +12,10 @@ class BaseNetwork:
         self.graph.add_node(node)
 
     def remove_node(self, node) -> None:
-        self.graph.remove_node(node)
+        try:
+            self.graph.remove_node(node)
+        except NetworkXError:
+            pass
 
     def add_node_connection(self, node_1, node_2, relatedness: int) -> None:
         self.graph.add_edge(node_1, node_2, weight=relatedness)
