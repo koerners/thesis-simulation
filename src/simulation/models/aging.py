@@ -13,4 +13,4 @@ class AgingModel(BaseModel):
                          run_id=run_id)
 
     def add_agent(self) -> None:
-        AgingAgent(self, lifeexpectancy=self.lifeexpectancy)
+        AgingAgent(self)
