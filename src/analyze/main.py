@@ -1,25 +1,12 @@
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
+import numpy as np
 
-from analyze.utils.arrays import pad_array
+from analyze.models import plot_population_growth
 from analyze.utils.files import get_run_data, get_saved_runs
 
 ALL_RUNS = get_saved_runs()
 
 all_run_data = pd.DataFrame()
-
-
-def plot_population_growth(data, path):
-    average_agent_growth = np.mean(
-        pad_array(np.array(data['agent_growth'])), axis=0)
-
-    plt.plot(average_agent_growth, label="Average")
-    plt.title("Agent growth")
-    plt.xlabel("Steps")
-    plt.ylabel("Population")
-    plt.legend()
-    plt.savefig(f'./out/{path}.png')
 
 
 if __name__ == '__main__':
@@ -33,4 +20,4 @@ if __name__ == '__main__':
 
     print(all_run_data.head())
 
-    plot_population_growth(all_run_data, "average_agent_growth")
+    plot_population_growth(all_run_data, "agent_growth", "genderless")
