@@ -1,6 +1,6 @@
 import pandas as pd
 
-from analyze.models import plot_value_over_time_by_feature
+from analyze.models import plot_distribution_over_time, plot_value_over_time_by_feature
 from analyze.utils.files import get_run_data, get_saved_runs
 
 ALL_RUNS = get_saved_runs()
@@ -13,6 +13,8 @@ if __name__ == '__main__':
     all_run_data = all_run_data.append(get_run_data(ALL_RUNS[-1]))
 
     print(all_run_data.head())
+
+    plot_distribution_over_time(all_run_data, "agent_types")
 
     plot_value_over_time_by_feature(
         all_run_data, "clustering", "foodlimit_multiplicator")
