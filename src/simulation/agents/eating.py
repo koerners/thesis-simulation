@@ -20,7 +20,8 @@ class EatingAgent(ReproducingAgent):
     def find_food(self) -> int:
         food = 0
         if self.model.current_food > 0:
-            food = self.random.choice(range(0, self.model.finding_max))
+            food = min(self.random.choice(
+                range(0, self.model.finding_max)), self.model.current_food)
             self.model.current_food -= food
         return food
 
