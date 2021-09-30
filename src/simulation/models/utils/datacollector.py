@@ -1,5 +1,7 @@
 from typing import Dict
 
+from networkx.algorithms.approximation import average_clustering
+
 
 def get_total_agent_count(self) -> int:
     return self.schedule.get_agent_count()
@@ -10,7 +12,7 @@ def get_experiment_id(self) -> int:
 
 
 def get_steps_data(self) -> Dict:
-    keep = ['total_agents']
+    keep = ['total_agents', 'clustering']
     return [{key: value} for (key, value) in self.datacollector.model_vars.items() if key in keep]
 
 
@@ -19,3 +21,10 @@ def get_current_network(self, step=10):
     if self.schedule.steps % step == 0:
         return self.network
     return None
+
+
+def get_network_clustering(self):
+    try:
+        return average_clustering(self.network.graph)
+    except IndexError:
+        return 0

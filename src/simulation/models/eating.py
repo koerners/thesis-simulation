@@ -3,7 +3,6 @@ import math
 from simulation.agents.eating import EatingAgent
 from simulation.models.reproduction import ReproductionModel
 
-
 class EatingModel(ReproductionModel):
     def __init__(self, num_agents, network_saving_steps,
                  lifeexpectancy, genderless, agent_limit, run_id,

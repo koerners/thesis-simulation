@@ -1,9 +1,11 @@
 from mesa import Model
-from mesa.time import RandomActivation
 from mesa.datacollection import DataCollector
+from mesa.time import RandomActivation
 from simulation.agents.base import BaseAgent
-from simulation.models.utils.datacollector import \
-    get_experiment_id, get_steps_data, get_total_agent_count
+from simulation.models.utils.datacollector import (get_experiment_id,
+                                                   get_network_clustering,
+                                                   get_steps_data,
+                                                   get_total_agent_count)
 from simulation.networks.base import BaseNetwork
 
 
@@ -20,7 +22,10 @@ class BaseModel(Model):
         self.datacollector = DataCollector(
             {'total_agents': get_total_agent_count,
              'experiment_id': get_experiment_id,
-             'steps': get_steps_data})
+             'steps': get_steps_data,
+             'clustering': get_network_clustering
+             }
+        )
 
         # Create agents
         for _ in range(self.num_agents):
@@ -40,6 +45,6 @@ class BaseModel(Model):
     def init_scheduler(self) -> RandomActivation:
         return RandomActivation(self)
 
-    @staticmethod
+    @ staticmethod
     def init_social_network() -> BaseNetwork:
         return BaseNetwork()
