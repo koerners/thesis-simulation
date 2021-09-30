@@ -28,3 +28,6 @@ class EatingModel(ReproductionModel):
     def step(self) -> None:
         self.current_food = self.foodlimit
         super().step()
+        for agent in self.schedule.agents:
+            if agent.current_food < 1:
+                agent.die()

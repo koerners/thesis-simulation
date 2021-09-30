@@ -10,10 +10,6 @@ class EatingAgent(ReproducingAgent):
 
     def step(self) -> None:
         self.current_food += self.find_food()
-        if self.current_food < 1:
-            self.die()
-            return
-
         self.current_food -= 1
         self.can_reproduce = self.current_food >= self.model.child_bearing_cost
 

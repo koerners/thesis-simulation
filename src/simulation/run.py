@@ -1,10 +1,11 @@
 from mesa.batchrunner import BatchRunnerMP
 
-from simulation.models.eating import EatingModel
+from simulation.models.hamilton import HamiltonModel
 from simulation.models.utils.datacollector import (get_experiment_id,
                                                    get_steps_data,
                                                    get_total_agent_count)
 from simulation.utils.commandline import Commandline
+from simulation.utils.params import float_range
 from simulation.utils.save_runs import pre_edit_run_data, save_to_pickle
 from simulation.utils.time import get_current_timestring
 
@@ -29,7 +30,7 @@ eating_mode_params = {**reproduction_model_params,
                       'foodlimit_multiplicator': [10],
                       # maximum amount of food one agent can find per step
                       'finding_max': range(2, 4),
-                      'child_bearing_cost': range(0, 4)
+                      'child_bearing_cost': float_range(0, 2, 0.5)
                       }
 
 
@@ -44,7 +45,7 @@ if __name__ == "__main__":
     commandline_args = Commandline()
 
     # BATCH RUNNER
-    batch_run = BatchRunnerMP(model_cls=EatingModel,
+    batch_run = BatchRunnerMP(model_cls=HamiltonModel,
                               nr_processes=commandline_args.nr_of_processes,
                               variable_parameters=eating_mode_params,
                               fixed_parameters=fixed_params,
