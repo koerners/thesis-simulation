@@ -11,13 +11,19 @@ class Gender(Enum):
     GENDERLESS = "x"
 
 
+def agent_can_reproduce(agent, agent_limit_reached): \
+    return not agent_limit_reached and agent.partner is not None \
+    and (agent.gender in (Gender.FEMALE, Gender.GENDERLESS)) \
+    and agent.age < 40 and agent.can_reproduce and agent.partner.can_reproduce
+
+
 class ReproducingAgent(AgingAgent):
     def __init__(self, model, age=None):
         super().__init__(model=model, age=age)
         self.gender = self.random.choice(
             [Gender.MALE, Gender.FEMALE]) if not model.genderless else Gender.GENDERLESS
         self.partner = None
-        self.can_reproduce = True
+        self.can_reproduce = True  # can be overwritten by parent classes
 
     def step(self) -> None:
         super().step()
@@ -25,10 +31,9 @@ class ReproducingAgent(AgingAgent):
             self.model) >= self.model.agent_limit
         if self.partner is None:
             self.find_partner()
-        if not agent_limit_reached and self.partner is not None \
-            and (self.gender in (Gender.FEMALE, Gender.GENDERLESS)) \
-                and self.age < 40 and self.can_reproduce:
+        if agent_can_reproduce(self, agent_limit_reached):
             self.reproduce()
+        self.can_reproduce = True
 
     def reproduce(self) -> None:
         child = self.bear_child()

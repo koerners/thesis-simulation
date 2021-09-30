@@ -25,3 +25,5 @@ if __name__ == '__main__':
         all_run_data, "total_agents", "lifeexpectancy")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "foodlimit_multiplicator")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "child_bearing_cost")

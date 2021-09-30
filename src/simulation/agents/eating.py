@@ -15,6 +15,8 @@ class EatingAgent(ReproducingAgent):
             return
 
         self.current_food -= 1
+        self.can_reproduce = self.current_food >= self.model.child_bearing_cost
+
         super().step()
 
     def find_food(self) -> int:
@@ -26,4 +28,5 @@ class EatingAgent(ReproducingAgent):
         return food
 
     def bear_child(self):
+        self.current_food -= self.model.child_bearing_cost
         return EatingAgent(self.model, age=0)

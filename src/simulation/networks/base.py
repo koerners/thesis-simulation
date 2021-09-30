@@ -20,5 +20,11 @@ class BaseNetwork:
     def add_node_connection(self, node_1, node_2, relatedness: int) -> None:
         self.graph.add_edge(node_1, node_2, weight=relatedness)
 
+    def get_neighbors(self, node):
+        try:
+            return nx.algorithms.components.node_connected_component(self.graph, node)
+        except KeyError:
+            return None
+
     def save(self, file_name: str) -> None:
         save_network(self, file_name)

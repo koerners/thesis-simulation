@@ -21,14 +21,15 @@ aging_model_params = {**variable_base_params,
                       'lifeexpectancy': [(30, 40)]}
 
 reproduction_model_params = {**aging_model_params,
-                             'genderless': [True],
+                             'genderless': [False],
                              'agent_limit': [500]}
 
 eating_mode_params = {**reproduction_model_params,
                       # will be multiplied by the amount of initial agents
                       'foodlimit_multiplicator': [10],
                       # maximum amount of food one agent can find per step
-                      'finding_max': range(1, 4),
+                      'finding_max': range(2, 4),
+                      'child_bearing_cost': range(0, 4)
                       }
 
 
