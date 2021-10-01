@@ -37,9 +37,9 @@ def plot_value_over_time_by_feature(data: DataFrame,
     plt.xlabel("steps")
     plt.ylabel(value_to_excert)
     plt.legend()
-    output = f'./out/{value_to_excert}_by_{feature}.png' \
-        if feature is not None else f'./out/{value_to_excert}.png'
-    plt.savefig(output)
+    output = f'{value_to_excert}/by_{feature}.png' \
+        if feature is not None else f'{value_to_excert}/average.png'
+    plt.savefig(create_dir(output))
 
 
 def _plot_distribution_over_time(data: DataFrame,
