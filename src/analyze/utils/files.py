@@ -5,7 +5,7 @@ import pandas as pd
 
 def get_saved_runs():
     runs = [name for name in os.listdir(
-        './out') if os.path.isdir(os.path.join('./out', name))]
+        './out') if os.path.isdir(os.path.join('./out', name)) and name[0].isdigit()]
     return sorted(runs)
 
 

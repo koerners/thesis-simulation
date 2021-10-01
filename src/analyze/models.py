@@ -4,7 +4,7 @@ import numpy as np
 from pandas.core.frame import DataFrame
 import pandas as pd
 from analyze.utils.arrays import pad_array
-
+from simulation.utils.save_runs import create_dir
 
 def get_steps_data(data, value_to_excert):
     return data['steps'].apply(
@@ -17,7 +17,6 @@ def plot_value_over_time_by_feature(data: DataFrame,
                                     value_to_excert: str,
                                     feature: str = None) -> None:
     plt.figure().clear()
-
     data[value_to_excert] = get_steps_data(data, value_to_excert)
 
     if feature is not None:
@@ -45,7 +44,8 @@ def plot_value_over_time_by_feature(data: DataFrame,
 
 def _plot_distribution_over_time(data: DataFrame,
                                  value_to_excert: str,
-                                 feature: str = None) -> None:
+                                 name: str = None,
+                                 output_path: str = None) -> None:
     # pylint: disable=cell-var-from-loop
 
     plt.figure().clear()
@@ -61,14 +61,12 @@ def _plot_distribution_over_time(data: DataFrame,
         data_frame[pos] = np.mean(np.array(data[pos]), axis=0)
 
     data_frame[possible].plot.area(stacked=True)
-    title = f"distribution of {value_to_excert} by {feature}" if \
-        feature is not None else f"distribution of {value_to_excert}"
+    title = f"distribution of {value_to_excert} by {name}" if \
+        name is not None else f"distribution of {value_to_excert}"
     plt.title(title)
     plt.xlabel("steps")
     plt.legend()
-    output = f'./out/distribution_{value_to_excert}_by_{feature}.png' \
-        if feature is not None else f'./out/distribution__{value_to_excert}.png'
-    plt.savefig(output)
+    plt.savefig(output_path)
 
 
 def plot_distribution_over_time_by_feature(data: DataFrame,
@@ -79,4 +77,9 @@ def plot_distribution_over_time_by_feature(data: DataFrame,
     for value in unique_values:
         data_frame = data.loc[data[feature] == value].copy(deep=True)
         _plot_distribution_over_time(
-            data_frame.reset_index(), value_to_excert, f"{feature}_{value}")
+            data=data_frame.reset_index(),
+            value_to_excert=value_to_excert,
+            name=f"{feature}_{value}",
+            output_path=create_dir(
+                f"distribution_{value_to_excert}/{feature}_{value}.png")
+        )
