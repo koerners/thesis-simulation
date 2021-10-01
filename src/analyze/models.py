@@ -43,13 +43,12 @@ def plot_value_over_time_by_feature(data: DataFrame,
     plt.savefig(output)
 
 
-def plot_distribution_over_time(data: DataFrame,
-                                value_to_excert: str,
-                                feature: str = None) -> None:
+def _plot_distribution_over_time(data: DataFrame,
+                                 value_to_excert: str,
+                                 feature: str = None) -> None:
     # pylint: disable=cell-var-from-loop
 
     plt.figure().clear()
-
     extracted = get_steps_data(data, value_to_excert)
     data[value_to_excert] = extracted
     data_frame = pd.DataFrame()
@@ -62,11 +61,22 @@ def plot_distribution_over_time(data: DataFrame,
         data_frame[pos] = np.mean(np.array(data[pos]), axis=0)
 
     data_frame[possible].plot.area(stacked=True)
-    title = f"distribution of{value_to_excert} by {feature}" if \
+    title = f"distribution of {value_to_excert} by {feature}" if \
         feature is not None else f"distribution of {value_to_excert}"
     plt.title(title)
     plt.xlabel("steps")
     plt.legend()
-    output = f'./out/distribution__{value_to_excert}_by_{feature}.png' \
+    output = f'./out/distribution_{value_to_excert}_by_{feature}.png' \
         if feature is not None else f'./out/distribution__{value_to_excert}.png'
     plt.savefig(output)
+
+
+def plot_distribution_over_time_by_feature(data: DataFrame,
+                                           value_to_excert: str,
+                                           feature: str = None) -> None:
+
+    unique_values = data[feature].unique()
+    for value in unique_values:
+        data_frame = data.loc[data[feature] == value].copy(deep=True)
+        _plot_distribution_over_time(
+            data_frame.reset_index(), value_to_excert, f"{feature}_{value}")
