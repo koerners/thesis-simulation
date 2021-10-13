@@ -6,11 +6,14 @@ import pandas as pd
 from analyze.utils.arrays import pad_array
 from simulation.utils.save_runs import create_dir
 
+
 def get_steps_data(data, value_to_excert):
     return data['steps'].apply(
-        lambda x:
-        np.array(list(filter(lambda y:
-                             y.get(value_to_excert) is not None, x))[0].get(value_to_excert)))
+        lambda x: np.array(
+            list(
+                filter(
+                    lambda y: y.get(value_to_excert) is not None,
+                    x))[0].get(value_to_excert)))
 
 
 def plot_value_over_time_by_feature(data: DataFrame,

@@ -3,13 +3,15 @@ import math
 from simulation.agents.eating import EatingAgent
 from simulation.models.reproduction import ReproductionModel
 
+
 class EatingModel(ReproductionModel):
     def __init__(self, num_agents, network_saving_steps,
                  lifeexpectancy, genderless, agent_limit, run_id,
                  finding_max, foodlimit_multiplicator=None,
                  child_bearing_cost=0):
-        self.foodlimit = (foodlimit_multiplicator *
-                          num_agents) if foodlimit_multiplicator is not None else math.inf
+        self.foodlimit = (
+            foodlimit_multiplicator *
+            num_agents) if foodlimit_multiplicator is not None else math.inf
         self.current_food = self.foodlimit
         self.finding_max = finding_max
         self.child_bearing_cost = child_bearing_cost

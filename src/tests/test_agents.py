@@ -18,22 +18,41 @@ class NetworksTest(unittest.TestCase):
         self.assertIsInstance(agent, BaseAgent)
 
     def test_aging(self):
-        model = AgingModel(num_agents=0, network_saving_steps=None, run_id=None,
-                           lifeexpectancy=(0, 0))
+        model = AgingModel(
+            num_agents=0,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(
+                0,
+                0))
         agent = AgingAgent(model)
         self.assertIsInstance(agent, AgingAgent)
 
     def test_reproducing(self):
-        model = ReproductionModel(num_agents=0, network_saving_steps=None, run_id=None,
-                                  lifeexpectancy=(0, 0), agent_limit=0,
-                                  genderless=False)
+        model = ReproductionModel(
+            num_agents=0,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(
+                0,
+                0),
+            agent_limit=0,
+            genderless=False)
         agent = ReproducingAgent(model)
         self.assertIsInstance(agent, ReproducingAgent)
 
     def test_eating(self):
-        model = EatingModel(num_agents=0, network_saving_steps=None, run_id=None,
-                            lifeexpectancy=(0, 0), agent_limit=0,
-                            genderless=False, foodlimit_multiplicator=None, finding_max=0)
+        model = EatingModel(
+            num_agents=0,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(
+                0,
+                0),
+            agent_limit=0,
+            genderless=False,
+            foodlimit_multiplicator=None,
+            finding_max=0)
         agent = EatingAgent(model)
         self.assertIsInstance(agent, EatingAgent)
 
