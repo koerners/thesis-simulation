@@ -13,7 +13,8 @@ def get_experiment_id(self) -> int:
 
 def get_steps_data(self) -> Dict:
     keep = ['total_agents', 'clustering', 'agent_types']
-    return [{key: value} for (key, value) in self.datacollector.model_vars.items() if key in keep]
+    return [{key: value}
+            for (key, value) in self.datacollector.model_vars.items() if key in keep]
 
 
 def get_current_network(self, step=10):
