@@ -1,6 +1,6 @@
 [MASTER]
 init-hook='import sys; sys.path.append("/src/simulation")'
 disable=
-    C0114, C0115 , C0116 # missing-docstring
+    C0114, C0115 , C0116, R0801, W0105
 max-args=10
 max-attributes=10
