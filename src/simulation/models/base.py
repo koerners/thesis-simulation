@@ -2,10 +2,12 @@ from mesa import Model
 from mesa.datacollection import DataCollector
 from mesa.time import RandomActivation
 from simulation.agents.base import BaseAgent
-from simulation.models.utils.datacollector import (get_current_agent_types, get_experiment_id,
-                                                   get_network_clustering,
-                                                   get_steps_data,
-                                                   get_total_agent_count)
+from simulation.models.utils.datacollector import (
+    get_current_agent_types,
+    get_experiment_id,
+    get_network_clustering,
+    get_steps_data,
+    get_total_agent_count)
 from simulation.networks.base import BaseNetwork
 
 

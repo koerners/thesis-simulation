@@ -12,11 +12,11 @@ class SizeUnit(enum.Enum):
 def convert_unit(size_in_bytes: int, unit: SizeUnit) -> float:
     """ Convert the size from bytes to other units like KB, MB or GB"""
     if unit == SizeUnit.KB:
-        out = size_in_bytes/1024
+        out = size_in_bytes / 1024
     elif unit == SizeUnit.MB:
-        out = size_in_bytes/(1024*1024)
+        out = size_in_bytes / (1024 * 1024)
     elif unit == SizeUnit.GB:
-        out = size_in_bytes/(1024*1024*1024)
+        out = size_in_bytes / (1024 * 1024 * 1024)
     else:
         out = size_in_bytes
     return round(out, 2)

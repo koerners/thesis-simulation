@@ -17,8 +17,10 @@ class ReproductionModel(AgingModel):
         ReproducingAgent(self)
 
     def step(self) -> None:
-        self.suitable_mates = list(filter(lambda agent: (agent.age > 18 and agent.age <
-                                   40 and agent.partner is None), self.schedule.agents))
-
+        self.suitable_mates = list(
+            filter(
+                lambda agent: (
+                    agent.age > 18 and agent.age < 40 and agent.partner is None),
+                self.schedule.agents))
 
         super().step()

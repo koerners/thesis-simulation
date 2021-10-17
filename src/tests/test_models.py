@@ -18,22 +18,41 @@ class ModelsTest(unittest.TestCase):
         self.assert_step(model)
 
     def test_aging(self):
-        model = AgingModel(num_agents=0, network_saving_steps=None, run_id=None,
-                           lifeexpectancy=(0, 0))
+        model = AgingModel(
+            num_agents=0,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(
+                0,
+                0))
         self.assertIsInstance(model, AgingModel)
         self.assert_step(model)
 
     def test_reproducing(self):
-        model = ReproductionModel(num_agents=0, network_saving_steps=None, run_id=None,
-                                  lifeexpectancy=(0, 0), agent_limit=0,
-                                  genderless=False)
+        model = ReproductionModel(
+            num_agents=0,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(
+                0,
+                0),
+            agent_limit=0,
+            genderless=False)
         self.assertIsInstance(model, ReproductionModel)
         self.assert_step(model)
 
     def test_eating(self):
-        model = EatingModel(num_agents=0, network_saving_steps=None, run_id=None,
-                                  lifeexpectancy=(0, 0), agent_limit=0,
-                                  genderless=False, foodlimit_multiplicator=None, finding_max=0)
+        model = EatingModel(
+            num_agents=0,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(
+                0,
+                0),
+            agent_limit=0,
+            genderless=False,
+            foodlimit_multiplicator=None,
+            finding_max=0)
         self.assertIsInstance(model, EatingModel)
         self.assert_step(model)
 
