@@ -12,7 +12,6 @@ class HamiltonAgent(EatingAgent):
         if relative_in_need is not None:
             self.give_food_to(relative_in_need)
 
-
     def __find_relative_in_need(self):
         strongest_connection = 0
         strongest_connected_agent = None
