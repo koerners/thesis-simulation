@@ -17,6 +17,3 @@ class BaseAgent(Agent):
 
     def step(self) -> None:
         pass
-
-    def end_of_step_action(self) -> None:
-        pass

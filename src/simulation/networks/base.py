@@ -25,7 +25,7 @@ class BaseNetwork:
             return nx.algorithms.components.node_connected_component(
                 self.graph, node)
         except KeyError:
-            return None
+            return []
 
     def get_node_weight(self, node_1, node_2) -> int:
         conn = self.graph.get_edge_data(node_1, node_2)

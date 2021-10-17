@@ -54,4 +54,6 @@ class ReproducingAgent(AgingAgent):
                 self, self.partner, Relationship.PARTNER.value)
 
     def bear_child(self):
-        return ReproducingAgent(self.model, age=0)
+        return self.random.choice([
+            self.__class__(self.model, age=0),
+            self.partner.__class__(self.model, age=0)])
