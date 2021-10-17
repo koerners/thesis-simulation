@@ -26,5 +26,9 @@ class BaseNetwork:
         except KeyError:
             return None
 
+    def get_node_weight(self, node_1, node_2) -> int:
+        conn = self.graph.get_edge_data(node_1, node_2)
+        return 0 if conn is None else conn.get("weight", 0)
+
     def save(self, file_name: str) -> None:
         save_network(self, file_name)

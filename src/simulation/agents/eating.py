@@ -26,3 +26,8 @@ class EatingAgent(ReproducingAgent):
     def bear_child(self):
         self.current_food -= self.model.child_bearing_cost
         return EatingAgent(self.model, age=0)
+
+    def give_food_to(self, receiver):
+        if self.current_food > 0:
+            self.current_food -= 1
+            receiver.current_food += 1

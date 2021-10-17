@@ -39,6 +39,8 @@ class BaseModel(Model):
             self.network.save(
                 f"{self.run_id}/{self.experiment_id}/Step_{self.schedule.steps}.pkl")
         self.schedule.step()
+        for agent in self.schedule.agents:
+            agent.end_of_step_action()
 
     def add_agent(self) -> None:
         BaseAgent(self)
