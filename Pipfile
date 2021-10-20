@@ -5,6 +5,7 @@ verify_ssl = true
 [dev-packages]
 nose2="*"
 pylint = "*"
+black = "*"
 
 [packages]
 mesa = "*"
@@ -18,3 +19,4 @@ lint="pylint src"
 clear="rm -rf out/"
 test="python -m nose2 --with-coverage"
 analyze="python src/analyze/main.py"
+format="black . --check"
