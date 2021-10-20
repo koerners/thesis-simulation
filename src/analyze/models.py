@@ -15,6 +15,7 @@ def get_steps_data(data, value_to_excert):
                     lambda y: y.get(value_to_excert) is not None,
                     x))[0].get(value_to_excert)))
 
+
 def clear_figs():
     plt.figure().clear()
     plt.close('all')
