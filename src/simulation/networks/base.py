@@ -16,10 +16,6 @@ class BaseNetwork:
             self.graph.remove_node(node)
         except NetworkXError:
             pass
-        
-        
-        
-            
 
     def add_node_connection(self, node_1, node_2, relatedness: int) -> None:
         self.graph.add_edge(node_1, node_2, weight=relatedness)
