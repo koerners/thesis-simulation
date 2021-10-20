@@ -8,9 +8,16 @@ class HamiltonAgent(EatingAgent):
 
     def step(self) -> None:
         super().step()
-        relative_in_need = self.__find_relative_in_need()
-        if relative_in_need is not None:
-            self.give_food_to(relative_in_need)
+
+        cant_help_anyone = False
+        for _ in range(int(self.current_food)):
+            if cant_help_anyone:
+                continue
+            relative_in_need = self.__find_relative_in_need()
+            if relative_in_need is not None:
+                self.give_food_to(relative_in_need)
+            else:
+                cant_help_anyone = True
 
     def __find_relative_in_need(self):
         strongest_connection = 0
@@ -22,4 +29,5 @@ class HamiltonAgent(EatingAgent):
             if connection > strongest_connection:
                 strongest_connection = connection
                 strongest_connected_agent = neighbor
+
         return strongest_connected_agent

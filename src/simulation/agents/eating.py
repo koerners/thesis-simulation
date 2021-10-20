@@ -19,7 +19,7 @@ class EatingAgent(ReproducingAgent):
         food = 0
         if self.model.current_food > 0:
             food = min(self.random.choice(
-                range(self.model.finding_max+1)), self.model.current_food)
+                range(self.model.finding_max + 1)), self.model.current_food)
             self.model.current_food -= food
         return food
 
@@ -30,6 +30,7 @@ class EatingAgent(ReproducingAgent):
 
     def bear_child(self):
         self.current_food -= self.model.child_bearing_cost
+        self.partner.current_food -= self.model.child_bearing_cost
         return self.random.choice([
             self.__class__(self.model, age=0),
             self.partner.__class__(self.model, age=0)])
