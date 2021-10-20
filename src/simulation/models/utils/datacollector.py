@@ -18,9 +18,12 @@ def get_seed(self) -> int:
 
 
 def get_steps_data(self) -> Dict:
-    keep = ['total_agents', 'clustering', 'agent_types', 'food_distribution']
-    return [{key: value}
-            for (key, value) in self.datacollector.model_vars.items() if key in keep]
+    keep = ["total_agents", "clustering", "agent_types", "food_distribution"]
+    return [
+        {key: value}
+        for (key, value) in self.datacollector.model_vars.items()
+        if key in keep
+    ]
 
 
 def get_current_network(self, step=10):
@@ -56,12 +59,10 @@ def get_current_food_distribution(self):
     try:
         food_distribution = [x.current_food for x in self.schedule.agents]
         mean = median(food_distribution)
-        below_average = len(
-            list(filter(lambda x: x < mean, food_distribution)))
-        above_average = len(
-            list(filter(lambda x: x > mean, food_distribution)))
+        below_average = len(list(filter(lambda x: x < mean, food_distribution)))
+        above_average = len(list(filter(lambda x: x > mean, food_distribution)))
     except StatisticsError:
         # no agents
         pass
 
-    return {'below_mean': below_average, 'above_mean': above_average}
+    return {"below_mean": below_average, "above_mean": above_average}

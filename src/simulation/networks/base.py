@@ -22,8 +22,7 @@ class BaseNetwork:
 
     def get_neighbors(self, node):
         try:
-            return nx.algorithms.components.node_connected_component(
-                self.graph, node)
+            return nx.algorithms.components.node_connected_component(self.graph, node)
         except KeyError:
             return []
 

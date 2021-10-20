@@ -7,14 +7,11 @@ class Commandline:
         _parser = argparse.ArgumentParser()
 
         # Adding optional argument
-        _parser.add_argument("-p", "--Processes",
-                             help="Number of processes used")
+        _parser.add_argument("-p", "--Processes", help="Number of processes used")
 
-        _parser.add_argument("-i", "--Iterations",
-                             help="Number of iterations")
+        _parser.add_argument("-i", "--Iterations", help="Number of iterations")
 
-        _parser.add_argument("-s", "--Steps",
-                             help="Max steps")
+        _parser.add_argument("-s", "--Steps", help="Max steps")
 
         # Read arguments from command line
         _args = _parser.parse_args()

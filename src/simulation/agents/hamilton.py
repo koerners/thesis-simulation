@@ -1,4 +1,3 @@
-
 from simulation.agents.eating import EatingAgent
 
 

@@ -1,5 +1,3 @@
-
-
 from simulation.agents.eating import EatingAgent
 from simulation.agents.hamilton import HamiltonAgent
 from simulation.models.eating import EatingModel

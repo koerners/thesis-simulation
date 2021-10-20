@@ -9,7 +9,8 @@ from simulation.models.utils.datacollector import (
     get_network_clustering,
     get_seed,
     get_steps_data,
-    get_total_agent_count)
+    get_total_agent_count,
+)
 from simulation.networks.base import BaseNetwork
 
 
@@ -24,14 +25,15 @@ class BaseModel(Model):
         self.network_saving_steps = network_saving_steps
         self.experiment_id = hash(self)
         self.datacollector = DataCollector(
-            {'total_agents': get_total_agent_count,
-             'experiment_id': get_experiment_id,
-             'steps': get_steps_data,
-             'clustering': get_network_clustering,
-             'agent_types': get_current_agent_types,
-             'food_distribution': get_current_food_distribution,
-             'seed': get_seed
-             }
+            {
+                "total_agents": get_total_agent_count,
+                "experiment_id": get_experiment_id,
+                "steps": get_steps_data,
+                "clustering": get_network_clustering,
+                "agent_types": get_current_agent_types,
+                "food_distribution": get_current_food_distribution,
+                "seed": get_seed,
+            }
         )
 
         # Create agents
@@ -40,10 +42,13 @@ class BaseModel(Model):
 
     def step(self) -> None:
         self.datacollector.collect(self)
-        if self.network_saving_steps is not None and \
-                self.schedule.steps % self.network_saving_steps == 0:
+        if (
+            self.network_saving_steps is not None
+            and self.schedule.steps % self.network_saving_steps == 0
+        ):
             self.network.save(
-                f"{self.run_id}/{self.experiment_id}/Step_{self.schedule.steps}.pkl")
+                f"{self.run_id}/{self.experiment_id}/Step_{self.schedule.steps}.pkl"
+            )
         self.schedule.step()
 
     def add_agent(self) -> None:
@@ -52,6 +57,6 @@ class BaseModel(Model):
     def init_scheduler(self) -> RandomActivation:
         return RandomActivation(self)
 
-    @ staticmethod
+    @staticmethod
     def init_social_network() -> BaseNetwork:
         return BaseNetwork()

@@ -10,7 +10,8 @@ class AgingAgent(BaseAgent):
             self.age = age
         min_lifeexpectancy, max_lifeexpectancy = model.lifeexpectancy
         self.life_expectancy = self.random.randint(
-            min_lifeexpectancy, max_lifeexpectancy)
+            min_lifeexpectancy, max_lifeexpectancy
+        )
 
     def step(self) -> None:
         super().step()

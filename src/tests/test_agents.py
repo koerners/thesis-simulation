@@ -12,7 +12,6 @@ from simulation.models.reproduction import ReproductionModel
 
 
 class NetworksTest(unittest.TestCase):
-
     def test_base(self):
         model = BaseModel(num_agents=0, network_saving_steps=None, run_id=None)
         agent = BaseAgent(model)
@@ -21,12 +20,8 @@ class NetworksTest(unittest.TestCase):
 
     def test_aging(self):
         model = AgingModel(
-            num_agents=0,
-            network_saving_steps=None,
-            run_id=None,
-            lifeexpectancy=(
-                0,
-                0))
+            num_agents=0, network_saving_steps=None, run_id=None, lifeexpectancy=(0, 0)
+        )
         agent = AgingAgent(model)
         self.assertIsInstance(agent, AgingAgent)
         agent.step()
@@ -36,11 +31,10 @@ class NetworksTest(unittest.TestCase):
             num_agents=0,
             network_saving_steps=None,
             run_id=None,
-            lifeexpectancy=(
-                0,
-                0),
+            lifeexpectancy=(0, 0),
             agent_limit=0,
-            genderless=False)
+            genderless=False,
+        )
         agent = ReproducingAgent(model)
         self.assertIsInstance(agent, ReproducingAgent)
         agent.step()
@@ -50,13 +44,12 @@ class NetworksTest(unittest.TestCase):
             num_agents=0,
             network_saving_steps=None,
             run_id=None,
-            lifeexpectancy=(
-                0,
-                0),
+            lifeexpectancy=(0, 0),
             agent_limit=0,
             genderless=False,
             foodlimit_multiplicator=None,
-            finding_max=0)
+            finding_max=0,
+        )
         agent = EatingAgent(model)
         self.assertIsInstance(agent, EatingAgent)
         agent.step()
@@ -66,17 +59,16 @@ class NetworksTest(unittest.TestCase):
             num_agents=0,
             network_saving_steps=None,
             run_id=None,
-            lifeexpectancy=(
-                0,
-                0),
+            lifeexpectancy=(0, 0),
             agent_limit=0,
             genderless=False,
             foodlimit_multiplicator=None,
-            finding_max=0)
+            finding_max=0,
+        )
         agent = EatingAgent(model)
         self.assertIsInstance(agent, EatingAgent)
         agent.step()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
