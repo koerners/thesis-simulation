@@ -24,11 +24,6 @@ jobs:
         git commit -am "Automated formatting fixes"
         git push
 
-    - name: Exit after push if files had to be formatted
-      if: steps.action_black.outputs.is_formatted == 'true'
-      run: |
-            exit 1
-
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
