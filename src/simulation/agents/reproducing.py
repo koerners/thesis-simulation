@@ -42,6 +42,12 @@ class ReproducingAgent(AgingAgent):
         self.model.network.add_node_connection(
             self.partner, child, Relationship.CHILD.value)
 
+        """
+        for relative in self.model.network.get_neighbors(self):
+            self.model.network.add_node_connection(
+                relative, child,  self.model.network.get_node_weight(self, relative)*0.5)
+        """
+
     def find_partner(self):
         self.partner = next(
             filter(lambda mate: (mate.partner is None and
