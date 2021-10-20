@@ -20,3 +20,6 @@ clear="rm -rf out/"
 test="python -m nose2 --with-coverage"
 analyze="python src/analyze/main.py"
 format="black . --check"
+
+[pipenv]
+allow_prereleases = true
