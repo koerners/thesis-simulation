@@ -18,9 +18,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install pipenv
         pipenv install --dev
+    - name: Black
+      run: |
+          pipenv run format
+    - name: Commit autopep8 changes
+      if: steps.Black.outputs.exit-code == 1
+      run: |
+        git config --global user.name 'koerners'
+        git config --global user.email 'git@skoerner.com'
+        git commit -am "Automated formatting fixes"
+        git push
+    
     - name: Analysing the code with pylint
+      if: steps.Black.outputs.exit-code == 0
       run: |
         pipenv run lint
     - name: Running tests
+      if: steps.Black.outputs.exit-code == 0
       run: |
         pipenv run test
