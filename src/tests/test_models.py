@@ -3,6 +3,7 @@ import unittest
 from simulation.models.aging import AgingModel
 from simulation.models.base import BaseModel
 from simulation.models.eating import EatingModel
+from simulation.models.hamilton import HamiltonModel
 from simulation.models.reproduction import ReproductionModel
 
 
@@ -54,6 +55,21 @@ class ModelsTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=0)
         self.assertIsInstance(model, EatingModel)
+        self.assert_step(model)
+
+    def test_hamilton(self):
+        model = HamiltonModel(
+            num_agents=0,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(
+                0,
+                0),
+            agent_limit=0,
+            genderless=False,
+            foodlimit_multiplicator=None,
+            finding_max=0)
+        self.assertIsInstance(model, HamiltonModel)
         self.assert_step(model)
 
 

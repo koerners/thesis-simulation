@@ -15,6 +15,10 @@ def get_steps_data(data, value_to_excert):
                     lambda y: y.get(value_to_excert) is not None,
                     x))[0].get(value_to_excert)))
 
+def clear_figs():
+    plt.figure().clear()
+    plt.close('all')
+
 
 def plot_value_over_time_by_feature(data: DataFrame,
                                     value_to_excert: str,
@@ -44,6 +48,8 @@ def plot_value_over_time_by_feature(data: DataFrame,
         if feature is not None else f'{value_to_excert}/average.png'
     plt.savefig(create_dir(output))
 
+    clear_figs()
+
 
 def _plot_distribution_over_time(data: DataFrame,
                                  value_to_excert: str,
@@ -71,11 +77,12 @@ def _plot_distribution_over_time(data: DataFrame,
     plt.legend()
     plt.savefig(output_path)
 
+    clear_figs()
+
 
 def plot_distribution_over_time_by_feature(data: DataFrame,
                                            value_to_excert: str,
                                            feature: str = None) -> None:
-
     unique_values = data[feature].unique()
     for value in unique_values:
         data_frame = data.loc[data[feature] == value].copy(deep=True)
@@ -86,3 +93,5 @@ def plot_distribution_over_time_by_feature(data: DataFrame,
             output_path=create_dir(
                 f"distribution_{value_to_excert}/{feature}_{value}.png")
         )
+
+    clear_figs()

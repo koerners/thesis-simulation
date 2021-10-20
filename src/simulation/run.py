@@ -1,7 +1,7 @@
 from mesa.batchrunner import BatchRunnerMP
 
 from simulation.models.hamilton import HamiltonModel
-from simulation.models.utils.datacollector import (get_experiment_id,
+from simulation.models.utils.datacollector import (get_experiment_id, get_seed,
                                                    get_steps_data,
                                                    get_total_agent_count)
 from simulation.utils.commandline import Commandline
@@ -29,14 +29,15 @@ eating_mode_params = {**reproduction_model_params,
                       # will be multiplied by the amount of initial agents
                       'foodlimit_multiplicator': [10],
                       # maximum amount of food one agent can find per step
-                      'finding_max': range(2, 4),
+                      'finding_max': range(1, 3),
                       'child_bearing_cost': float_range(0, 2, 0.5)
                       }
 
 
 # MODEL REPORTER
 base_reporter = {'final_agents': get_total_agent_count,
-                 'experiment_id': get_experiment_id}
+                 'experiment_id': get_experiment_id,
+                 'seed': get_seed}
 
 extended_reporter = {'steps': get_steps_data}
 

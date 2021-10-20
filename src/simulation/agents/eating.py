@@ -9,17 +9,17 @@ class EatingAgent(ReproducingAgent):
         super().__init__(model=model, age=age)
 
     def step(self) -> None:
-        self.current_food += self.find_food()
+        self.current_food += self.__find_food()
         self.current_food -= 1
         self.can_reproduce = self.current_food >= self.model.child_bearing_cost
 
         super().step()
 
-    def find_food(self) -> int:
+    def __find_food(self) -> int:
         food = 0
         if self.model.current_food > 0:
             food = min(self.random.choice(
-                range(0, self.model.finding_max)), self.model.current_food)
+                range(self.model.finding_max+1)), self.model.current_food)
             self.model.current_food -= food
         return food
 

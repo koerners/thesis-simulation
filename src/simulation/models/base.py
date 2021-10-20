@@ -4,8 +4,10 @@ from mesa.time import RandomActivation
 from simulation.agents.base import BaseAgent
 from simulation.models.utils.datacollector import (
     get_current_agent_types,
+    get_current_food_distribution,
     get_experiment_id,
     get_network_clustering,
+    get_seed,
     get_steps_data,
     get_total_agent_count)
 from simulation.networks.base import BaseNetwork
@@ -26,7 +28,9 @@ class BaseModel(Model):
              'experiment_id': get_experiment_id,
              'steps': get_steps_data,
              'clustering': get_network_clustering,
-             'agent_types': get_current_agent_types
+             'agent_types': get_current_agent_types,
+             'food_distribution': get_current_food_distribution,
+             'seed': get_seed
              }
         )
 

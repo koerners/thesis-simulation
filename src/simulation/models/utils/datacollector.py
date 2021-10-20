@@ -1,3 +1,4 @@
+from statistics import StatisticsError, median
 from typing import Dict
 
 from networkx.algorithms.approximation import average_clustering
@@ -11,8 +12,13 @@ def get_experiment_id(self) -> int:
     return self.experiment_id
 
 
+def get_seed(self) -> int:
+    # pylint: disable=no-member protected-access
+    return self._seed
+
+
 def get_steps_data(self) -> Dict:
-    keep = ['total_agents', 'clustering', 'agent_types']
+    keep = ['total_agents', 'clustering', 'agent_types', 'food_distribution']
     return [{key: value}
             for (key, value) in self.datacollector.model_vars.items() if key in keep]
 
@@ -40,3 +46,22 @@ def get_current_agent_types(self):
             continue
         agents[agent_type] = 1
     return agents
+
+
+def get_current_food_distribution(self):
+
+    below_average = 0
+    above_average = 0
+
+    try:
+        food_distribution = [x.current_food for x in self.schedule.agents]
+        mean = median(food_distribution)
+        below_average = len(
+            list(filter(lambda x: x < mean, food_distribution)))
+        above_average = len(
+            list(filter(lambda x: x > mean, food_distribution)))
+    except StatisticsError:
+        # no agents
+        pass
+
+    return {'below_mean': below_average, 'above_mean': above_average}
