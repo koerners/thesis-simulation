@@ -15,5 +15,5 @@ jobs:
         run: |
           git config --global user.name 'koerners'
           git config --global user.email 'git@skoerner.com'
-          git commit -m "Automated autopep8 fixes"
+          git commit -am "Automated autopep8 fixes"
           git push
