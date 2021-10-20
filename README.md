@@ -9,6 +9,7 @@
 4. Run simulation ```pipenv run run``` or get possible arguments with ```--help```
 
 ## Development
-When executing Step 3 in the setup process use ```pipenv install --dev``` instead.
+Install the development dependencies with ```pipenv install --dev```.
+- Run the formatter with ```pipenv run format```
 - Run the linter with ```pipenv run lint```
 - Run the tests with ```pipenv run test```
