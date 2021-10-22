@@ -22,8 +22,8 @@ class BaseNetwork:
 
     def get_neighbors(self, node):
         try:
-            return nx.algorithms.components.node_connected_component(self.graph, node)
-        except KeyError:
+            return self.graph.neighbors(node)
+        except NetworkXError:
             return []
 
     def get_node_weight(self, node_1, node_2) -> int:
