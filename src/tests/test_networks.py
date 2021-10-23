@@ -4,6 +4,8 @@ from simulation.networks.base import BaseNetwork
 
 
 class TestNode:
+    # pylint: disable=too-few-public-methods
+
     def __init__(self, unique_id):
         self.unique_id = unique_id
 
