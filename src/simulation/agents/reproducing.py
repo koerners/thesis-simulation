@@ -45,17 +45,14 @@ class ReproducingAgent(AgingAgent):
 
     def reproduce(self) -> None:
         child = self.bear_child()
-        self.model.network.add_node_connection(
-            self, child, Relationship.CHILD.value
-        )
+        self.model.network.add_node_connection(self, child, Relationship.CHILD.value)
         self.model.network.add_node_connection(
             self.partner, child, Relationship.CHILD.value
         )
 
         for parent_neighbor in self.model.get_neighbors(self):
             if (
-                self.model.network.get_node_weight(
-                    self, parent_neighbor)
+                self.model.network.get_node_weight(self, parent_neighbor)
                 == Relationship.CHILD.value
             ):
                 self.model.network.add_node_connection(

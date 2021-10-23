@@ -68,10 +68,10 @@ class BaseModel(Model):
             pass
 
         return to_return
-    
+
     def get_agents_by_id(self, agent_ids: List[int]) -> List[any]:
         return list(filter(lambda x: x.unique_id in agent_ids, self.schedule.agents))
-        
+
     def get_neighbors(self, agent) -> List[any]:
         return self.get_agents_by_id(self.network.get_neighbors_ids(agent))
 
