@@ -9,4 +9,5 @@ class HamiltonModel(EatingModel):
         super().__init__(*args, **kwargs)
 
     def add_agent(self) -> None:
-        self.random.choice([EatingAgent(self), HamiltonAgent(self)])
+        agent = self.random.choice([EatingAgent, HamiltonAgent])
+        agent(self)

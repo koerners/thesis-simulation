@@ -45,13 +45,19 @@ class ReproducingAgent(AgingAgent):
 
     def reproduce(self) -> None:
         child = self.bear_child()
-        self.model.network.add_node_connection(self, child, Relationship.CHILD.value)
+        self.model.network.add_node_connection(
+            self, child, Relationship.CHILD.value
+        )
         self.model.network.add_node_connection(
             self.partner, child, Relationship.CHILD.value
         )
 
-        for parent_neighbor in self.model.network.get_neighbors(self):
-            if self.model.network.get_node_weight(self, parent_neighbor) == Relationship.CHILD.value:
+        for parent_neighbor in self.model.get_neighbors(self):
+            if (
+                self.model.network.get_node_weight(
+                    self, parent_neighbor)
+                == Relationship.CHILD.value
+            ):
                 self.model.network.add_node_connection(
                     parent_neighbor, child, Relationship.SIBLING.value
                 )
@@ -74,9 +80,10 @@ class ReproducingAgent(AgingAgent):
             )
 
     def bear_child(self):
-        return self.random.choice(
+        agent = self.random.choice(
             [
-                self.__class__(self.model, age=0),
-                self.partner.__class__(self.model, age=0),
+                self.__class__,
+                self.partner.__class__,
             ]
         )
+        return agent(self.model, age=0)

@@ -1,3 +1,4 @@
+from typing import List
 from mesa import Model
 from mesa.datacollection import DataCollector
 from mesa.time import RandomActivation
@@ -49,10 +50,30 @@ class BaseModel(Model):
             self.network.save(
                 f"{self.run_id}/{self.experiment_id}/Step_{self.schedule.steps}.pkl"
             )
+
         self.schedule.step()
+
+        agent_keys = [x.unique_id for x in self.schedule.agents]
+        self.network.remove_duplicates(agent_keys)
 
     def add_agent(self) -> None:
         BaseAgent(self)
+
+    def get_agent_by_id(self, agent_id):
+        to_return = None
+        agent = list(filter(lambda x: x.unique_id == agent_id, self.schedule.agents))
+        try:
+            to_return = agent[0]
+        except IndexError:
+            pass
+
+        return to_return
+    
+    def get_agents_by_id(self, agent_ids: List[int]) -> List[any]:
+        return list(filter(lambda x: x.unique_id in agent_ids, self.schedule.agents))
+        
+    def get_neighbors(self, agent) -> List[any]:
+        return self.get_agents_by_id(self.network.get_neighbors_ids(agent))
 
     def init_scheduler(self) -> RandomActivation:
         return RandomActivation(self)

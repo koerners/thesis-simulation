@@ -16,23 +16,27 @@ class ModelsTest(unittest.TestCase):
     def assert_running(self, model):
         for _ in range(0, 500):
             model.step()
-            print(model.network.get_node_count(),
-                  len(model.schedule.agents))
-            self.assertEqual(model.network.get_node_count(),
-                             len(model.schedule.agents))
+            self.assertEqual(
+                model.network.get_node_count(), model.schedule.get_agent_count()
+            )
 
     def test_base(self):
-        model = BaseModel(
-            num_agents=10, network_saving_steps=None, run_id=None)
+        model = BaseModel(num_agents=10, network_saving_steps=None, run_id=None)
         self.assertIsInstance(model, BaseModel)
+        self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assert_step(model)
         self.assert_running(model)
 
     def test_aging(self):
         model = AgingModel(
-            num_agents=50, network_saving_steps=None, run_id=None, lifeexpectancy=(50, 100)
+            num_agents=50,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(50, 100),
         )
         self.assertIsInstance(model, AgingModel)
+        self.assertEqual(model.schedule.get_agent_count(), 50)
+
         self.assert_step(model)
         self.assert_running(model)
 
@@ -42,26 +46,29 @@ class ModelsTest(unittest.TestCase):
             network_saving_steps=None,
             run_id=None,
             lifeexpectancy=(50, 100),
-            agent_limit=500,
+            agent_limit=100,
             genderless=False,
         )
         self.assertIsInstance(model, ReproductionModel)
+        self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assert_step(model)
         self.assert_running(model)
 
     def test_eating(self):
         model = EatingModel(
-            num_agents=50,
+            num_agents=10,
             network_saving_steps=None,
             run_id=None,
             lifeexpectancy=(50, 100),
-            agent_limit=500,
+            agent_limit=100,
             genderless=False,
             foodlimit_multiplicator=None,
             finding_max=3,
         )
         self.assertIsInstance(model, EatingModel)
+        self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assert_step(model)
+        self.assert_running(model)
 
     def test_hamilton(self):
         model = HamiltonModel(
@@ -69,13 +76,15 @@ class ModelsTest(unittest.TestCase):
             network_saving_steps=None,
             run_id=None,
             lifeexpectancy=(50, 100),
-            agent_limit=500,
+            agent_limit=100,
             genderless=False,
             foodlimit_multiplicator=10,
             finding_max=3,
         )
         self.assertIsInstance(model, HamiltonModel)
+        self.assertEqual(model.schedule.get_agent_count(), 50)
         self.assert_step(model)
+        self.assert_running(model)
 
 
 if __name__ == "__main__":

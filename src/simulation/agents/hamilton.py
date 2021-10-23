@@ -15,7 +15,7 @@ class HamiltonAgent(EatingAgent):
     def __find_relative_in_need(self):
         strongest_connection = 0
         strongest_connected_agent = None
-        for neighbor in self.model.network.get_neighbors(self):
+        for neighbor in self.model.get_neighbors(self):
             if neighbor.current_food > 0:
                 continue
             connection = self.model.network.get_node_weight(self, neighbor)
