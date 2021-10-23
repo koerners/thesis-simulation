@@ -64,5 +64,7 @@ def get_current_food_distribution(self):
     except StatisticsError:
         # no agents
         pass
+    except AttributeError:
+        pass
 
     return {"below_mean": below_average, "above_mean": above_average}

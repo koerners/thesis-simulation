@@ -8,6 +8,18 @@ class NetworksTest(unittest.TestCase):
         network = BaseNetwork()
         self.assertIsInstance(network, BaseNetwork)
 
+    def test_add(self):
+        network = BaseNetwork()
+        network.add_node(1)
+        self.assertEqual(network.get_node_count(), 1)
+
+    def test_remove(self):
+        network = BaseNetwork()
+        network.add_node(1)
+        self.assertEqual(network.get_node_count(), 1)
+        network.remove_node(1)
+        self.assertEqual(network.get_node_count(), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

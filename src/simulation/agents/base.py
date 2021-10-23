@@ -10,10 +10,7 @@ class BaseAgent(Agent):
 
     def die(self) -> None:
         self.model.network.remove_node(self)
-        try:
-            self.model.schedule.remove(self)
-        except KeyError:
-            pass
+        self.model.schedule.remove(self)
 
     def step(self) -> None:
         pass
