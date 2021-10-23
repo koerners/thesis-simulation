@@ -3,4 +3,5 @@ from enum import Enum
 
 class Relationship(Enum):
     PARTNER = 1
-    CHILD = 2
+    SIBLING = 2
+    CHILD = 3
