@@ -51,7 +51,10 @@ class ReproducingAgent(AgingAgent):
         )
 
         for parent_neighbor in self.model.network.get_neighbors(self):
-            if self.model.network.get_node_weight(self, parent_neighbor) == Relationship.CHILD.value:
+            if (
+                self.model.network.get_node_weight(self, parent_neighbor)
+                == Relationship.CHILD.value
+            ):
                 self.model.network.add_node_connection(
                     parent_neighbor, child, Relationship.SIBLING.value
                 )
