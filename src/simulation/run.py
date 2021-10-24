@@ -20,7 +20,7 @@ fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
 
 variable_base_params = {"num_agents": [50]}
 
-aging_model_params = {**variable_base_params, "lifeexpectancy": [(20, 30)]}
+aging_model_params = {**variable_base_params, "lifeexpectancy": [(30, 40)]}
 
 reproduction_model_params = {
     **aging_model_params,
@@ -33,7 +33,7 @@ eating_mode_params = {
     # will be multiplied by the amount of initial agents
     "foodlimit_multiplicator": [5],
     # maximum amount of food one agent can find per step
-    "finding_max": range(2, 6),
+    "finding_max": [2, 3],
     # cost that has to be paid by BOTH parents
     "child_bearing_cost": float_range(0, 3, 0.5),
 }

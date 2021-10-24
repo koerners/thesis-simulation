@@ -32,12 +32,18 @@ class NetworksTest(unittest.TestCase):
             network_saving_steps=None,
             run_id=None,
             lifeexpectancy=(0, 0),
-            agent_limit=0,
-            genderless=False,
+            agent_limit=5,
+            genderless=True,
         )
-        agent = ReproducingAgent(model)
-        self.assertIsInstance(agent, ReproducingAgent)
-        agent.step()
+        agent_1 = ReproducingAgent(model)
+        agent_2 = ReproducingAgent(model)
+        self.assertIsInstance(agent_1, ReproducingAgent)
+        self.assertEqual(model.schedule.get_agent_count(), 2)
+        agent_1.partner = agent_2
+        agent_2.partner = agent_1
+        agent_1.reproduce()
+        self.assertEqual(model.schedule.get_agent_count(), 3)
+        agent_1.step()
 
     def test_eating(self):
         model = EatingModel(
