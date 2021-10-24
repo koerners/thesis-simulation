@@ -32,7 +32,6 @@ class NetworksTest(unittest.TestCase):
         agent.step()
         self.assertEqual(model.schedule.get_agent_count(), 0)
 
-
     def test_reproducing(self):
         model = ReproductionModel(
             num_agents=0,
