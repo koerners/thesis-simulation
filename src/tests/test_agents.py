@@ -20,11 +20,18 @@ class NetworksTest(unittest.TestCase):
 
     def test_aging(self):
         model = AgingModel(
-            num_agents=0, network_saving_steps=None, run_id=None, lifeexpectancy=(0, 0)
+            num_agents=0, network_saving_steps=None, run_id=None, lifeexpectancy=(2, 2)
         )
-        agent = AgingAgent(model)
+        agent = AgingAgent(model, age=0)
         self.assertIsInstance(agent, AgingAgent)
+        self.assertEqual(agent.age, 0)
         agent.step()
+        self.assertEqual(agent.age, 1)
+        self.assertEqual(model.schedule.get_agent_count(), 1)
+        agent.step()
+        agent.step()
+        self.assertEqual(model.schedule.get_agent_count(), 0)
+
 
     def test_reproducing(self):
         model = ReproductionModel(
