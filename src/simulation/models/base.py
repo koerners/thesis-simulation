@@ -73,7 +73,9 @@ class BaseModel(Model):
         return list(filter(lambda x: x.unique_id in agent_ids, self.schedule.agents))
 
     def get_neighbors(self, agent) -> List[any]:
-        return self.get_agents_by_id(self.network.get_neighbors_ids(agent))
+        agent_ids = self.network.get_neighbors_ids(agent)
+        agents = self.get_agents_by_id(agent_ids)
+        return agents
 
     def init_scheduler(self) -> RandomActivation:
         return RandomActivation(self)

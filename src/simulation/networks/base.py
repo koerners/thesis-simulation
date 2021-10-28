@@ -23,7 +23,7 @@ class BaseNetwork:
 
     def get_neighbors_ids(self, node) -> List[int]:
         try:
-            return self.__graph.neighbors(node.unique_id)
+            return list(self.__graph.neighbors(node.unique_id))
         except NetworkXError:
             return []
 
