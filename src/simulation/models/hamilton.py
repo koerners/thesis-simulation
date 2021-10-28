@@ -30,7 +30,7 @@ class HamiltonModel(EatingModel):
             agent_limit=agent_limit,
             finding_max=finding_max,
             foodlimit_multiplicator=foodlimit_multiplicator,
-            child_bearing_cost=child_bearing_cost
+            child_bearing_cost=child_bearing_cost,
         )
 
     def add_agent(self) -> None:
