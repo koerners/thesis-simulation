@@ -21,6 +21,13 @@ if __name__ == "__main__":
         all_run_data, "agent_types", "child_bearing_cost"
     )
 
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "level_of_sacrifice"
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "min_relationship"
+    )
+
     plot_value_over_time_by_feature(
         all_run_data, "clustering", "foodlimit_multiplicator"
     )

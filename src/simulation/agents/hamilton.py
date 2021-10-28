@@ -7,10 +7,23 @@ class HamiltonAgent(EatingAgent):
 
     def step(self) -> None:
         super().step()
-        if self.current_food > 1:
-            relative_in_need = self.__find_relative_in_need()
-            if relative_in_need is not None:
-                self.give_food_to(relative_in_need)
+        still_needy_relatives_left = True
+        for _ in range(self.__determine_max_sacrifice()):
+            if still_needy_relatives_left:
+                relative_in_need = self.__find_relative_in_need()
+                if relative_in_need is not None:
+                    self.give_food_to(relative_in_need)
+                else:
+                    still_needy_relatives_left = False
+
+    def __determine_max_sacrifice(self) -> int:
+        if self.current_food < 1:
+            return 0
+        if self.model.level_of_sacrifice == 1:
+            return self.current_food
+
+        to_sacrifice = int(self.model.level_of_sacrifice * self.current_food)
+        return max(1, to_sacrifice)
 
     def __find_relative_in_need(self):
         strongest_connection = 0
@@ -22,4 +35,6 @@ class HamiltonAgent(EatingAgent):
             if connection > strongest_connection:
                 strongest_connection = connection
                 strongest_connected_agent = neighbor
+        if strongest_connection < self.model.min_relationship:
+            return None
         return strongest_connected_agent

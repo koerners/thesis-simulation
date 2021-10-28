@@ -8,7 +8,6 @@ from simulation.models.utils.datacollector import (
     get_total_agent_count,
 )
 from simulation.utils.commandline import Commandline
-from simulation.utils.params import float_range
 from simulation.utils.save_runs import pre_edit_run_data, save_to_pickle
 from simulation.utils.time import get_current_timestring
 
@@ -28,14 +27,21 @@ reproduction_model_params = {
     "agent_limit": [5000],
 }
 
-eating_mode_params = {
+eating_model_params = {
     **reproduction_model_params,
     # will be multiplied by the amount of initial agents
     "foodlimit_multiplicator": [5],
     # maximum amount of food one agent can find per step
     "finding_max": [2, 3],
     # cost that has to be paid by BOTH parents
-    "child_bearing_cost": float_range(0, 3, 0.5),
+    "child_bearing_cost": [0, 1, 2, 3, 4]  # float_range(0, 3, 0.5),
+}
+
+
+hamilton_model_params = {
+    **eating_model_params,
+    "level_of_sacrifice": [0.1, 0.5, 0.8, 1.0],
+    "min_relationship": [1, 2, 3]
 }
 
 
@@ -56,7 +62,7 @@ if __name__ == "__main__":
     batch_run = BatchRunnerMP(
         model_cls=HamiltonModel,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=eating_mode_params,
+        variable_parameters=hamilton_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,
