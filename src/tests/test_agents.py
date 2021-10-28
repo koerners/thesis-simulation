@@ -25,11 +25,11 @@ class NetworksTest(unittest.TestCase):
         agent = AgingAgent(model, age=0)
         self.assertIsInstance(agent, AgingAgent)
         self.assertEqual(agent.age, 0)
-        agent.step()
+        model.step()
         self.assertEqual(agent.age, 1)
         self.assertEqual(model.schedule.get_agent_count(), 1)
-        agent.step()
-        agent.step()
+        model.step()
+        model.step()
         self.assertEqual(model.schedule.get_agent_count(), 0)
 
     def test_reproducing(self):

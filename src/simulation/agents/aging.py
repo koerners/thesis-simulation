@@ -16,5 +16,3 @@ class AgingAgent(BaseAgent):
     def step(self) -> None:
         super().step()
         self.age += 1
-        if self.life_expectancy < self.age:
-            self.die()

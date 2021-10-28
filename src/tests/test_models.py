@@ -14,7 +14,7 @@ class ModelsTest(unittest.TestCase):
         self.assertEqual(model.schedule.steps, 1)
 
     def assert_running(self, model):
-        for _ in range(0, 500):
+        for _ in range(0, 1000):
             model.step()
             self.assertEqual(
                 model.network.get_node_count(), model.schedule.get_agent_count()
