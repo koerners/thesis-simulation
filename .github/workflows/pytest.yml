@@ -4,41 +4,40 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Check files using the black formatter
-      uses: rickstaa/action-black@v1
-      id: action_black
-      with:
-        black_args: "."
-        fail_on_error: "false"
+      - uses: actions/checkout@v2
+      - name: Check files using the black formatter
+        uses: rickstaa/action-black@v1
+        id: action_black
+        with:
+          black_args: "."
+          fail_on_error: "false"
 
-    - name: Commit black changes
-      if: steps.action_black.outputs.is_formatted == 'true'
-      run: |
-        git config --global user.name 'koerners'
-        git config --global user.email 'git@skoerner.com'
-        git commit -am "Automated formatting fixes"
-        git push
+      - name: Commit black changes
+        if: steps.action_black.outputs.is_formatted == 'true'
+        run: |
+          git config --global user.name 'koerners'
+          git config --global user.email 'git@skoerner.com'
+          git commit -am "Automated formatting fixes"
+          git push
 
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pipenv
-        pipenv install --dev
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
 
-    - name: Analysing the code with pylint
-      run: |
-        pipenv run lint
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+          pipenv install --dev
 
-    - name: Running tests
-      run: |
-        pipenv run test
+      - name: Running tests
+        run: |
+          pipenv run test
+
+      - name: Analysing the code with pylint
+        run: |
+          pipenv run lint

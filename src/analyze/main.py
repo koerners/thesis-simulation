@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     all_run_data = all_run_data.append(get_run_data(ALL_RUNS[-1]))
 
-    print(all_run_data.head())
+    print(all_run_data)
 
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "child_bearing_cost"
