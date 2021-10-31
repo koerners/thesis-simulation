@@ -78,7 +78,7 @@ class NetworksTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=0,
             level_of_sacrifice=0.8,
-            min_relationship=2
+            min_relationship=2,
         )
         agent = HamiltonAgent(model)
         self.assertIsInstance(agent, HamiltonAgent)
