@@ -4,6 +4,7 @@ from simulation.agents.aging import AgingAgent
 from simulation.agents.base import BaseAgent
 from simulation.agents.reproducing import ReproducingAgent
 from simulation.agents.eating import EatingAgent
+from simulation.agents.hamilton import HamiltonAgent
 from simulation.models.aging import AgingModel
 from simulation.models.base import BaseModel
 from simulation.models.eating import EatingModel
@@ -76,9 +77,11 @@ class NetworksTest(unittest.TestCase):
             genderless=False,
             foodlimit_multiplicator=None,
             finding_max=0,
+            level_of_sacrifice=0.8,
+            min_relationship=2
         )
-        agent = EatingAgent(model)
-        self.assertIsInstance(agent, EatingAgent)
+        agent = HamiltonAgent(model)
+        self.assertIsInstance(agent, HamiltonAgent)
         agent.step()
 
 

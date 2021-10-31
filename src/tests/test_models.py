@@ -80,6 +80,8 @@ class ModelsTest(unittest.TestCase):
             genderless=False,
             foodlimit_multiplicator=10,
             finding_max=3,
+            level_of_sacrifice=0.8,
+            min_relationship=2
         )
         self.assertIsInstance(model, HamiltonModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
