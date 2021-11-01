@@ -1,4 +1,5 @@
 from mesa.batchrunner import BatchRunnerMP
+from simulation.models.greenbeard import GreenBeardModel
 
 from simulation.models.hamilton import HamiltonModel
 from simulation.models.utils.datacollector import (
@@ -47,6 +48,13 @@ hamilton_model_params = {
     "min_relationship": [1, 2, 3],
 }
 
+greenbeard_model_params = {
+    **eating_model_params,
+    # Percentage of food the agent is willing to sacrifice
+    # 1.0 leaves the agent to starve without food
+    # 0.x gives x percent to other agents but minimum 1 if the agent can afford it without starving
+    "level_of_sacrifice": [0.25, 0.5, 0.75, 1.0],
+}
 
 # MODEL REPORTER
 base_reporter = {
@@ -63,9 +71,9 @@ if __name__ == "__main__":
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=HamiltonModel,
+        model_cls=GreenBeardModel,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=hamilton_model_params,
+        variable_parameters=greenbeard_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,

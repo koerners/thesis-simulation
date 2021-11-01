@@ -132,3 +132,4 @@ out/*
 *.out
 slurm.sh
 slurm-other-options.txt
+archive/*

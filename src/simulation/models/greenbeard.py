@@ -14,12 +14,10 @@ class GreenBeardModel(EatingModel):
         run_id,
         finding_max,
         level_of_sacrifice,
-        min_relationship,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
         self.level_of_sacrifice = level_of_sacrifice
-        self.min_relationship = min_relationship
 
         super().__init__(
             num_agents=num_agents,
