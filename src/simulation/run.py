@@ -1,7 +1,6 @@
 from mesa.batchrunner import BatchRunnerMP
 from simulation.models.greenbeard import GreenBeardModel
 
-from simulation.models.hamilton import HamiltonModel
 from simulation.models.utils.datacollector import (
     get_experiment_id,
     get_seed,
