@@ -91,6 +91,8 @@ def _plot_distribution_over_time(
 def plot_distribution_over_time_by_feature(
     data: DataFrame, value_to_excert: str, feature: str = None
 ) -> None:
+    if feature not in data:
+        return
     unique_values = data[feature].unique()
     for value in unique_values:
         data_frame = data.loc[data[feature] == value].copy(deep=True)
