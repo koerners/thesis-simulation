@@ -33,6 +33,5 @@ class GreenBeardModel(AltruismModel):
         )
 
     def add_agent(self) -> None:
-        agent = self.random.choice(
-            [EatingAgent, GenuineAgent, GreenBeardAgent])
+        agent = self.random.choice([EatingAgent, GenuineAgent, GreenBeardAgent])
         agent(self)
