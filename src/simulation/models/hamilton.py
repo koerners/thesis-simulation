@@ -1,4 +1,5 @@
 from simulation.agents.eating import EatingAgent
+from simulation.agents.genuine import GenuineAgent
 from simulation.agents.hamilton import HamiltonAgent
 from simulation.models.altruism import AltruismModel
 
@@ -34,5 +35,5 @@ class HamiltonModel(AltruismModel):
         )
 
     def add_agent(self) -> None:
-        agent = self.random.choice([EatingAgent, HamiltonAgent])
+        agent = self.random.choice([EatingAgent, GenuineAgent, HamiltonAgent])
         agent(self)
