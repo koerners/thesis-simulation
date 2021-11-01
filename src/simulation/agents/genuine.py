@@ -7,9 +7,6 @@ class GenuineAgent(AltruismAgent):
 
     def find_peer_in_need(self):
         for peer in self.model.agents:
-            if (
-                peer != self
-                and peer.current_food < 1
-            ):
+            if peer != self and peer.current_food < 1:
                 return peer
         return None
