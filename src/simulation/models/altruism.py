@@ -1,9 +1,8 @@
-from simulation.agents.eating import EatingAgent
-from simulation.agents.greenbeard import GreenBeardAgent
-from simulation.models.altruism import AltruismModel
+from simulation.models.eating import EatingModel
+from simulation.agents.altruism import AltruismAgent
 
 
-class GreenBeardModel(AltruismModel):
+class AltruismModel(EatingModel):
     def __init__(
         self,
         num_agents,
@@ -17,6 +16,7 @@ class GreenBeardModel(AltruismModel):
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
+        self.level_of_sacrifice = level_of_sacrifice
 
         super().__init__(
             num_agents=num_agents,
@@ -28,9 +28,7 @@ class GreenBeardModel(AltruismModel):
             finding_max=finding_max,
             foodlimit_multiplicator=foodlimit_multiplicator,
             child_bearing_cost=child_bearing_cost,
-            level_of_sacrifice=level_of_sacrifice,
         )
 
     def add_agent(self) -> None:
-        agent = self.random.choice([EatingAgent, GreenBeardAgent])
-        agent(self)
+        AltruismAgent(self)

@@ -36,23 +36,18 @@ eating_model_params = {
     "child_bearing_cost": [4, 5, 6],  # float_range(0, 3, 0.5),
 }
 
-
-hamilton_model_params = {
+altruism_model_params = {
     **eating_model_params,
     # Percentage of food the agent is willing to sacrifice
     # 1.0 leaves the agent to starve without food
     # 0.x gives x percent to other agents but minimum 1 if the agent can afford it without starving
     "level_of_sacrifice": [0.25, 0.5, 0.75, 1.0],
-    # minimmal relationship the agent has with the other agent to be willing to sacrifice for him
-    "min_relationship": [1, 2, 3],
 }
 
-greenbeard_model_params = {
-    **eating_model_params,
-    # Percentage of food the agent is willing to sacrifice
-    # 1.0 leaves the agent to starve without food
-    # 0.x gives x percent to other agents but minimum 1 if the agent can afford it without starving
-    "level_of_sacrifice": [0.25, 0.5, 0.75, 1.0],
+hamilton_model_params = {
+    **altruism_model_params,
+    # minimmal relationship the agent has with the other agent to be willing to sacrifice for him
+    "min_relationship": [1, 2, 3],
 }
 
 # MODEL REPORTER
@@ -72,7 +67,7 @@ if __name__ == "__main__":
     batch_run = BatchRunnerMP(
         model_cls=GreenBeardModel,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=greenbeard_model_params,
+        variable_parameters=altruism_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,
@@ -88,4 +83,4 @@ if __name__ == "__main__":
     run_data = pre_edit_run_data(run_data)
 
     print(run_data)
-    save_to_pickle(run_data, f"{RUN_ID}/run_data.pkl")
+    save_to_pickle(run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")

@@ -1,9 +1,9 @@
 from simulation.agents.eating import EatingAgent
 from simulation.agents.hamilton import HamiltonAgent
-from simulation.models.eating import EatingModel
+from simulation.models.altruism import AltruismModel
 
 
-class HamiltonModel(EatingModel):
+class HamiltonModel(AltruismModel):
     def __init__(
         self,
         num_agents,
@@ -18,7 +18,6 @@ class HamiltonModel(EatingModel):
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
-        self.level_of_sacrifice = level_of_sacrifice
         self.min_relationship = min_relationship
 
         super().__init__(
@@ -31,6 +30,7 @@ class HamiltonModel(EatingModel):
             finding_max=finding_max,
             foodlimit_multiplicator=foodlimit_multiplicator,
             child_bearing_cost=child_bearing_cost,
+            level_of_sacrifice=level_of_sacrifice,
         )
 
     def add_agent(self) -> None:
