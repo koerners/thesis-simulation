@@ -3,6 +3,7 @@ import unittest
 from simulation.models.aging import AgingModel
 from simulation.models.base import BaseModel
 from simulation.models.eating import EatingModel
+from simulation.models.greenbeard import GreenBeardModel
 from simulation.models.hamilton import HamiltonModel
 from simulation.models.reproduction import ReproductionModel
 
@@ -81,9 +82,27 @@ class ModelsTest(unittest.TestCase):
             foodlimit_multiplicator=10,
             finding_max=3,
             level_of_sacrifice=0.8,
-            min_relationship=2
+            min_relationship=2,
         )
         self.assertIsInstance(model, HamiltonModel)
+        self.assertEqual(model.schedule.get_agent_count(), 50)
+        self.assert_step(model)
+        self.assert_running(model)
+
+    def test_greenbeard(self):
+        model = GreenBeardModel(
+            num_agents=50,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(50, 100),
+            agent_limit=100,
+            genderless=False,
+            foodlimit_multiplicator=10,
+            finding_max=3,
+            level_of_sacrifice=0.8,
+            min_relationship=2,
+        )
+        self.assertIsInstance(model, GreenBeardModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
         self.assert_step(model)
         self.assert_running(model)

@@ -83,3 +83,7 @@ class BaseModel(Model):
     @staticmethod
     def init_social_network() -> BaseNetwork:
         return BaseNetwork()
+
+    @property
+    def agents(self) -> List[BaseAgent]:
+        return self.schedule.agents
