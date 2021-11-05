@@ -2,8 +2,8 @@ from simulation.agents.eating import EatingAgent
 
 
 class AltruismAgent(EatingAgent):
-    def __init__(self, model, age=None):
-        super().__init__(model=model, age=age)
+    def __init__(self, model, group=None, age=None):
+        super().__init__(model=model, group=group, age=age)
 
     def step(self) -> None:
         super().step()

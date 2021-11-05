@@ -22,8 +22,8 @@ def agent_can_reproduce(agent, agent_limit_reached):
 
 
 class ReproducingAgent(AgingAgent):
-    def __init__(self, model, age=None):
-        super().__init__(model=model, age=age)
+    def __init__(self, model, group=None, age=None):
+        super().__init__(model=model, group=group, age=age)
         self.gender = (
             self.random.choice([Gender.MALE, Gender.FEMALE])
             if not model.genderless

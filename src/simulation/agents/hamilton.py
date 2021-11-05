@@ -2,8 +2,8 @@ from simulation.agents.altruism import AltruismAgent
 
 
 class HamiltonAgent(AltruismAgent):
-    def __init__(self, model, age=None):
-        super().__init__(model=model, age=age)
+    def __init__(self, model, group=None, age=None):
+        super().__init__(model=model, group=group, age=age)
 
     def find_peer_in_need(self):
         strongest_connection = 0

@@ -2,9 +2,9 @@ from simulation.agents.reproducing import ReproducingAgent
 
 
 class EatingAgent(ReproducingAgent):
-    def __init__(self, model, age=None):
+    def __init__(self, model, group=None, age=None):
         self.current_food = 1
-        super().__init__(model=model, age=age)
+        super().__init__(model=model, group=group, age=age)
 
     def step(self) -> None:
         self.current_food += self.__find_food()

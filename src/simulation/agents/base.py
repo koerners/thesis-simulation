@@ -2,8 +2,9 @@ from mesa import Agent
 
 
 class BaseAgent(Agent):
-    def __init__(self, model):
+    def __init__(self, model, group=None):
         self.unique_id = model.next_id()
+        self.group = group
         super().__init__(model=model, unique_id=self.unique_id)
         self.model.schedule.add(self)
         self.model.network.add_node(self)
