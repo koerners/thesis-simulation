@@ -1,5 +1,6 @@
 from mesa.batchrunner import BatchRunnerMP
 from simulation.models.greenbeard import GreenBeardModel
+from simulation.models.hamilton import HamiltonModel
 
 from simulation.models.utils.datacollector import (
     get_experiment_id,
@@ -33,7 +34,7 @@ eating_model_params = {
     # maximum amount of food one agent can find per step
     "finding_max": [4],
     # cost that has to be paid by BOTH parents
-    "child_bearing_cost": [4, 5, 6],  # float_range(0, 3, 0.5),
+    "child_bearing_cost": [0, 2, 4, 6],  # float_range(0, 3, 0.5),
 }
 
 altruism_model_params = {
