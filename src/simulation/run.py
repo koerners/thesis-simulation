@@ -17,7 +17,7 @@ RUN_ID = get_current_timestring()
 # PARAMETERS
 fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
 
-variable_base_params = {"num_agents": [50]}
+variable_base_params = {"num_agents": [100]}
 
 aging_model_params = {**variable_base_params, "lifeexpectancy": [(30, 40)]}
 
