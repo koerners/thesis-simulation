@@ -29,7 +29,7 @@ class CultureModel(AltruismModel):
         child_bearing_cost=0,
     ):
 
-        self.groups = [CultureGroup('A', 0), CultureGroup('B', 0.5)]
+        self.groups = [CultureGroup("A", 0), CultureGroup("B", 0.5)]
 
         super().__init__(
             num_agents=num_agents,
@@ -48,8 +48,7 @@ class CultureModel(AltruismModel):
         CultureAgent(self, group=self.random.choice(self.groups).group_id)
 
     def get_group_of_agent(self, agent):
-        return list(filter(lambda g: g.group_id ==
-                           agent.group, self.groups))[0]
+        return list(filter(lambda g: g.group_id == agent.group, self.groups))[0]
 
     def agent_acted_altruistic(self, agent):
         group = self.get_group_of_agent(agent)
