@@ -134,7 +134,7 @@ class NetworksTest(unittest.TestCase):
             finding_max=3,
             level_of_sacrifice=0.8,
         )
-        agent = CultureAgent(model, group=CultureGroup('A', 0))
+        agent = CultureAgent(model, group=CultureGroup("A", 0))
         self.assertIsInstance(agent, CultureAgent)
         agent.step()
 

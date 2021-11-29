@@ -84,5 +84,4 @@ if __name__ == "__main__":
     run_data = pre_edit_run_data(run_data)
 
     print(run_data)
-    save_to_pickle(
-        run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")
+    save_to_pickle(run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")
