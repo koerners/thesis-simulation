@@ -4,6 +4,7 @@ from mesa.datacollection import DataCollector
 from mesa.time import RandomActivation
 from simulation.agents.base import BaseAgent
 from simulation.models.utils.datacollector import (
+    get_agent_groups,
     get_current_agent_types,
     get_current_food_distribution,
     get_experiment_id,
@@ -34,6 +35,7 @@ class BaseModel(Model):
                 "agent_types": get_current_agent_types,
                 "food_distribution": get_current_food_distribution,
                 "seed": get_seed,
+                "agent_groups": get_agent_groups,
             }
         )
 

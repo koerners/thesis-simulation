@@ -65,6 +65,7 @@ class ReproducingAgent(AgingAgent):
                 lambda mate: (
                     mate.partner is None
                     and (mate.gender != self.gender or self.gender == Gender.GENDERLESS)
+                    and self.group == mate.group
                 ),
                 self.model.suitable_mates,
             ),

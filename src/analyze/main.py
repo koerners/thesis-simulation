@@ -27,11 +27,14 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "min_relationship"
     )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "experiment_id"
+    )
+
 
     plot_value_over_time_by_feature(
         all_run_data, "clustering", "foodlimit_multiplicator"
     )
-
     plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "lifeexpectancy")

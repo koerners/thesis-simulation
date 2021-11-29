@@ -1,6 +1,6 @@
 from mesa.batchrunner import BatchRunnerMP
-from simulation.models.greenbeard import GreenBeardModel
-from simulation.models.hamilton import HamiltonModel
+from simulation.models.culture import CultureModel
+
 
 from simulation.models.utils.datacollector import (
     get_experiment_id,
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=GreenBeardModel,
+        model_cls=CultureModel,
         nr_processes=commandline_args.nr_of_processes,
         variable_parameters=altruism_model_params,
         fixed_parameters=fixed_params,
@@ -84,4 +84,5 @@ if __name__ == "__main__":
     run_data = pre_edit_run_data(run_data)
 
     print(run_data)
-    save_to_pickle(run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")
+    save_to_pickle(
+        run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")

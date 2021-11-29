@@ -18,7 +18,7 @@ def get_seed(self) -> int:
 
 
 def get_steps_data(self) -> Dict:
-    keep = ["total_agents", "clustering", "agent_types", "food_distribution"]
+    keep = ["total_agents", "clustering", "agent_types", "food_distribution", "agent_groups"]
     return [
         {key: value}
         for (key, value) in self.datacollector.model_vars.items()
@@ -50,6 +50,16 @@ def get_current_agent_types(self):
         agents[agent_type] = 1
     return agents
 
+
+def get_agent_groups(self):
+    agents = {}
+    for agent in self.schedule.agents:
+        agent_group = agent.group
+        if agent_group in agents:
+            agents[agent_group] += 1
+            continue
+        agents[agent_group] = 1
+    return agents
 
 def get_current_food_distribution(self):
 

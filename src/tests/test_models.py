@@ -7,6 +7,7 @@ from simulation.models.eating import EatingModel
 from simulation.models.greenbeard import GreenBeardModel
 from simulation.models.hamilton import HamiltonModel
 from simulation.models.reproduction import ReproductionModel
+from simulation.models.culture import CultureModel
 
 
 class ModelsTest(unittest.TestCase):
@@ -85,6 +86,23 @@ class ModelsTest(unittest.TestCase):
             level_of_sacrifice=0.8,
         )
         self.assertIsInstance(model, AltruismModel)
+        self.assertEqual(model.schedule.get_agent_count(), 10)
+        self.assert_step(model)
+        self.assert_running(model)
+
+    def test_culture(self):
+        model = CultureModel(
+            num_agents=10,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(50, 100),
+            agent_limit=100,
+            genderless=False,
+            foodlimit_multiplicator=None,
+            finding_max=3,
+            level_of_sacrifice=0.8,
+        )
+        self.assertIsInstance(model, CultureModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assert_step(model)
         self.assert_running(model)
