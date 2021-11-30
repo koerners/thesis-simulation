@@ -6,6 +6,7 @@ verify_ssl = true
 nose2="*"
 pylint = "*"
 black = "*"
+graphviz = "*"
 
 [packages]
 mesa = "*"

@@ -46,3 +46,10 @@ jobs:
         run: |
           pipenv run uml_models
           pipenv run uml_agents
+
+      - name: Commit UML Diagrams
+        run: |
+          git config --global user.name 'koerners'
+          git config --global user.email 'git@skoerner.com'
+          git commit -am "Updated UML diagrams"
+          git push
