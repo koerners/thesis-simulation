@@ -20,6 +20,8 @@ clear="rm -rf out/"
 test="python -m nose2 --with-coverage"
 analyze="python src/analyze/main.py"
 format="black ."
+uml_models="pyreverse -o png -d uml/ -p Models src/simulation/models"
+uml_agents="pyreverse -o png -d uml/ -p Agents src/simulation/agents"
 
 [pipenv]
 allow_prereleases = true

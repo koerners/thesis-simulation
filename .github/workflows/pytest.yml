@@ -41,3 +41,8 @@ jobs:
       - name: Analysing the code with pylint
         run: |
           pipenv run lint
+
+      - name: Update UML
+        run: |
+          pipenv run uml_models
+          pipenv run uml_agents
