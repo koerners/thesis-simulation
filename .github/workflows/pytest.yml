@@ -54,5 +54,5 @@ jobs:
         run: |
           git config --global user.name 'koerners'
           git config --global user.email 'git@skoerner.com'
-          git commit -am "Updated UML diagrams"
+          git commit --allow-empty -am "Updated UML diagrams"
           git push
