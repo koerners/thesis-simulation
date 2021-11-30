@@ -1,7 +1,7 @@
-from simulation.agents.altruism import AltruismAgent
+from simulation.agents.group import GroupAgent
 
 
-class CultureAgent(AltruismAgent):
+class CultureAgent(GroupAgent):
     def __init__(self, model, group=None, age=None):
         super().__init__(model=model, group=group, age=age)
 

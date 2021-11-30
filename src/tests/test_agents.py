@@ -5,15 +5,17 @@ from simulation.agents.base import BaseAgent
 from simulation.agents.culture import CultureAgent
 from simulation.agents.genuine import GenuineAgent
 from simulation.agents.greenbeard import GreenBeardAgent
+from simulation.agents.group import GroupAgent
 from simulation.agents.reproducing import ReproducingAgent
 from simulation.agents.eating import EatingAgent
 from simulation.agents.hamilton import HamiltonAgent
 from simulation.models.aging import AgingModel
 from simulation.models.altruism import AltruismModel
 from simulation.models.base import BaseModel
-from simulation.models.culture import CultureGroup, CultureModel
+from simulation.models.culture import CultureModel
 from simulation.models.eating import EatingModel
 from simulation.models.greenbeard import GreenBeardModel
+from simulation.models.group import GroupModel
 from simulation.models.hamilton import HamiltonModel
 from simulation.models.reproduction import ReproductionModel
 
@@ -122,6 +124,22 @@ class NetworksTest(unittest.TestCase):
         self.assertIsInstance(agent, GreenBeardAgent)
         agent.step()
 
+    def test_group(self):
+        model = GroupModel(
+            num_agents=10,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(50, 100),
+            agent_limit=100,
+            genderless=False,
+            foodlimit_multiplicator=None,
+            finding_max=3,
+            level_of_sacrifice=0.8,
+        )
+        agent = GroupAgent(model, group="A")
+        self.assertIsInstance(agent, GroupAgent)
+        agent.step()
+
     def test_culture(self):
         model = CultureModel(
             num_agents=10,
@@ -134,7 +152,7 @@ class NetworksTest(unittest.TestCase):
             finding_max=3,
             level_of_sacrifice=0.8,
         )
-        agent = CultureAgent(model, group='A')
+        agent = CultureAgent(model, group="A")
         self.assertIsInstance(agent, CultureAgent)
         agent.step()
 
