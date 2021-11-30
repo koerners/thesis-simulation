@@ -15,4 +15,7 @@ class ReputationAgent(AltruismAgent):
         return None
 
     def __calculate_help_decision(self, peer):
-        return peer.reputation >= self.model.average_reputation
+        peer_rep = 0
+        if hasattr(peer, 'reputation'):
+            peer_rep = peer.reputation
+        return peer_rep >= self.model.average_reputation

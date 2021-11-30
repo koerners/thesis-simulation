@@ -1,4 +1,6 @@
+from simulation.agents.eating import EatingAgent
 from simulation.agents.reputation import ReputationAgent
+from simulation.agents.genuine import GenuineAgent
 from simulation.models.altruism import AltruismModel
 
 
@@ -37,7 +39,12 @@ class ReputationModel(AltruismModel):
         super().step()
 
     def add_agent(self) -> None:
-        ReputationAgent(self)
+        agent = self.random.choice(
+                    [EatingAgent, GenuineAgent, ReputationAgent])
+        agent(self)
 
     def __calculate_average_reputation(self) -> int:
-        return sum(agent.reputation for agent in self.agents) / len(self.agents)
+        reputation_agents = list(filter(lambda x: isinstance(x, ReputationAgent), self.agents))
+        if len(reputation_agents) == 0:
+            return 0
+        return sum(agent.reputation for agent in reputation_agents) / len(reputation_agents)

@@ -187,6 +187,7 @@ class ModelsTest(unittest.TestCase):
         )
         self.assertIsInstance(model, ReputationModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
+        self.assert_test_group(model)
         self.assert_step(model)
         self.assert_running(model)
 
