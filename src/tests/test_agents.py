@@ -9,6 +9,7 @@ from simulation.agents.group import GroupAgent
 from simulation.agents.reproducing import ReproducingAgent
 from simulation.agents.eating import EatingAgent
 from simulation.agents.hamilton import HamiltonAgent
+from simulation.agents.reputation import ReputationAgent
 from simulation.models.aging import AgingModel
 from simulation.models.altruism import AltruismModel
 from simulation.models.base import BaseModel
@@ -18,6 +19,7 @@ from simulation.models.greenbeard import GreenBeardModel
 from simulation.models.group import GroupModel
 from simulation.models.hamilton import HamiltonModel
 from simulation.models.reproduction import ReproductionModel
+from simulation.models.reputation import ReputationModel
 
 
 class NetworksTest(unittest.TestCase):
@@ -154,6 +156,22 @@ class NetworksTest(unittest.TestCase):
         )
         agent = CultureAgent(model, group="A")
         self.assertIsInstance(agent, CultureAgent)
+        agent.step()
+
+    def test_reputation(self):
+        model = ReputationModel(
+            num_agents=50,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(50, 100),
+            agent_limit=100,
+            genderless=False,
+            foodlimit_multiplicator=10,
+            finding_max=3,
+            level_of_sacrifice=0.8,
+        )
+        agent = ReputationAgent(model)
+        self.assertIsInstance(agent, ReputationAgent)
         agent.step()
 
 

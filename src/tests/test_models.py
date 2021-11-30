@@ -1,4 +1,6 @@
 import unittest
+from simulation.agents.eating import EatingAgent
+from simulation.agents.genuine import GenuineAgent
 
 from simulation.models.aging import AgingModel
 from simulation.models.altruism import AltruismModel
@@ -9,6 +11,7 @@ from simulation.models.group import Group, GroupModel
 from simulation.models.hamilton import HamiltonModel
 from simulation.models.reproduction import ReproductionModel
 from simulation.models.culture import CultureGroup, CultureModel
+from simulation.models.reputation import ReputationModel
 
 
 class ModelsTest(unittest.TestCase):
@@ -23,6 +26,12 @@ class ModelsTest(unittest.TestCase):
             self.assertEqual(
                 model.network.get_node_count(), model.schedule.get_agent_count()
             )
+
+    def assert_test_group(self, model):
+        """assert there are two types of agents present in the model: genuine and eating"""
+        existing_types_of_agents = set(agent.__class__ for agent in model.agents)
+        self.assertIn(GenuineAgent, existing_types_of_agents)
+        self.assertIn(EatingAgent, existing_types_of_agents)
 
     def test_base(self):
         model = BaseModel(num_agents=10, network_saving_steps=None, run_id=None)
@@ -142,6 +151,7 @@ class ModelsTest(unittest.TestCase):
         )
         self.assertIsInstance(model, HamiltonModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
+        self.assert_test_group(model)
         self.assert_step(model)
         self.assert_running(model)
 
@@ -158,6 +168,24 @@ class ModelsTest(unittest.TestCase):
             level_of_sacrifice=0.8,
         )
         self.assertIsInstance(model, GreenBeardModel)
+        self.assertEqual(model.schedule.get_agent_count(), 50)
+        self.assert_test_group(model)
+        self.assert_step(model)
+        self.assert_running(model)
+
+    def test_reputation(self):
+        model = ReputationModel(
+            num_agents=50,
+            network_saving_steps=None,
+            run_id=None,
+            lifeexpectancy=(50, 100),
+            agent_limit=100,
+            genderless=False,
+            foodlimit_multiplicator=10,
+            finding_max=3,
+            level_of_sacrifice=0.8,
+        )
+        self.assertIsInstance(model, ReputationModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
         self.assert_step(model)
         self.assert_running(model)
