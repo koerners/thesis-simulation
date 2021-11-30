@@ -42,6 +42,9 @@ jobs:
         run: |
           pipenv run lint
 
+      - name: Install graphviz
+        run: sudo apt-get install -y graphviz
+
       - name: Update UML
         run: |
           pipenv run uml_models
