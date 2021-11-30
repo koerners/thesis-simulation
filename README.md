@@ -18,3 +18,10 @@ Install the development dependencies with ```pipenv install --dev```.
 - Run the formatter with ```pipenv run format```
 - Run the linter with ```pipenv run lint```
 - Run tests with ```pipenv run test```
+
+
+## Struture
+### Models
+![UML-Models](https://github.com/koerners/thesis-simulation/blob/63ffa08a6e642918eb53696f6d2fb4a96076c244/uml/classes_Models.png)
+### Agents
+![UML-Models](https://github.com/koerners/thesis-simulation/blob/63ffa08a6e642918eb53696f6d2fb4a96076c244/uml/classes_Agents.png)
