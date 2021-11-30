@@ -20,7 +20,7 @@ Install the development dependencies with ```pipenv install --dev```.
 - Run tests with ```pipenv run test```
 
 
-## Struture
+## Structure
 ### Models
 ![UML-Models](https://github.com/koerners/thesis-simulation/blob/main/uml/classes_Models.png)
 ### Agents
