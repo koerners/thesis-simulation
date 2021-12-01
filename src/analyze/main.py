@@ -3,6 +3,7 @@ import pandas as pd
 from analyze.models import (
     plot_distribution_over_time_by_feature,
     plot_value_over_time_by_feature,
+    plot_values_over_time,
 )
 from analyze.utils.files import get_run_data, get_saved_runs
 
@@ -32,7 +33,8 @@ if __name__ == "__main__":
     plot_value_over_time_by_feature(
         all_run_data, "clustering", "foodlimit_multiplicator"
     )
-    plot_value_over_time_by_feature(all_run_data, "average_reputation", "finding_max")
+    plot_value_over_time_by_feature(all_run_data, "average_reputation")
+    plot_values_over_time(all_run_data, "groups_culture")
 
     plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")

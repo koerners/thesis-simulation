@@ -25,6 +25,7 @@ def get_steps_data(self) -> Dict:
         "food_distribution",
         "agent_groups",
         "average_reputation",
+        "groups_culture",
     ]
     return [
         {key: value}
@@ -67,6 +68,15 @@ def get_agent_groups(self):
             continue
         agents[agent_group] = 1
     return agents
+
+
+def get_groups_culture(self):
+    groups = {}
+    if hasattr(self, "groups"):
+        for group in self.groups:
+            if hasattr(group, "group_culture"):
+                groups[group.group_id] = group.group_culture
+    return groups
 
 
 def get_average_reputation(self):

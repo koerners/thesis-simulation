@@ -9,6 +9,7 @@ from simulation.models.utils.datacollector import (
     get_current_agent_types,
     get_current_food_distribution,
     get_experiment_id,
+    get_groups_culture,
     get_network_clustering,
     get_seed,
     get_steps_data,
@@ -38,6 +39,7 @@ class BaseModel(Model):
                 "seed": get_seed,
                 "agent_groups": get_agent_groups,
                 "average_reputation": get_average_reputation,
+                "groups_culture": get_groups_culture,
             }
         )
 

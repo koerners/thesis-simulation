@@ -11,6 +11,19 @@
 5. Analyze the generated data using ```pipenv run analyze```
 6. Clear ```.out/``` with ```pipenv run clear```
 
+## Options
+
+```
+usage: run.py [-h] [-p PROCESSES] [-i ITERATIONS] [-s STEPS]
+
+optional arguments:
+  -h,            --help                     Show this help message and exit
+  -p PROCESSES,  --Processes PROCESSES      Number of processes used
+  -i ITERATIONS, --Iterations ITERATIONS    Number of iterations
+  -s STEPS,      --Steps STEPS              Max steps
+```
+
+
 ## Development
 
 Install the development dependencies with ```pipenv install --dev```.

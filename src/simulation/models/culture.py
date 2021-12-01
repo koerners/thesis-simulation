@@ -8,10 +8,10 @@ class CultureGroup(Group):
         super().__init__(group_id=group_id)  # A, B, C ...
 
     def agent_acted_altruistic(self):
-        self.group_culture = max(self.group_culture + 0.01, 1)
+        self.group_culture = min(self.group_culture + 0.0001, 1)
 
     def agent_acted_non_altruistic(self):
-        self.group_culture = min(0, self.group_culture - 0.01)
+        self.group_culture = max(0, self.group_culture - 0.0001)
 
 
 class CultureModel(GroupModel):
@@ -43,7 +43,12 @@ class CultureModel(GroupModel):
         )
 
     def init_groups(self):
-        self.groups = [CultureGroup("A", 0), CultureGroup("B", 0.5)]
+        self.groups = [
+            CultureGroup("A", 0.25),
+            CultureGroup("B", 0.5),
+            CultureGroup("C", 0.75),
+            CultureGroup("D", 1),
+        ]
 
     def add_agent(self) -> None:
         CultureAgent(self, group=self.random.choice(self.groups).group_id)
