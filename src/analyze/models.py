@@ -114,6 +114,8 @@ def plot_distribution_over_time_by_feature(
 
 def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
     plt.figure().clear()
+    if value_to_excert not in data:
+        return
     extracted = get_steps_data(data, value_to_excert)
     data[value_to_excert] = extracted
     data_frame = pd.DataFrame()
