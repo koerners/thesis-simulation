@@ -1,7 +1,8 @@
 from typing import List
 from mesa import Model
+from mesa.agent import Agent
 from mesa.datacollection import DataCollector
-from mesa.time import RandomActivation
+from mesa.time import BaseScheduler, RandomActivation
 from simulation.agents.base import BaseAgent
 from simulation.models.utils.datacollector import (
     get_agent_groups,
@@ -21,14 +22,14 @@ from simulation.networks.base import BaseNetwork
 class BaseModel(Model):
     def __init__(self, num_agents, network_saving_steps, run_id):
         super().__init__()
-        self.run_id = run_id
-        self.num_agents = num_agents
-        self.schedule = self.init_scheduler()
-        self.running = True
-        self.network = self.init_social_network()
-        self.network_saving_steps = network_saving_steps
-        self.experiment_id = hash(self)
-        self.datacollector = DataCollector(
+        self.run_id: str = run_id
+        self.num_agents: int = num_agents
+        self.schedule: BaseScheduler = self.init_scheduler()
+        self.running: bool = True
+        self.network: BaseNetwork = self.init_social_network()
+        self.network_saving_steps: int = network_saving_steps
+        self.experiment_id: str = hash(self)
+        self.datacollector: DataCollector = DataCollector(
             {
                 "total_agents": get_total_agent_count,
                 "experiment_id": get_experiment_id,
@@ -47,7 +48,7 @@ class BaseModel(Model):
         for _ in range(self.num_agents):
             self.add_agent()
 
-    def step(self) -> None:
+    def step(self):
         self.datacollector.collect(self)
         if (
             self.network_saving_steps is not None
@@ -62,10 +63,10 @@ class BaseModel(Model):
         agent_keys = [x.unique_id for x in self.schedule.agents]
         self.network.remove_duplicates(agent_keys)
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         BaseAgent(self)
 
-    def get_agent_by_id(self, agent_id):
+    def get_agent_by_id(self, agent_id) -> Agent:
         to_return = None
         agent = list(filter(lambda x: x.unique_id == agent_id, self.schedule.agents))
         try:
@@ -75,15 +76,15 @@ class BaseModel(Model):
 
         return to_return
 
-    def get_agents_by_id(self, agent_ids: List[int]) -> List[any]:
+    def get_agents_by_id(self, agent_ids: List[int]) -> List[Agent]:
         return list(filter(lambda x: x.unique_id in agent_ids, self.schedule.agents))
 
-    def get_neighbors(self, agent) -> List[any]:
+    def get_neighbors(self, agent) -> List[Agent]:
         agent_ids = self.network.get_neighbors_ids(agent)
         agents = self.get_agents_by_id(agent_ids)
         return agents
 
-    def init_scheduler(self) -> RandomActivation:
+    def init_scheduler(self) -> BaseScheduler:
         return RandomActivation(self)
 
     @staticmethod
@@ -91,5 +92,5 @@ class BaseModel(Model):
         return BaseNetwork()
 
     @property
-    def agents(self) -> List[BaseAgent]:
+    def agents(self) -> List[Agent]:
         return self.schedule.agents

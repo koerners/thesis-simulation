@@ -1,3 +1,4 @@
+from mesa.agent import Agent
 from simulation.agents.altruism import AltruismAgent
 
 
@@ -5,7 +6,7 @@ class HamiltonAgent(AltruismAgent):
     def __init__(self, model, group=None, age=None):
         super().__init__(model=model, group=group, age=age)
 
-    def find_peer_in_need(self):
+    def find_peer_in_need(self) -> Agent:
         strongest_connection = 0
         strongest_connected_agent = None
         for neighbor in self.model.get_neighbors(self):

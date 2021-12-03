@@ -12,13 +12,13 @@ class BaseNetwork:
     def get_node_count(self) -> int:
         return self.__graph.number_of_nodes()
 
-    def add_node(self, node) -> None:
+    def add_node(self, node):
         self.__graph.add_node(node.unique_id)
 
-    def remove_node(self, node) -> None:
+    def remove_node(self, node):
         self.__graph.remove_node(node.unique_id)
 
-    def add_node_connection(self, node_1, node_2, relatedness: int) -> None:
+    def add_node_connection(self, node_1, node_2, relatedness: int):
         self.__graph.add_edge(node_1.unique_id, node_2.unique_id, weight=relatedness)
 
     def get_neighbors_ids(self, node) -> List[int]:
@@ -31,14 +31,14 @@ class BaseNetwork:
         conn = self.__graph.get_edge_data(node_1.unique_id, node_2.unique_id)
         return 0 if conn is None else conn.get("weight", 0)
 
-    def save(self, file_name: str) -> None:
+    def save(self, file_name: str):
         save_network(self, file_name)
 
     @property
     def graph(self) -> nx.Graph:
         return self.__graph
 
-    def remove_duplicates(self, to_keep) -> None:
+    def remove_duplicates(self, to_keep):
         to_delete_from_network = list(
             filter(lambda x: x not in to_keep, self.graph.nodes())
         )

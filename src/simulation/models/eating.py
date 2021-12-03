@@ -17,14 +17,14 @@ class EatingModel(ReproductionModel):
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
-        self.foodlimit = (
+        self.foodlimit: float = (
             (foodlimit_multiplicator * num_agents)
             if foodlimit_multiplicator is not None
             else math.inf
         )
-        self.current_food = self.foodlimit
-        self.finding_max = finding_max
-        self.child_bearing_cost = child_bearing_cost
+        self.current_food: float = self.foodlimit
+        self.finding_max: float = finding_max
+        self.child_bearing_cost: float = child_bearing_cost
 
         super().__init__(
             num_agents=num_agents,
@@ -35,10 +35,10 @@ class EatingModel(ReproductionModel):
             agent_limit=agent_limit,
         )
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         EatingAgent(self)
 
-    def step(self) -> None:
+    def step(self):
         self.current_food = self.foodlimit
         super().step()
         for agent in self.schedule.agents:

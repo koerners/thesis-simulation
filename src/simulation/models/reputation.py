@@ -19,7 +19,7 @@ class ReputationModel(AltruismModel):
         child_bearing_cost=0,
     ):
 
-        self.average_reputation = 0
+        self.average_reputation: float = 0
 
         super().__init__(
             num_agents=num_agents,
@@ -34,15 +34,15 @@ class ReputationModel(AltruismModel):
             level_of_sacrifice=level_of_sacrifice,
         )
 
-    def step(self) -> None:
+    def step(self):
         self.average_reputation = self.__calculate_average_reputation()
         super().step()
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         agent = self.random.choice([EatingAgent, GenuineAgent, ReputationAgent])
         agent(self)
 
-    def __calculate_average_reputation(self) -> int:
+    def __calculate_average_reputation(self) -> float:
         reputation_agents = list(
             filter(lambda x: isinstance(x, ReputationAgent), self.agents)
         )

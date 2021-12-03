@@ -5,9 +5,9 @@ class AltruismAgent(EatingAgent):
     def __init__(self, model, group=None, age=None):
         super().__init__(model=model, group=group, age=age)
 
-    def step(self) -> None:
+    def step(self):
         super().step()
-        still_needy_peers_left = True
+        still_needy_peers_left: bool = True
         for _ in range(self.__determine_max_sacrifice()):
             if still_needy_peers_left:
                 # pylint: disable=assignment-from-none

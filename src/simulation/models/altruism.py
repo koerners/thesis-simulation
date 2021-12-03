@@ -16,7 +16,7 @@ class AltruismModel(EatingModel):
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
-        self.level_of_sacrifice = level_of_sacrifice
+        self.level_of_sacrifice: float = level_of_sacrifice
 
         super().__init__(
             num_agents=num_agents,
@@ -30,5 +30,5 @@ class AltruismModel(EatingModel):
             child_bearing_cost=child_bearing_cost,
         )
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         AltruismAgent(self)

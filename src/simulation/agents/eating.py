@@ -1,19 +1,20 @@
+from mesa.agent import Agent
 from simulation.agents.reproducing import ReproducingAgent
 
 
 class EatingAgent(ReproducingAgent):
     def __init__(self, model, group=None, age=None):
-        self.current_food = 1
+        self.current_food: float = 1
         super().__init__(model=model, group=group, age=age)
 
-    def step(self) -> None:
-        self.current_food += self.__find_food()
+    def step(self):
+        self.current_food += self.find_food()
         self.current_food -= 1
-        self.can_reproduce = self.current_food >= self.model.child_bearing_cost
+        self.can_reproduce: bool = self.current_food >= self.model.child_bearing_cost
 
         super().step()
 
-    def __find_food(self) -> int:
+    def find_food(self) -> int:
         food = 0
         if self.model.current_food > 0:
             food = min(
@@ -28,7 +29,7 @@ class EatingAgent(ReproducingAgent):
             self.current_food -= 1
             receiver.current_food += 1
 
-    def bear_child(self):
+    def bear_child(self) -> Agent:
         self.current_food -= self.model.child_bearing_cost
         self.partner.current_food -= self.model.child_bearing_cost
         agent = self.random.choice(

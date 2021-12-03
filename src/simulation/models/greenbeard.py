@@ -32,6 +32,6 @@ class GreenBeardModel(AltruismModel):
             level_of_sacrifice=level_of_sacrifice,
         )
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         agent = self.random.choice([EatingAgent, GenuineAgent, GreenBeardAgent])
         agent(self)

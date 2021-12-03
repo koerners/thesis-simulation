@@ -19,7 +19,7 @@ class HamiltonModel(AltruismModel):
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
-        self.min_relationship = min_relationship
+        self.min_relationship: int = min_relationship
 
         super().__init__(
             num_agents=num_agents,
@@ -34,6 +34,6 @@ class HamiltonModel(AltruismModel):
             level_of_sacrifice=level_of_sacrifice,
         )
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         agent = self.random.choice([EatingAgent, GenuineAgent, HamiltonAgent])
         agent(self)

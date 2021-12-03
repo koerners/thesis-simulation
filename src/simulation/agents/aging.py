@@ -5,14 +5,14 @@ class AgingAgent(BaseAgent):
     def __init__(self, model, group=None, age=None):
         super().__init__(model=model, group=group)
         if age is None:
-            self.age = self.random.randint(0, 69)
+            self.age: int = self.random.randint(0, 69)
         else:
-            self.age = age
+            self.age: int = age
         min_lifeexpectancy, max_lifeexpectancy = model.lifeexpectancy
-        self.life_expectancy = self.random.randint(
+        self.life_expectancy: int = self.random.randint(
             min_lifeexpectancy, max_lifeexpectancy
         )
 
-    def step(self) -> None:
+    def step(self):
         super().step()
         self.age += 1

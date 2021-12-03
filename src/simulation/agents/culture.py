@@ -1,3 +1,4 @@
+from mesa.agent import Agent
 from simulation.agents.group import GroupAgent
 
 
@@ -5,7 +6,7 @@ class CultureAgent(GroupAgent):
     def __init__(self, model, group=None, age=None):
         super().__init__(model=model, group=group, age=age)
 
-    def find_peer_in_need(self):
+    def find_peer_in_need(self) -> Agent:
         willing_to_help = (
             self.random.uniform(0, 1)
             <= self.model.get_group_of_agent(self).group_culture
@@ -19,5 +20,5 @@ class CultureAgent(GroupAgent):
             self.model.agent_acted_non_altruistic(self)
         return None
 
-    def bear_child(self):
+    def bear_child(self) -> Agent:
         return CultureAgent(model=self.model, group=self.group, age=0)

@@ -1,3 +1,5 @@
+from typing import List
+from mesa.agent import Agent
 from simulation.agents.reproducing import ReproducingAgent
 from simulation.models.aging import AgingModel
 
@@ -12,9 +14,9 @@ class ReproductionModel(AgingModel):
         agent_limit,
         run_id,
     ):
-        self.genderless = genderless
-        self.agent_limit = agent_limit
-        self.suitable_mates = []
+        self.genderless: bool = genderless
+        self.agent_limit: int = agent_limit
+        self.suitable_mates: List[Agent] = []
         super().__init__(
             num_agents=num_agents,
             network_saving_steps=network_saving_steps,
@@ -22,10 +24,10 @@ class ReproductionModel(AgingModel):
             run_id=run_id,
         )
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         ReproducingAgent(self)
 
-    def step(self) -> None:
+    def step(self):
         self.suitable_mates = list(
             filter(
                 lambda agent: (

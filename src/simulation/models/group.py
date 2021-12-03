@@ -33,10 +33,10 @@ class GroupModel(AltruismModel):
             level_of_sacrifice=level_of_sacrifice,
         )
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         GroupAgent(self, group=self.random.choice(self.groups).group_id)
 
-    def get_group_of_agent(self, agent):
+    def get_group_of_agent(self, agent) -> Group:
         return list(filter(lambda g: g.group_id == agent.group, self.groups))[0]
 
     def init_groups(self):

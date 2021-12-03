@@ -11,11 +11,11 @@ class AgingModel(BaseModel):
             run_id=run_id,
         )
 
-    def step(self) -> None:
+    def step(self):
         super().step()
         for agent in self.schedule.agents:
             if agent.life_expectancy < agent.age:
                 agent.die()
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         AgingAgent(self)

@@ -1,5 +1,6 @@
+from typing import List
 from simulation.agents.culture import CultureAgent
-from simulation.helper.groups import CultureGroup
+from simulation.helper.groups import CultureGroup, Group
 from simulation.models.group import GroupModel
 
 
@@ -32,17 +33,17 @@ class CultureModel(GroupModel):
         )
 
     def init_groups(self):
-        self.groups = [
+        self.groups: List[CultureGroup] = [
             CultureGroup("A", 0.25),
             CultureGroup("B", 0.5),
             CultureGroup("C", 0.75),
             CultureGroup("D", 1),
         ]
 
-    def add_agent(self) -> None:
+    def add_agent(self):
         CultureAgent(self, group=self.random.choice(self.groups).group_id)
 
-    def get_group_of_agent(self, agent):
+    def get_group_of_agent(self, agent) -> Group:
         return list(filter(lambda g: g.group_id == agent.group, self.groups))[0]
 
     def agent_acted_altruistic(self, agent):
