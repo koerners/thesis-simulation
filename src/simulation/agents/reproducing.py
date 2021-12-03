@@ -1,13 +1,7 @@
-from enum import Enum
 from simulation.agents.aging import AgingAgent
+from simulation.helper.gender import Gender
 from simulation.models.utils.datacollector import get_total_agent_count
 from simulation.networks.constants_relationsships import Relationship
-
-
-class Gender(Enum):
-    MALE = "m"
-    FEMALE = "f"
-    GENDERLESS = "x"
 
 
 def agent_can_reproduce(agent, agent_limit_reached):

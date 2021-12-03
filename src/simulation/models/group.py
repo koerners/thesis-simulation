@@ -1,11 +1,6 @@
 from simulation.agents.group import GroupAgent
+from simulation.helper.groups import Group
 from simulation.models.altruism import AltruismModel
-
-
-class Group:
-    # pylint:disable=too-few-public-methods
-    def __init__(self, group_id):
-        self.group_id = group_id  # A, B, C ...
 
 
 class GroupModel(AltruismModel):
