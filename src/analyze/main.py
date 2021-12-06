@@ -18,6 +18,10 @@ if __name__ == "__main__":
 
     print(all_run_data)
 
+    plot_values_over_time(all_run_data, "agent_neighbors_by_group")
+
+    plot_values_over_time(all_run_data, "agent_neighbors_by_type")
+
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "child_bearing_cost"
     )
@@ -28,7 +32,8 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "min_relationship"
     )
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "finding_max")
 
     plot_value_over_time_by_feature(
         all_run_data, "clustering", "foodlimit_multiplicator"
@@ -36,10 +41,13 @@ if __name__ == "__main__":
     plot_value_over_time_by_feature(all_run_data, "average_reputation")
     plot_values_over_time(all_run_data, "groups_culture")
 
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "lifeexpectancy")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "lifeexpectancy")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "foodlimit_multiplicator"
     )
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "child_bearing_cost")

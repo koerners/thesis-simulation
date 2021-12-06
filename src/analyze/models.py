@@ -35,7 +35,8 @@ def plot_value_over_time_by_feature(
         unique_values = data[feature].unique()
         for value in unique_values:
             data_frame = data.loc[data[feature] == value]
-            mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
+            mean = np.mean(
+                pad_array(np.array(data_frame[value_to_excert])), axis=0)
             plt.plot(mean, label=value)
 
     average = np.mean(pad_array(np.array(data[value_to_excert])), axis=0)
@@ -114,23 +115,25 @@ def plot_distribution_over_time_by_feature(
 
 def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
     plt.figure().clear()
-    if value_to_excert not in data:
-        return
+
     extracted = get_steps_data(data, value_to_excert)
     data[value_to_excert] = extracted
     data_frame = pd.DataFrame()
+    try:
+        possible = list(extracted[0][0])
+        for pos in possible:
+            # pylint: disable=cell-var-from-loop
+            data[pos] = data[value_to_excert].apply(
+                lambda x: np.array([y.get(pos, 0) for y in x])
+            )
+            data_frame[pos] = np.mean(np.array(data[pos]), axis=0)
 
-    possible = list(extracted[0][0])
-    for pos in possible:
-        # pylint: disable=cell-var-from-loop
-        data[pos] = data[value_to_excert].apply(
-            lambda x: np.array([y.get(pos, 0) for y in x])
-        )
-        data_frame[pos] = np.mean(np.array(data[pos]), axis=0)
-
-    data_frame[possible].plot()
-    title = f"{value_to_excert}"
-    plt.title(title)
-    plt.xlabel("steps")
-    plt.legend()
-    plt.savefig(create_dir(f"{value_to_excert}.png"))
+        data_frame[possible].plot()
+        title = f"{value_to_excert}"
+        plt.title(title)
+        plt.xlabel("steps")
+        plt.legend()
+        plt.savefig(create_dir(f"{value_to_excert}.png"))
+    except TypeError as exception:
+        print(
+            f'Error in plot_values_over_time when processing "{value_to_excert}": {exception}')
