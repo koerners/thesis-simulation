@@ -17,7 +17,7 @@ scipy = "*"
 [scripts]
 run="python src/simulation/run.py"
 spy="py-spy top --subprocesses -- python src/simulation/run.py"
-lint="pylint src"
+lint="pylint src/simulation"
 clear="rm -rf out/"
 test="python -m nose2 --with-coverage"
 analyze="python src/analyze/main.py"

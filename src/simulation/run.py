@@ -24,7 +24,7 @@ aging_model_params = {**variable_base_params, "lifeexpectancy": [(30, 40)]}
 reproduction_model_params = {
     **aging_model_params,
     "genderless": [False],
-    "agent_limit": [5000],
+    "agent_limit": [50],
 }
 
 eating_model_params = {

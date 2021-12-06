@@ -26,38 +26,41 @@ def plot_value_over_time_by_feature(
 ) -> None:
     plt.figure().clear()
 
-    if value_to_excert not in data:
-        return
+    try:
+        data[value_to_excert] = get_steps_data(data, value_to_excert)
 
-    data[value_to_excert] = get_steps_data(data, value_to_excert)
+        if feature is not None:
+            unique_values = data[feature].unique()
+            for value in unique_values:
+                data_frame = data.loc[data[feature] == value]
+                mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
+                plt.plot(mean, label=value)
 
-    if feature is not None:
-        unique_values = data[feature].unique()
-        for value in unique_values:
-            data_frame = data.loc[data[feature] == value]
-            mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
-            plt.plot(mean, label=value)
+        average = np.mean(pad_array(np.array(data[value_to_excert])), axis=0)
 
-    average = np.mean(pad_array(np.array(data[value_to_excert])), axis=0)
+        plt.plot(average, "--", label="average")
+        title = (
+            f"{value_to_excert} by {feature}"
+            if feature is not None
+            else plt.title("f{value_to_excert}")
+        )
+        plt.title(title)
+        plt.xlabel("steps")
+        plt.ylabel(value_to_excert)
+        plt.legend()
+        output = (
+            f"{value_to_excert}/by_{feature}.png"
+            if feature is not None
+            else f"{value_to_excert}/average.png"
+        )
+        plt.savefig(create_dir(output))
 
-    plt.plot(average, "--", label="average")
-    title = (
-        f"{value_to_excert} by {feature}"
-        if feature is not None
-        else plt.title("f{value_to_excert}")
-    )
-    plt.title(title)
-    plt.xlabel("steps")
-    plt.ylabel(value_to_excert)
-    plt.legend()
-    output = (
-        f"{value_to_excert}/by_{feature}.png"
-        if feature is not None
-        else f"{value_to_excert}/average.png"
-    )
-    plt.savefig(create_dir(output))
+        clear_figs()
 
-    clear_figs()
+    except Exception as e:
+        print(
+            f'Error in plot_value_over_time_by_feature when processing "{value_to_excert}": {e}'
+        )
 
 
 def _plot_distribution_over_time(
@@ -133,7 +136,7 @@ def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
         plt.xlabel("steps")
         plt.legend()
         plt.savefig(create_dir(f"{value_to_excert}.png"))
-    except TypeError as exception:
+    except Exception as exception:
         print(
             f'Error in plot_values_over_time when processing "{value_to_excert}": {exception}'
         )
