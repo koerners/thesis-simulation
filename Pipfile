@@ -6,6 +6,7 @@ verify_ssl = true
 nose2="*"
 pylint = "*"
 black = "*"
+py-spy = "*"
 
 [packages]
 mesa = "*"
@@ -15,6 +16,7 @@ scipy = "*"
 
 [scripts]
 run="python src/simulation/run.py"
+spy="py-spy top --subprocesses -- python src/simulation/run.py"
 lint="pylint src"
 clear="rm -rf out/"
 test="python -m nose2 --with-coverage"
