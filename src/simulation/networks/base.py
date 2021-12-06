@@ -27,6 +27,12 @@ class BaseNetwork:
         except NetworkXError:
             return []
 
+    def get_nr_neighbors(self, node) -> int:
+        try:
+            return len(list(self.__graph.neighbors(node.unique_id)))
+        except NetworkXError:
+            return 0
+
     def get_node_weight(self, node_1, node_2) -> int:
         conn = self.__graph.get_edge_data(node_1.unique_id, node_2.unique_id)
         return 0 if conn is None else conn.get("weight", 0)

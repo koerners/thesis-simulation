@@ -26,6 +26,8 @@ def get_steps_data(self) -> Dict:
         "agent_groups",
         "average_reputation",
         "groups_culture",
+        "agent_neighbors_by_type",
+        "agent_neighbors_by_group",
     ]
     return [
         {key: value}
@@ -57,6 +59,39 @@ def get_current_agent_types(self):
             continue
         agents[agent_type] = 1
     return agents
+
+
+def get_agent_neighbors_by_type(self):
+    agents = {}
+    agents_helper = {}
+    for agent in self.schedule.agents:
+        agent_type = type(agent).__name__
+        if agent_type in agents:
+            agents[agent_type] += self.network.get_nr_neighbors(agent)
+            agents_helper[agent_type] += 1
+            continue
+        agents[agent_type] = self.network.get_nr_neighbors(agent)
+        agents_helper[agent_type] = 1
+    for agent_type in agents:
+        agents[agent_type] = round(agents[agent_type] / agents_helper[agent_type], 2)
+    return agents
+
+
+def get_agent_neighbors_by_group(self):
+    groups = {}
+    groups_helper = {}
+    if hasattr(self, "groups"):
+        for agent in self.schedule.agents:
+            agent_group = self.get_group_of_agent(agent).group_id
+            if agent_group in groups:
+                groups[agent_group] += self.network.get_nr_neighbors(agent)
+                groups_helper[agent_group] += 1
+                continue
+            groups[agent_group] = self.network.get_nr_neighbors(agent)
+            groups_helper[agent_group] = 1
+        for group in groups:
+            groups[group] = round(groups[group] / groups_helper[group], 2)
+    return groups
 
 
 def get_agent_groups(self):

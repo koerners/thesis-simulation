@@ -6,6 +6,8 @@ from mesa.time import BaseScheduler, RandomActivation
 from simulation.agents.base import BaseAgent
 from simulation.models.utils.datacollector import (
     get_agent_groups,
+    get_agent_neighbors_by_group,
+    get_agent_neighbors_by_type,
     get_average_reputation,
     get_current_agent_types,
     get_current_food_distribution,
@@ -36,6 +38,8 @@ class BaseModel(Model):
                 "steps": get_steps_data,
                 "clustering": get_network_clustering,
                 "agent_types": get_current_agent_types,
+                "agent_neighbors_by_type": get_agent_neighbors_by_type,
+                "agent_neighbors_by_group": get_agent_neighbors_by_group,
                 "food_distribution": get_current_food_distribution,
                 "seed": get_seed,
                 "agent_groups": get_agent_groups,

@@ -1,5 +1,5 @@
 from mesa.batchrunner import BatchRunnerMP
-from simulation.models.culture import CultureModel
+from simulation.models.greenbeard import GreenBeardModel
 
 
 from simulation.models.utils.datacollector import (
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=CultureModel,
+        model_cls=GreenBeardModel,
         nr_processes=commandline_args.nr_of_processes,
         variable_parameters=altruism_model_params,
         fixed_parameters=fixed_params,
