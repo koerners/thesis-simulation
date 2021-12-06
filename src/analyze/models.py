@@ -33,7 +33,8 @@ def plot_value_over_time_by_feature(
             unique_values = data[feature].unique()
             for value in unique_values:
                 data_frame = data.loc[data[feature] == value]
-                mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
+                mean = np.mean(
+                    pad_array(np.array(data_frame[value_to_excert])), axis=0)
                 plt.plot(mean, label=value)
 
         average = np.mean(pad_array(np.array(data[value_to_excert])), axis=0)
@@ -55,12 +56,13 @@ def plot_value_over_time_by_feature(
         )
         plt.savefig(create_dir(output))
 
-        clear_figs()
-
     except Exception as e:
         print(
             f'Error in plot_value_over_time_by_feature when processing "{value_to_excert}": {e}'
         )
+
+    finally:
+        clear_figs()
 
 
 def _plot_distribution_over_time(
@@ -140,3 +142,5 @@ def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
         print(
             f'Error in plot_values_over_time when processing "{value_to_excert}": {exception}'
         )
+    finally:
+        clear_figs()
