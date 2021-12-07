@@ -1,5 +1,5 @@
 from mesa.batchrunner import BatchRunnerMP
-from simulation.models.greenbeard import GreenBeardModel
+from simulation.models.hamilton import HamiltonModel
 
 
 from simulation.models.utils.datacollector import (
@@ -15,22 +15,22 @@ from simulation.utils.time import get_current_timestring
 RUN_ID = get_current_timestring()
 
 # PARAMETERS
-fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
+fixed_params = {"network_saving_steps": 19999, "run_id": RUN_ID}
 
-variable_base_params = {"num_agents": [100]}
+variable_base_params = {"num_agents": [30]}
 
 aging_model_params = {**variable_base_params, "lifeexpectancy": [(30, 40)]}
 
 reproduction_model_params = {
     **aging_model_params,
     "genderless": [False],
-    "agent_limit": [50],
+    "agent_limit": [5000],
 }
 
 eating_model_params = {
     **reproduction_model_params,
     # will be multiplied by the amount of initial agents
-    "foodlimit_multiplicator": [10],
+    "foodlimit_multiplicator": [5],
     # maximum amount of food one agent can find per step
     "finding_max": [4],
     # cost that has to be paid by BOTH parents
@@ -66,9 +66,9 @@ if __name__ == "__main__":
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=GreenBeardModel,
+        model_cls=HamiltonModel,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=altruism_model_params,
+        variable_parameters=hamilton_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,
