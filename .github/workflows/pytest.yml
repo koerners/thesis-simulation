@@ -20,7 +20,7 @@ jobs:
         run: |
           git config --global user.name 'koerners'
           git config --global user.email 'git@skoerner.com'
-          git commit -am "Automated formatting fixes"
+          git commit -am "[Automated] format"
           git push
 
       - name: Set up Python 3.9
@@ -54,5 +54,5 @@ jobs:
         run: |
           git config --global user.name 'koerners'
           git config --global user.email 'git@skoerner.com'
-          git commit --allow-empty -am "Updated UML diagrams"
+          git commit --allow-empty -am "[Automated] update UML diagrams"
           git push
