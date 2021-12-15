@@ -1,6 +1,7 @@
 import pandas as pd
 
 from analyze.models import (
+    plot_correlations,
     plot_distribution_over_time_by_feature,
     plot_value_over_time_by_feature,
     plot_values_over_time,
@@ -17,6 +18,8 @@ if __name__ == "__main__":
     all_run_data = all_run_data.append(get_run_data(ALL_RUNS[-1]))
 
     print(all_run_data)
+
+    plot_correlations(all_run_data)
 
     plot_values_over_time(all_run_data, "agent_neighbors_by_group")
 
@@ -39,6 +42,7 @@ if __name__ == "__main__":
     )
     plot_value_over_time_by_feature(all_run_data, "average_reputation")
     plot_values_over_time(all_run_data, "groups_culture")
+    plot_values_over_time(all_run_data, "trivers_values")
 
     plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")

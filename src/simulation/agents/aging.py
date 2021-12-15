@@ -2,8 +2,8 @@ from simulation.agents.base import BaseAgent
 
 
 class AgingAgent(BaseAgent):
-    def __init__(self, model, group=None, age=None):
-        super().__init__(model=model, group=group)
+    def __init__(self, model, group=None, age=None, is_altruist=False):
+        super().__init__(model=model, group=group, is_altruist=is_altruist)
         if age is None:
             self.age: int = self.random.randint(0, 69)
         else:

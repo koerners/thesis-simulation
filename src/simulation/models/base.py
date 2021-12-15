@@ -16,6 +16,7 @@ from simulation.models.utils.datacollector import (
     get_seed,
     get_steps_data,
     get_total_agent_count,
+    get_trivers_values,
 )
 from simulation.networks.base import BaseNetwork
 
@@ -44,6 +45,7 @@ class BaseModel(Model):
                 "agent_groups": get_agent_groups,
                 "average_reputation": get_average_reputation,
                 "groups_culture": get_groups_culture,
+                "trivers_values": get_trivers_values,
             }
         )
 

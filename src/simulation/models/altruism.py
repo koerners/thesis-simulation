@@ -17,7 +17,8 @@ class AltruismModel(EatingModel):
         child_bearing_cost=0,
     ):
         self.level_of_sacrifice: float = level_of_sacrifice
-
+        self._altruists_benefits: int = 0  # For statistics
+        self._non_altruists_benefits: int = 0  # For statistics
         super().__init__(
             num_agents=num_agents,
             network_saving_steps=network_saving_steps,
@@ -32,3 +33,17 @@ class AltruismModel(EatingModel):
 
     def add_agent(self):
         AltruismAgent(self)
+
+    def altruistic_action_happend(self, receiver):
+        if receiver.is_altruist:
+            self._altruists_benefits += 1
+        else:
+            self._non_altruists_benefits += 1
+
+    def reset_benefits(self):
+        self._altruists_benefits = 0
+        self._non_altruists_benefits = 0
+
+    @property
+    def benefits(self):
+        return (self._altruists_benefits, self._non_altruists_benefits)

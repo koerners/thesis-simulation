@@ -3,7 +3,7 @@ from simulation.agents.eating import EatingAgent
 
 class AltruismAgent(EatingAgent):
     def __init__(self, model, group=None, age=None):
-        super().__init__(model=model, group=group, age=age)
+        super().__init__(model=model, group=group, age=age, is_altruist=True)
 
     def step(self):
         super().step()
@@ -16,6 +16,12 @@ class AltruismAgent(EatingAgent):
                     self.give_food_to(peer_in_need)
                 else:
                     still_needy_peers_left = False
+
+    def give_food_to(self, receiver):
+        if self.current_food > 0:
+            self.current_food -= 1
+            receiver.current_food += 1
+            self.model.altruistic_action_happend(receiver)
 
     def __determine_max_sacrifice(self) -> int:
         if self.current_food < 1:

@@ -1,5 +1,5 @@
 from mesa.batchrunner import BatchRunnerMP
-from simulation.models.hamilton import HamiltonModel
+from simulation.models.greenbeard import GreenBeardModel
 
 
 from simulation.models.utils.datacollector import (
@@ -60,15 +60,14 @@ base_reporter = {
 
 extended_reporter = {"steps": get_steps_data}
 
-
 if __name__ == "__main__":
     commandline_args = Commandline()
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=HamiltonModel,
+        model_cls=GreenBeardModel,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=hamilton_model_params,
+        variable_parameters=altruism_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,
