@@ -33,8 +33,7 @@ def plot_value_over_time_by_feature(
             unique_values = data[feature].unique()
             for value in unique_values:
                 data_frame = data.loc[data[feature] == value]
-                mean = np.mean(
-                    pad_array(np.array(data_frame[value_to_excert])), axis=0)
+                mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
                 plt.plot(mean, label=value)
 
         average = np.mean(pad_array(np.array(data[value_to_excert])), axis=0)
@@ -144,6 +143,7 @@ def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
         )
     finally:
         clear_figs()
+
 
 def plot_correlations(df: DataFrame) -> None:
     # plot correlation matrix for give pandas dataframe

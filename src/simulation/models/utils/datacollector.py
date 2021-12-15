@@ -73,13 +73,15 @@ def get_trivers_values(self):
         non_altruists = all_agents - altruists
         if altruists > 0:
             left_hand_side = (1 / ((altruists / all_agents) ** 2)) * (
-                benefits_altruists*benefit_factor -
-                (benefits_non_altruists + benefits_altruists)
+                benefits_altruists * benefit_factor
+                - (benefits_non_altruists + benefits_altruists)
             )
         if non_altruists > 0:
             right_hand_side = (
-                1 / ((non_altruists / all_agents) ** 2)
-            ) * benefits_non_altruists*benefit_factor
+                (1 / ((non_altruists / all_agents) ** 2))
+                * benefits_non_altruists
+                * benefit_factor
+            )
     return {"avg_fitness_alt": left_hand_side, "avg_fitness_non_alt": right_hand_side}
 
 
