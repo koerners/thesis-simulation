@@ -13,6 +13,7 @@ mesa = "*"
 networkx = "*"
 matplotlib = "*"
 scipy = "*"
+kaleido = "*"
 
 [scripts]
 run="python src/simulation/run.py"

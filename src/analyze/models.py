@@ -5,6 +5,7 @@ import pandas as pd
 from analyze.utils.arrays import pad_array
 from simulation.utils.save_runs import create_dir
 
+import plotly.express as px
 
 def get_steps_data(data, value_to_excert):
     return data["steps"].apply(
@@ -145,7 +146,20 @@ def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
     finally:
         clear_figs()
 
+
 def plot_correlations(df: DataFrame) -> None:
     # plot correlation matrix for give pandas dataframe
+    df['total_agents'] = get_steps_data(
+        df, "total_agents").apply(lambda x: x[-1])
+    df['food_distribution_factor'] = get_steps_data(
+        df, "food_distribution").apply(lambda x: ((x[-1].get("below_mean")+1)/(x[-1].get("above_mean")+1)))
+    df['avg_fitness_alt'] = get_steps_data(
+        df, "trivers_values").apply(lambda x: x[-1].get("avg_fitness_alt"))
+    df['avg_fitness_non_alt'] = get_steps_data(
+        df, "trivers_values").apply(lambda x: x[-1].get("avg_fitness_non_alt"))
+    print(df)
     corr = df.corr()
     print(corr)
+
+    fig = px.imshow(corr)
+    fig.write_image(create_dir("correlations.png"))
