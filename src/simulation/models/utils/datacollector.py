@@ -63,7 +63,6 @@ def get_current_agent_types(self):
 
 
 def get_trivers_values(self):
-    benefit_factor = 1.1
     left_hand_side, right_hand_side = 0, 0
     if hasattr(self, "benefits"):
         benefits_altruists, benefits_non_altruists = self.benefits
@@ -71,16 +70,16 @@ def get_trivers_values(self):
         all_agents = len(self.agents)
         altruists = len(list(filter(lambda x: x.is_altruist, self.agents)))
         non_altruists = all_agents - altruists
+        cum_benefits = benefits_non_altruists + benefits_altruists
         if altruists > 0:
             left_hand_side = (1 / ((altruists / all_agents) ** 2)) * (
-                benefits_altruists * benefit_factor
-                - (benefits_non_altruists + benefits_altruists)
+                benefits_altruists
+                - (cum_benefits*(1/max(1, self.child_bearing_cost)))
             )
         if non_altruists > 0:
             right_hand_side = (
                 (1 / ((non_altruists / all_agents) ** 2))
                 * benefits_non_altruists
-                * benefit_factor
             )
     return {"avg_fitness_alt": left_hand_side, "avg_fitness_non_alt": right_hand_side}
 
