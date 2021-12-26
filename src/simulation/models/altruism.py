@@ -33,8 +33,7 @@ class AltruismModel(EatingModel):
         )
 
     def add_agent(self):
-        agent = self.random.choice(
-                    [AltruismAgent, GenuineAgent])
+        agent = self.random.choice([AltruismAgent, GenuineAgent])
         agent(self)
 
     def altruistic_action_happend(self, receiver):
