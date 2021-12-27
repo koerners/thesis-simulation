@@ -1,5 +1,5 @@
+from simulation.agents.eating import EatingAgent
 from simulation.models.eating import EatingModel
-from simulation.agents.altruism import AltruismAgent
 from simulation.agents.genuine import GenuineAgent
 
 
@@ -33,8 +33,7 @@ class AltruismModel(EatingModel):
         )
 
     def add_agent(self):
-        agent = self.random.choice(
-                    [AltruismAgent, GenuineAgent])
+        agent = self.random.choice([EatingAgent, GenuineAgent])
         agent(self)
 
     def altruistic_action_happend(self, receiver):

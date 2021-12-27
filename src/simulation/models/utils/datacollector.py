@@ -1,4 +1,4 @@
-from statistics import StatisticsError, median
+from statistics import StatisticsError, mean, median
 from typing import Dict
 
 from networkx.algorithms.approximation import average_clustering
@@ -29,6 +29,7 @@ def get_steps_data(self) -> Dict:
         "agent_neighbors_by_type",
         "agent_neighbors_by_group",
         "trivers_values",
+        "food_distribution_by_type",
     ]
     return [
         {key: value}
@@ -149,9 +150,9 @@ def get_current_food_distribution(self):
 
     try:
         food_distribution = [x.current_food for x in self.schedule.agents]
-        mean = median(food_distribution)
-        below_average = len(list(filter(lambda x: x < mean, food_distribution)))
-        above_average = len(list(filter(lambda x: x > mean, food_distribution)))
+        median_dist = median(food_distribution)
+        below_average = len(list(filter(lambda x: x < median_dist, food_distribution)))
+        above_average = len(list(filter(lambda x: x > median_dist, food_distribution)))
     except StatisticsError:
         # no agents
         pass
@@ -159,3 +160,22 @@ def get_current_food_distribution(self):
         pass
 
     return {"below_mean": below_average, "above_mean": above_average}
+
+
+def get_current_food_distribution_by_type(self):
+    types = get_current_agent_types(self).keys()
+    agents = {}
+    for agent_type in types:
+        try:
+            food_distribution = [
+                x.current_food
+                for x in self.schedule.agents
+                if type(x).__name__ == agent_type
+            ]
+            agents.update({agent_type: round(mean(food_distribution), 2)})
+        except StatisticsError:
+            # no agents
+            pass
+        except AttributeError:
+            pass
+    return agents

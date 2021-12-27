@@ -11,6 +11,7 @@ from simulation.models.utils.datacollector import (
     get_average_reputation,
     get_current_agent_types,
     get_current_food_distribution,
+    get_current_food_distribution_by_type,
     get_experiment_id,
     get_groups_culture,
     get_seed,
@@ -41,6 +42,7 @@ class BaseModel(Model):
                 "agent_neighbors_by_type": get_agent_neighbors_by_type,
                 "agent_neighbors_by_group": get_agent_neighbors_by_group,
                 "food_distribution": get_current_food_distribution,
+                "food_distribution_by_type": get_current_food_distribution_by_type,
                 "seed": get_seed,
                 "agent_groups": get_agent_groups,
                 "average_reputation": get_average_reputation,
@@ -60,7 +62,7 @@ class BaseModel(Model):
             and self.schedule.steps % self.network_saving_steps == 0
         ):
             self.network.save(
-                f"{self.run_id}/{self.experiment_id}/Step_{self.schedule.steps}.pkl"
+                f"{self.run_id}/{self.experiment_id}/Step_{self.schedule.steps}"
             )
 
         self.schedule.step()
