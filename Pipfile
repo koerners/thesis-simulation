@@ -17,7 +17,7 @@ kaleido = "*"
 palettable = "*"
 
 [scripts]
-run="python src/simulation/run.py"
+start="python src/simulation/run.py"
 spy="py-spy top --subprocesses -- python src/simulation/run.py"
 lint="pylint src/simulation"
 clear="rm -rf out/"

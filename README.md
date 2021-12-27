@@ -7,14 +7,14 @@
 1. Install pip ```python -m ensurepip --upgrade```
 2. Install pipenv ```pip install pipenv```
 3. Install dependencies ```pipenv install```
-4. Run simulation ```pipenv run run``` or get possible arguments with ```--help```
+4. Run simulation ```pipenv run start``` or get possible arguments with ```--help```
 5. Analyze the generated data using ```pipenv run analyze```
 6. Clear ```.out/``` with ```pipenv run clear```
 
 ## Options
 
 ```
-usage: run.py [-h] [-p PROCESSES] [-i ITERATIONS] [-s STEPS]
+usage: pipenv run start [-h] [-p PROCESSES] [-i ITERATIONS] [-s STEPS]
 
 optional arguments:
   -h,            --help                     Show this help message and exit
