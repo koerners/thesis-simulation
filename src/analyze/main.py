@@ -19,35 +19,23 @@ if __name__ == "__main__":
 
     print(all_run_data)
 
+    # CORRELATIONS
+
     plot_correlations(all_run_data)
+
+    # FOODDISTRIBUTION
 
     plot_values_over_time(all_run_data, "food_distribution")
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution", "child_bearing_cost"
     )
-
-    plot_values_over_time(all_run_data, "agent_neighbors_by_group")
-
-    plot_values_over_time(all_run_data, "agent_neighbors_by_type")
-
     plot_distribution_over_time_by_feature(
-        all_run_data, "agent_types", "child_bearing_cost"
-    )
-
-    plot_distribution_over_time_by_feature(
-        all_run_data, "agent_types", "level_of_sacrifice"
+        all_run_data, "food_distribution", "lifeexpectancy"
     )
     plot_distribution_over_time_by_feature(
-        all_run_data, "agent_types", "min_relationship"
+        all_run_data, "food_distribution", "foodlimit_multiplicator"
     )
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
 
-    plot_value_over_time_by_feature(
-        all_run_data, "clustering", "foodlimit_multiplicator"
-    )
-    plot_value_over_time_by_feature(all_run_data, "average_reputation")
-    plot_values_over_time(all_run_data, "groups_culture")
-    plot_values_over_time(all_run_data, "trivers_values")
     plot_values_over_time(all_run_data, "food_distribution_by_type")
 
     plot_distribution_over_time_by_feature(
@@ -56,6 +44,39 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "level_of_sacrifice", line=True
     )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "lifeexpectancy", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "foodlimit_multiplicator", line=True
+    )
+
+    # NEIGHBORS
+
+    plot_values_over_time(all_run_data, "agent_neighbors_by_group")
+
+    plot_values_over_time(all_run_data, "agent_neighbors_by_type")
+
+    # AGENT TYPES
+
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "child_bearing_cost"
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "lifeexpectancy"
+    )
+
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "level_of_sacrifice"
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "min_relationship"
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "foodlimit_multiplicator"
+    )
+
+    # TOTAL AGENTS
 
     plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")
@@ -64,3 +85,38 @@ if __name__ == "__main__":
         all_run_data, "total_agents", "foodlimit_multiplicator"
     )
     plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
+
+    # GROUPS AND CULTURE
+
+    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
+
+    plot_values_over_time(all_run_data, "groups_culture")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "groups_culture", "lifeexpectancy", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "groups_culture", "level_of_sacrifice", line=True
+    )
+
+    # REPUTATION
+
+    plot_value_over_time_by_feature(all_run_data, "average_reputation")
+    plot_value_over_time_by_feature(
+        all_run_data, "average_reputation", "lifeexpectancy"
+    )
+    plot_value_over_time_by_feature(
+        all_run_data, "average_reputation", "level_of_sacrifice"
+    )
+
+    # TRIVERS
+
+    plot_values_over_time(all_run_data, "trivers_values")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "trivers_values", "child_bearing_cost", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "trivers_values", "lifeexpectancy", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "trivers_values", "level_of_sacrifice", line=True
+    )
