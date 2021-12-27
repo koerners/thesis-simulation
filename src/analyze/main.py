@@ -21,6 +21,11 @@ if __name__ == "__main__":
 
     plot_correlations(all_run_data)
 
+    plot_values_over_time(all_run_data, "food_distribution")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution", "child_bearing_cost"
+    )
+
     plot_values_over_time(all_run_data, "agent_neighbors_by_group")
 
     plot_values_over_time(all_run_data, "agent_neighbors_by_type")
@@ -43,6 +48,14 @@ if __name__ == "__main__":
     plot_value_over_time_by_feature(all_run_data, "average_reputation")
     plot_values_over_time(all_run_data, "groups_culture")
     plot_values_over_time(all_run_data, "trivers_values")
+    plot_values_over_time(all_run_data, "food_distribution_by_type")
+
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "child_bearing_cost", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "level_of_sacrifice", line=True
+    )
 
     plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")
