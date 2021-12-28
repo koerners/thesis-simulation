@@ -61,9 +61,11 @@ if __name__ == "__main__":
     )
 
     # AGENT TYPES
-
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "child_bearing_cost"
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "child_bearing_cost", zoom=1000
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "lifeexpectancy"
@@ -86,6 +88,9 @@ if __name__ == "__main__":
     plot_value_over_time_by_feature(all_run_data, "total_agents", "lifeexpectancy")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "foodlimit_multiplicator"
+    )
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "foodlimit_multiplicator", zoom=1000
     )
     plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
 

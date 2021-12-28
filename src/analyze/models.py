@@ -66,7 +66,7 @@ def clear_figs():
 
 
 def plot_value_over_time_by_feature(
-    data: DataFrame, value_to_excert: str, feature: str = None
+    data: DataFrame, value_to_excert: str, feature: str = None, zoom: int = None
 ) -> None:
     plt.figure().clear()
 
@@ -78,20 +78,27 @@ def plot_value_over_time_by_feature(
             for value in unique_values:
                 data_frame = data.loc[data[feature] == value]
                 mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
+                if zoom is not None:
+                    mean = mean[:zoom]
                 plt.plot(mean, label=value, color=get_color_by_value(value))
 
         average = np.mean(pad_array(np.array(data[value_to_excert])), axis=0)
+
+        if zoom is not None:
+            average = average[:zoom]
 
         plt.plot(average, "--", label="average", color=get_color_by_value("average"))
         plt.xlabel("steps")
         plt.ylabel(value_to_excert)
         plt.legend()
         output = (
-            f"{value_to_excert}/by_{feature}.png"
+            f"{value_to_excert}/by_{feature}"
             if feature is not None
-            else f"{value_to_excert}/average.png"
+            else f"{value_to_excert}/average"
         )
-        plt.savefig(create_dir(output))
+        if zoom is not None:
+            output = f"{output}_zoom_{zoom}"
+        plt.savefig(create_dir(f"{output}.png"))
 
     except Exception as e:
         print(
@@ -107,6 +114,7 @@ def _plot_distribution_over_time(
     value_to_excert: str,
     output_path: str = None,
     line=False,
+    zoom=None,
 ) -> None:
     # pylint: disable=cell-var-from-loop
 
@@ -122,6 +130,9 @@ def _plot_distribution_over_time(
             lambda x: np.array([y.get(pos, 0) for y in x])
         )
         data_frame[pos] = np.mean(np.array(data[pos]), axis=0)
+
+    if zoom is not None:
+        data_frame = data_frame.head(n=zoom)
     if line is False:
         data_frame[possible].plot.area(
             stacked=True,
@@ -141,7 +152,11 @@ def _plot_distribution_over_time(
 
 
 def plot_distribution_over_time_by_feature(
-    data: DataFrame, value_to_excert: str, feature: str = None, line=False
+    data: DataFrame,
+    value_to_excert: str,
+    feature: str = None,
+    line=False,
+    zoom: int = None,
 ) -> None:
     try:
         if feature not in data:
@@ -150,15 +165,18 @@ def plot_distribution_over_time_by_feature(
         for value in unique_values:
             data_frame = data.loc[data[feature] == value].copy(deep=True)
             path = (
-                f"distribution_{value_to_excert}/{feature}_{value}.png"
+                f"distribution_{value_to_excert}/{feature}_{value}"
                 if line is False
-                else f"{value_to_excert}/{feature}_{value}.png"
+                else f"{value_to_excert}/{feature}_{value}"
             )
+            if zoom is not None:
+                path += f"_zoom_{zoom}"
             _plot_distribution_over_time(
                 data=data_frame.reset_index(),
                 value_to_excert=value_to_excert,
-                output_path=create_dir(path),
+                output_path=create_dir(f"{path}.png"),
                 line=line,
+                zoom=zoom,
             )
     except Exception as e:
         print(
@@ -203,7 +221,9 @@ def plot_correlations(df: DataFrame) -> None:
     try:
         df["total_agents"] = get_steps_data(df, "total_agents").apply(lambda x: x[-1])
         df["food_distribution_factor"] = get_steps_data(df, "food_distribution").apply(
-            lambda x: ((x[-1].get("below_median") + 1) / (x[-1].get("above_median") + 1))
+            lambda x: (
+                (x[-1].get("below_median") + 1) / (x[-1].get("above_median") + 1)
+            )
         )
         df["avg_fitness_alt"] = get_steps_data(df, "trivers_values").apply(
             lambda x: x[-1].get("avg_fitness_alt")
