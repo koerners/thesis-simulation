@@ -1,10 +1,10 @@
 from simulation.agents.eating import EatingAgent
-from simulation.agents.genuine import GenuineAgent
-from simulation.agents.hamilton import HamiltonAgent
+from simulation.agents.unconditional import UnconditionalAgent
+from simulation.agents.kinselection import KinSelectionAgent
 from simulation.models.altruism import AltruismModel
 
 
-class HamiltonModel(AltruismModel):
+class KinSelectionModel(AltruismModel):
     def __init__(
         self,
         num_agents,
@@ -35,5 +35,5 @@ class HamiltonModel(AltruismModel):
         )
 
     def add_agent(self):
-        agent = self.random.choice([EatingAgent, GenuineAgent, HamiltonAgent])
+        agent = self.random.choice([EatingAgent, UnconditionalAgent, KinSelectionAgent])
         agent(self)

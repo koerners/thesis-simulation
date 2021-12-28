@@ -19,11 +19,11 @@ COLOR_MAP = {
     "GroupAgent": color_pallet[1],
     "CultureAgent": color_pallet[2],
     "AltruismAgent": color_pallet[3],
-    "GenuineAgent": color_pallet[4],
+    "UnconditionalAgent": color_pallet[4],
     "GreenbeardAgent": color_pallet[6],
     "ReputationAgent": color_pallet[7],
     "EatingAgent": color_pallet[8],
-    "HamiltonAgent": color_pallet[9],
+    "KinSelectionAgent": color_pallet[9],
     # Statistics
     "below_mean": color_pallet[2],
     "above_mean": color_pallet[-1],
@@ -46,7 +46,7 @@ COLOR_MAP = {
 }
 
 
-def get_color_by_value(value: str) -> str:
+def get_color_by_value(value):
     return COLOR_MAP.get(str(value), random.choice(Vivid_10.mpl_colors))
 
 

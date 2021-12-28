@@ -1,6 +1,6 @@
 from simulation.agents.eating import EatingAgent
 from simulation.agents.reputation import ReputationAgent
-from simulation.agents.genuine import GenuineAgent
+from simulation.agents.unconditional import UnconditionalAgent
 from simulation.models.altruism import AltruismModel
 
 
@@ -39,7 +39,7 @@ class ReputationModel(AltruismModel):
         super().step()
 
     def add_agent(self):
-        agent = self.random.choice([EatingAgent, GenuineAgent, ReputationAgent])
+        agent = self.random.choice([EatingAgent, UnconditionalAgent, ReputationAgent])
         agent(self)
 
     def __calculate_average_reputation(self) -> float:

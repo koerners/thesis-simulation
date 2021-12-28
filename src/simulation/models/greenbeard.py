@@ -1,7 +1,7 @@
 from simulation.agents.eating import EatingAgent
 from simulation.agents.greenbeard import GreenBeardAgent
 from simulation.models.altruism import AltruismModel
-from simulation.agents.genuine import GenuineAgent
+from simulation.agents.unconditional import UnconditionalAgent
 
 
 class GreenBeardModel(AltruismModel):
@@ -33,5 +33,5 @@ class GreenBeardModel(AltruismModel):
         )
 
     def add_agent(self):
-        agent = self.random.choice([EatingAgent, GenuineAgent, GreenBeardAgent])
+        agent = self.random.choice([EatingAgent, UnconditionalAgent, GreenBeardAgent])
         agent(self)

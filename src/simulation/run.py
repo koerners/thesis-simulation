@@ -1,5 +1,5 @@
 from mesa.batchrunner import BatchRunnerMP
-from simulation.models.hamilton import HamiltonModel
+from simulation.models.altruism import AltruismModel
 
 
 from simulation.models.utils.datacollector import (
@@ -15,11 +15,11 @@ from simulation.utils.time import get_current_timestring
 RUN_ID = get_current_timestring()
 
 # PARAMETERS
-fixed_params = {"network_saving_steps": 500, "run_id": RUN_ID}
+fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
 
-variable_base_params = {"num_agents": [50]}
+variable_base_params = {"num_agents": [60]}
 
-aging_model_params = {**variable_base_params, "lifeexpectancy": [(30, 40)]}
+aging_model_params = {**variable_base_params, "lifeexpectancy": [(25, 35), (60, 70)]}
 
 reproduction_model_params = {
     **aging_model_params,
@@ -30,11 +30,11 @@ reproduction_model_params = {
 eating_model_params = {
     **reproduction_model_params,
     # will be multiplied by the amount of initial agents
-    "foodlimit_multiplicator": [5],
+    "foodlimit_multiplicator": [5, 10],
     # maximum amount of food one agent can find per step
     "finding_max": [3],
     # cost that has to be paid by BOTH parents
-    "child_bearing_cost": [3],  # float_range(0, 3, 0.5),
+    "child_bearing_cost": [0, 2, 4, 6],  # float_range(0, 3, 0.5),
 }
 
 altruism_model_params = {
@@ -42,14 +42,16 @@ altruism_model_params = {
     # Percentage of food the agent is willing to sacrifice
     # 1.0 might leave the agent to starve without food
     # 0.x gives x percent to other agents but minimum 1 if the agent can afford it without starving
-    "level_of_sacrifice": [1],
+    "level_of_sacrifice": [0.2, 0.5, 0.8, 1.0],
 }
 
-hamilton_model_params = {
+kin_selection_model_params = {
     **altruism_model_params,
     # minimmal relationship the agent has with the other agent to be willing to sacrifice for him
-    "min_relationship": [3],
+    "min_relationship": [1, 2, 3],
 }
+
+group_model_params = {**altruism_model_params, "group_number": [2, 4, 6]}
 
 # MODEL REPORTER
 base_reporter = {
@@ -65,9 +67,9 @@ if __name__ == "__main__":
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=HamiltonModel,
+        model_cls=AltruismModel,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=hamilton_model_params,
+        variable_parameters=altruism_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,

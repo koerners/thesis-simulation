@@ -1,16 +1,16 @@
 import unittest
-from simulation.agents.eating import EatingAgent
-from simulation.agents.genuine import GenuineAgent
 
+from simulation.agents.eating import EatingAgent
+from simulation.agents.unconditional import UnconditionalAgent
 from simulation.models.aging import AgingModel
 from simulation.models.altruism import AltruismModel
 from simulation.models.base import BaseModel
+from simulation.models.culture import CultureGroup, CultureModel
 from simulation.models.eating import EatingModel
 from simulation.models.greenbeard import GreenBeardModel
 from simulation.models.group import Group, GroupModel
-from simulation.models.hamilton import HamiltonModel
+from simulation.models.kinselection import KinSelectionModel
 from simulation.models.reproduction import ReproductionModel
-from simulation.models.culture import CultureGroup, CultureModel
 from simulation.models.reputation import ReputationModel
 
 
@@ -28,13 +28,15 @@ class ModelsTest(unittest.TestCase):
             )
 
     def assert_test_group(self, model):
-        """assert there are two types of agents present in the model: genuine and eating"""
-        existing_types_of_agents = set(agent.__class__ for agent in model.agents)
-        self.assertIn(GenuineAgent, existing_types_of_agents)
+        """assert there are two types of agents present in the model: unconditional and eating"""
+        existing_types_of_agents = set(
+            agent.__class__ for agent in model.agents)
+        self.assertIn(UnconditionalAgent, existing_types_of_agents)
         self.assertIn(EatingAgent, existing_types_of_agents)
 
     def test_base(self):
-        model = BaseModel(num_agents=10, network_saving_steps=None, run_id=None)
+        model = BaseModel(
+            num_agents=10, network_saving_steps=None, run_id=None)
         self.assertIsInstance(model, BaseModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assert_step(model)
@@ -136,12 +138,13 @@ class ModelsTest(unittest.TestCase):
         self.assertIsInstance(model, CultureModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assertEqual(len(model.groups), 3)
-        self.assertIsInstance(model.get_group_of_agent(model.agents[0]), CultureGroup)
+        self.assertIsInstance(model.get_group_of_agent(
+            model.agents[0]), CultureGroup)
         self.assert_step(model)
         self.assert_running(model)
 
-    def test_hamilton(self):
-        model = HamiltonModel(
+    def test_kinselection(self):
+        model = KinSelectionModel(
             num_agents=50,
             network_saving_steps=None,
             run_id=None,
@@ -153,7 +156,7 @@ class ModelsTest(unittest.TestCase):
             level_of_sacrifice=0.8,
             min_relationship=2,
         )
-        self.assertIsInstance(model, HamiltonModel)
+        self.assertIsInstance(model, KinSelectionModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
         self.assert_test_group(model)
         self.assert_step(model)

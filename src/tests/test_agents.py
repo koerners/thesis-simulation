@@ -3,12 +3,12 @@ import unittest
 from simulation.agents.aging import AgingAgent
 from simulation.agents.base import BaseAgent
 from simulation.agents.culture import CultureAgent
-from simulation.agents.genuine import GenuineAgent
+from simulation.agents.unconditional import UnconditionalAgent
 from simulation.agents.greenbeard import GreenBeardAgent
 from simulation.agents.group import GroupAgent
 from simulation.agents.reproducing import ReproducingAgent
 from simulation.agents.eating import EatingAgent
-from simulation.agents.hamilton import HamiltonAgent
+from simulation.agents.kinselection import KinSelectionAgent
 from simulation.agents.reputation import ReputationAgent
 from simulation.models.aging import AgingModel
 from simulation.models.altruism import AltruismModel
@@ -17,7 +17,7 @@ from simulation.models.culture import CultureModel
 from simulation.models.eating import EatingModel
 from simulation.models.greenbeard import GreenBeardModel
 from simulation.models.group import GroupModel
-from simulation.models.hamilton import HamiltonModel
+from simulation.models.kinselection import KinSelectionModel
 from simulation.models.reproduction import ReproductionModel
 from simulation.models.reputation import ReputationModel
 
@@ -77,7 +77,7 @@ class NetworksTest(unittest.TestCase):
         self.assertIsInstance(agent, EatingAgent)
         agent.step()
 
-    def test_genuine(self):
+    def test_unconditional(self):
         model = AltruismModel(
             num_agents=0,
             network_saving_steps=None,
@@ -89,12 +89,12 @@ class NetworksTest(unittest.TestCase):
             finding_max=0,
             level_of_sacrifice=0.8,
         )
-        agent = GenuineAgent(model)
-        self.assertIsInstance(agent, GenuineAgent)
+        agent = UnconditionalAgent(model)
+        self.assertIsInstance(agent, UnconditionalAgent)
         agent.step()
 
-    def test_hamilton(self):
-        model = HamiltonModel(
+    def test_kinselection(self):
+        model = KinSelectionModel(
             num_agents=0,
             network_saving_steps=None,
             run_id=None,
@@ -106,8 +106,8 @@ class NetworksTest(unittest.TestCase):
             level_of_sacrifice=0.8,
             min_relationship=2,
         )
-        agent = HamiltonAgent(model)
-        self.assertIsInstance(agent, HamiltonAgent)
+        agent = KinSelectionAgent(model)
+        self.assertIsInstance(agent, KinSelectionAgent)
         agent.step()
 
     def test_greenbeard(self):
