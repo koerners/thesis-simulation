@@ -159,7 +159,7 @@ def get_current_food_distribution(self):
     except AttributeError:
         pass
 
-    return {"below_mean": below_average, "above_mean": above_average}
+    return {"below_median": below_average, "above_median": above_average}
 
 
 def get_current_food_distribution_by_type(self):
