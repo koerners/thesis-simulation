@@ -92,6 +92,8 @@ if __name__ == "__main__":
     # GROUPS AND CULTURE
 
     plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "group_number")
 
     plot_distribution_over_time_by_feature(
         all_run_data, "groups_culture", "lifeexpectancy", line=True
@@ -99,7 +101,9 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "groups_culture", "level_of_sacrifice", line=True
     )
-
+    plot_distribution_over_time_by_feature(
+        all_run_data, "groups_culture", "group_number", line=True
+    )
     # REPUTATION
 
     plot_value_over_time_by_feature(all_run_data, "average_reputation")
