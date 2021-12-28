@@ -1,3 +1,5 @@
+import string
+from typing import List
 from simulation.agents.group import GroupAgent
 from simulation.helper.groups import Group
 from simulation.models.altruism import AltruismModel
@@ -14,11 +16,12 @@ class GroupModel(AltruismModel):
         run_id,
         finding_max,
         level_of_sacrifice,
+        group_number,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
 
-        self.init_groups()
+        self.init_groups(group_number)
 
         super().__init__(
             num_agents=num_agents,
@@ -39,5 +42,8 @@ class GroupModel(AltruismModel):
     def get_group_of_agent(self, agent) -> Group:
         return list(filter(lambda g: g.group_id == agent.group, self.groups))[0]
 
-    def init_groups(self):
-        self.groups = [Group("A"), Group("B")]
+    def init_groups(self, number_of_groups):
+        self.groups: List[Group] = []
+        letters = list(string.ascii_uppercase)
+        for i in range(number_of_groups):
+            self.groups.append(Group(letters[i]))

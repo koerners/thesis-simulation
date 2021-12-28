@@ -1,4 +1,5 @@
 from typing import List
+import string
 from simulation.agents.culture import CultureAgent
 from simulation.helper.groups import CultureGroup, Group
 from simulation.models.group import GroupModel
@@ -15,6 +16,7 @@ class CultureModel(GroupModel):
         run_id,
         finding_max,
         level_of_sacrifice,
+        group_number,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
@@ -30,15 +32,17 @@ class CultureModel(GroupModel):
             foodlimit_multiplicator=foodlimit_multiplicator,
             child_bearing_cost=child_bearing_cost,
             level_of_sacrifice=level_of_sacrifice,
+            group_number=group_number,
         )
 
-    def init_groups(self):
-        self.groups: List[CultureGroup] = [
-            CultureGroup("A", 0.25),
-            CultureGroup("B", 0.5),
-            CultureGroup("C", 0.75),
-            CultureGroup("D", 1),
-        ]
+    def init_groups(self, number_of_groups):
+        letters = list(string.ascii_uppercase)
+        step = float(1 / number_of_groups)
+        counter = step
+        self.groups: List[CultureModel] = []
+        for i in range(number_of_groups):
+            self.groups.append(CultureGroup(letters[i], round(counter, 2)))
+            counter += step
 
     def add_agent(self):
         CultureAgent(self, group=self.random.choice(self.groups).group_id)

@@ -105,7 +105,6 @@ def plot_value_over_time_by_feature(
 def _plot_distribution_over_time(
     data: DataFrame,
     value_to_excert: str,
-    name: str = None,
     output_path: str = None,
     line=False,
 ) -> None:
@@ -158,7 +157,6 @@ def plot_distribution_over_time_by_feature(
             _plot_distribution_over_time(
                 data=data_frame.reset_index(),
                 value_to_excert=value_to_excert,
-                name=f"{feature}_{value}",
                 output_path=create_dir(path),
                 line=line,
             )

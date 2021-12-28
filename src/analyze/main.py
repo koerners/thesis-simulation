@@ -25,7 +25,6 @@ if __name__ == "__main__":
 
     # FOODDISTRIBUTION
 
-    plot_values_over_time(all_run_data, "food_distribution")
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution", "child_bearing_cost"
     )
@@ -35,8 +34,6 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution", "foodlimit_multiplicator"
     )
-
-    plot_values_over_time(all_run_data, "food_distribution_by_type")
 
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "child_bearing_cost", line=True
@@ -56,6 +53,12 @@ if __name__ == "__main__":
     plot_values_over_time(all_run_data, "agent_neighbors_by_group")
 
     plot_values_over_time(all_run_data, "agent_neighbors_by_type")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_neighbors_by_type", "lifeexpectancy", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_neighbors_by_type", "level_of_sacrifice", line=True
+    )
 
     # AGENT TYPES
 
@@ -90,7 +93,6 @@ if __name__ == "__main__":
 
     plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
 
-    plot_values_over_time(all_run_data, "groups_culture")
     plot_distribution_over_time_by_feature(
         all_run_data, "groups_culture", "lifeexpectancy", line=True
     )
@@ -110,7 +112,6 @@ if __name__ == "__main__":
 
     # TRIVERS
 
-    plot_values_over_time(all_run_data, "trivers_values")
     plot_distribution_over_time_by_feature(
         all_run_data, "trivers_values", "child_bearing_cost", line=True
     )

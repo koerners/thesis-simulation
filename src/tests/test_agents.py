@@ -137,6 +137,7 @@ class NetworksTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=3,
             level_of_sacrifice=0.8,
+            group_number=1,
         )
         agent = GroupAgent(model, group="A")
         self.assertIsInstance(agent, GroupAgent)
@@ -153,6 +154,7 @@ class NetworksTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=3,
             level_of_sacrifice=0.8,
+            group_number=1,
         )
         agent = CultureAgent(model, group="A")
         self.assertIsInstance(agent, CultureAgent)

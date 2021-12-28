@@ -111,9 +111,11 @@ class ModelsTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=3,
             level_of_sacrifice=0.8,
+            group_number=3,
         )
         self.assertIsInstance(model, GroupModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
+        self.assertEqual(len(model.groups), 3)
         self.assertIsInstance(model.get_group_of_agent(model.agents[0]), Group)
         self.assert_step(model)
         self.assert_running(model)
@@ -129,9 +131,11 @@ class ModelsTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=3,
             level_of_sacrifice=0.8,
+            group_number=3,
         )
         self.assertIsInstance(model, CultureModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
+        self.assertEqual(len(model.groups), 3)
         self.assertIsInstance(model.get_group_of_agent(model.agents[0]), CultureGroup)
         self.assert_step(model)
         self.assert_running(model)
