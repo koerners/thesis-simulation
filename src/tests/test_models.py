@@ -29,14 +29,12 @@ class ModelsTest(unittest.TestCase):
 
     def assert_test_group(self, model):
         """assert there are two types of agents present in the model: unconditional and eating"""
-        existing_types_of_agents = set(
-            agent.__class__ for agent in model.agents)
+        existing_types_of_agents = set(agent.__class__ for agent in model.agents)
         self.assertIn(UnconditionalAgent, existing_types_of_agents)
         self.assertIn(EatingAgent, existing_types_of_agents)
 
     def test_base(self):
-        model = BaseModel(
-            num_agents=10, network_saving_steps=None, run_id=None)
+        model = BaseModel(num_agents=10, network_saving_steps=None, run_id=None)
         self.assertIsInstance(model, BaseModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assert_step(model)
@@ -138,8 +136,7 @@ class ModelsTest(unittest.TestCase):
         self.assertIsInstance(model, CultureModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assertEqual(len(model.groups), 3)
-        self.assertIsInstance(model.get_group_of_agent(
-            model.agents[0]), CultureGroup)
+        self.assertIsInstance(model.get_group_of_agent(model.agents[0]), CultureGroup)
         self.assert_step(model)
         self.assert_running(model)
 
