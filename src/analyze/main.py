@@ -74,6 +74,11 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "level_of_sacrifice"
     )
+
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "level_of_sacrifice", zoom=1000
+    )
+
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "min_relationship"
     )
