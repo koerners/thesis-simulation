@@ -203,7 +203,9 @@ def plot_correlations(df: DataFrame) -> None:
     try:
         df["total_agents"] = get_steps_data(df, "total_agents").apply(lambda x: x[-1])
         df["food_distribution_factor"] = get_steps_data(df, "food_distribution").apply(
-            lambda x: ((x[-1].get("below_median") + 1) / (x[-1].get("above_median") + 1))
+            lambda x: (
+                (x[-1].get("below_median") + 1) / (x[-1].get("above_median") + 1)
+            )
         )
         df["avg_fitness_alt"] = get_steps_data(df, "trivers_values").apply(
             lambda x: x[-1].get("avg_fitness_alt")
