@@ -8,6 +8,7 @@ class TestNode:
 
     def __init__(self, unique_id):
         self.unique_id = unique_id
+        self.group = None
 
 
 class NetworksTest(unittest.TestCase):

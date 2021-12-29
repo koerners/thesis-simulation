@@ -13,7 +13,8 @@ class BaseNetwork:
         return self.__graph.number_of_nodes()
 
     def add_node(self, node):
-        self.__graph.add_node(node.unique_id, agent_type=type(node).__name__)
+        self.__graph.add_node(node.unique_id,
+                              agent_type=type(node).__name__, agent_group=node.group)
 
     def remove_node(self, node):
         self.__graph.remove_node(node.unique_id)
