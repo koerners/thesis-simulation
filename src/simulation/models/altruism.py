@@ -1,4 +1,3 @@
-
 from mesa.agent import Agent
 from simulation.agents.eating import EatingAgent
 from simulation.models.eating import EatingModel
