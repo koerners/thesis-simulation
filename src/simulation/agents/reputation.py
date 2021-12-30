@@ -4,7 +4,7 @@ from simulation.agents.altruism import AltruismAgent
 
 class ReputationAgent(AltruismAgent):
     def __init__(self, model, group=None, age=None):
-        self.reputation = 0
+        self.reputation = 0.0
         super().__init__(model=model, group=group, age=age)
 
     def find_peer_in_need(self) -> Agent:
