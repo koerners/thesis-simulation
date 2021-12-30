@@ -29,7 +29,7 @@ class ReproductionModel(AgingModel):
         self.suitable_mates = list(
             filter(
                 lambda agent: (
-                    agent.age > 17 and agent.age < 40 and agent.partner is None
+                    agent.age > 15 and agent.age < 40 and agent.partner is None
                 ),
                 self.schedule.agents,
             )

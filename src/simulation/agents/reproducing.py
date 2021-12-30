@@ -32,7 +32,7 @@ class ReproducingAgent(AgingAgent):
         agent_limit_reached = (
             get_total_agent_count(self.model) >= self.model.agent_limit
         )
-        if self.partner is None:
+        if self.partner is None and self.age > 15:
             self.find_partner()
         if agent_can_reproduce(self, agent_limit_reached):
             self.reproduce()

@@ -52,7 +52,7 @@ class GroupModel(AltruismModel):
     def step(self):
         super().step()
         for agent in self.agents:
-            if agent.group is not None and agent.partner is None:
+            if agent.group is not None and agent.partner is None and agent.age > 15:
                 if self.random.random() < self.migration_rate:
                     agent.migrate()
 
