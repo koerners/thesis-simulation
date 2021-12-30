@@ -1,5 +1,5 @@
 from mesa.batchrunner import BatchRunnerMP
-from simulation.models.greenbeard import GreenBeardModel
+from simulation.models.group import GroupModel
 
 
 from simulation.models.utils.datacollector import (
@@ -19,7 +19,8 @@ fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
 
 variable_base_params = {"num_agents": [100]}
 
-aging_model_params = {**variable_base_params, "lifeexpectancy": [(25, 35), (60, 70)]}
+aging_model_params = {**variable_base_params,
+                      "lifeexpectancy": [(25, 35), (60, 70)]}
 
 reproduction_model_params = {
     **aging_model_params,
@@ -57,7 +58,11 @@ kin_selection_model_params = {
     "min_relationship": [1, 2, 3],
 }
 
-group_model_params = {**altruism_model_params, "group_number": [2, 4, 6]}
+group_model_params = {
+    **altruism_model_params,
+    "group_number": [2, 4, 6],
+    "migration_rate": [0.0, 0.05, 0.15],
+}
 
 # MODEL REPORTER
 base_reporter = {
@@ -73,9 +78,9 @@ if __name__ == "__main__":
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=GreenBeardModel,
+        model_cls=GroupModel,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=greenbeard_model_params,
+        variable_parameters=group_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,
@@ -91,4 +96,5 @@ if __name__ == "__main__":
     run_data = pre_edit_run_data(run_data)
 
     print(run_data)
-    save_to_pickle(run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")
+    save_to_pickle(
+        run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")

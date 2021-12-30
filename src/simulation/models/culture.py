@@ -17,6 +17,7 @@ class CultureModel(GroupModel):
         finding_max,
         level_of_sacrifice,
         group_number,
+        migration_rate,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
@@ -33,6 +34,7 @@ class CultureModel(GroupModel):
             child_bearing_cost=child_bearing_cost,
             level_of_sacrifice=level_of_sacrifice,
             group_number=group_number,
+            migration_rate=migration_rate,
         )
 
     def init_groups(self, number_of_groups):

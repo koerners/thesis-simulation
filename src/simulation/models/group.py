@@ -1,5 +1,7 @@
 import string
 from typing import List
+
+from mesa.agent import Agent
 from simulation.agents.group import GroupAgent
 from simulation.helper.groups import Group
 from simulation.models.altruism import AltruismModel
@@ -17,11 +19,13 @@ class GroupModel(AltruismModel):
         finding_max,
         level_of_sacrifice,
         group_number,
+        migration_rate,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
 
         self.init_groups(group_number)
+        self.migration_rate = migration_rate
 
         super().__init__(
             num_agents=num_agents,
@@ -38,6 +42,17 @@ class GroupModel(AltruismModel):
 
     def add_agent(self):
         GroupAgent(self, group=self.random.choice(self.groups).group_id)
+
+    def step(self):
+        super().step()
+        for agent in self.agents:
+            if self.random.random() < self.migration_rate:
+                self.migrate(agent)
+
+    def migrate(self, agent: Agent):
+        initial_group = agent.group
+        while initial_group == agent.group:
+            agent.group = self.random.choice(self.groups).group_id
 
     def get_group_of_agent(self, agent) -> Group:
         return list(filter(lambda g: g.group_id == agent.group, self.groups))[0]
