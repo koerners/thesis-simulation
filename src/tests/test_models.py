@@ -120,7 +120,9 @@ class ModelsTest(unittest.TestCase):
         self.assertIsInstance(model.get_group_of_agent(model.agents[0]), Group)
         initial_group = model.get_group_of_agent(model.agents[0])
         self.assert_step(model)
-        self.assertNotEqual(initial_group.group_id, model.get_group_of_agent(model.agents[0]).group_id)
+        self.assertNotEqual(
+            initial_group.group_id, model.get_group_of_agent(model.agents[0]).group_id
+        )
         self.assert_running(model)
 
     def test_culture(self):
