@@ -20,8 +20,8 @@ class ModelsTest(unittest.TestCase):
         model.step()
         self.assertEqual(model.schedule.steps, 1)
 
-    def assert_running(self, model):
-        for _ in range(0, 500):
+    def assert_running(self, model, steps=500):
+        for _ in range(0, steps):
             model.step()
             self.assertEqual(
                 model.network.get_node_count(), model.schedule.get_agent_count()
@@ -102,7 +102,7 @@ class ModelsTest(unittest.TestCase):
 
     def test_group(self):
         model = GroupModel(
-            num_agents=10,
+            num_agents=50,
             network_saving_steps=None,
             run_id=None,
             lifeexpectancy=(50, 100),
@@ -115,19 +115,15 @@ class ModelsTest(unittest.TestCase):
             migration_rate=1.0,
         )
         self.assertIsInstance(model, GroupModel)
-        self.assertEqual(model.schedule.get_agent_count(), 10)
+        self.assertEqual(model.schedule.get_agent_count(), 50)
         self.assertEqual(len(model.groups), 3)
-        self.assertIsInstance(model.get_group_of_agent(model.agents[0]), Group)
-        initial_group = model.get_group_of_agent(model.agents[0])
+        self.assert_test_group(model)
         self.assert_step(model)
-        self.assertNotEqual(
-            initial_group.group_id, model.get_group_of_agent(model.agents[0]).group_id
-        )
-        self.assert_running(model)
+        self.assert_running(model, 10)
 
     def test_culture(self):
         model = CultureModel(
-            num_agents=10,
+            num_agents=50,
             network_saving_steps=None,
             run_id=None,
             lifeexpectancy=(50, 100),
@@ -137,12 +133,12 @@ class ModelsTest(unittest.TestCase):
             finding_max=3,
             level_of_sacrifice=0.8,
             group_number=3,
-            migration_rate=0.5,
+            migration_rate=0.05,
         )
         self.assertIsInstance(model, CultureModel)
-        self.assertEqual(model.schedule.get_agent_count(), 10)
+        self.assertEqual(model.schedule.get_agent_count(), 50)
+        self.assert_test_group(model)
         self.assertEqual(len(model.groups), 3)
-        self.assertIsInstance(model.get_group_of_agent(model.agents[0]), CultureGroup)
         self.assert_step(model)
         self.assert_running(model)
 

@@ -20,6 +20,9 @@ class BaseNetwork:
     def remove_node(self, node):
         self.__graph.remove_node(node.unique_id)
 
+    def update_node_group(self, node):
+        self.__graph.nodes[node.unique_id]["agent_group"] = node.group
+
     def add_node_connection(self, node_1, node_2, relatedness: int):
         self.__graph.add_edge(node_1.unique_id, node_2.unique_id, weight=relatedness)
 

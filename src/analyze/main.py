@@ -50,6 +50,9 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "allow_fake_greenbeards", line=True
     )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "migration_rate", line=True
+    )
 
     # NEIGHBORS
 
@@ -64,6 +67,9 @@ if __name__ == "__main__":
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_neighbors_by_type", "allow_fake_greenbeards", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_neighbors_by_type", "migration_rate", line=True
     )
 
     # AGENT TYPES
@@ -94,6 +100,9 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "allow_fake_greenbeards"
     )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "migration_rate"
+    )
 
     # TOTAL AGENTS
 
@@ -113,6 +122,7 @@ if __name__ == "__main__":
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "allow_fake_greenbeards"
     )
+    plot_value_over_time_by_feature(all_run_data, "total_agents", "migration_rate")
 
     # GROUPS AND CULTURE
 
@@ -127,6 +137,9 @@ if __name__ == "__main__":
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "groups_culture", "group_number", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "groups_culture", "migration_rate", line=True
     )
     # REPUTATION
 
@@ -150,5 +163,8 @@ if __name__ == "__main__":
         all_run_data, "trivers_values", "level_of_sacrifice", line=True
     )
     plot_distribution_over_time_by_feature(
-        all_run_data, "trivers_values", "allow_fake_greenbeards", line=True, zoom=1000
+        all_run_data, "trivers_values", "allow_fake_greenbeards", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "trivers_values", "migration_rate", line=True
     )

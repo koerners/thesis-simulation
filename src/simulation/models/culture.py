@@ -1,6 +1,8 @@
 from typing import List
 import string
 from simulation.agents.culture import CultureAgent
+from simulation.agents.eating import EatingAgent
+from simulation.agents.unconditional import UnconditionalAgent
 from simulation.helper.groups import CultureGroup
 from simulation.models.group import GroupModel
 
@@ -47,7 +49,12 @@ class CultureModel(GroupModel):
             counter += step
 
     def add_agent(self):
-        CultureAgent(self, group=self.random.choice(self.groups).group_id)
+        possible_agents = [EatingAgent, UnconditionalAgent, CultureAgent]
+        agent = self.random.choice(possible_agents)
+        if agent == CultureAgent:
+            agent(self, group=self.random.choice(self.groups).group_id)
+        else:
+            agent(self)
 
     def agent_acted_altruistic(self, agent):
         group = self.get_group_of_agent(agent)

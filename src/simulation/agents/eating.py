@@ -33,4 +33,4 @@ class EatingAgent(ReproducingAgent):
                 self.partner.__class__,
             ]
         )
-        return agent(self.model, age=0)
+        return agent(self.model, age=0, group=self.group)

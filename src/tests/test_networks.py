@@ -6,9 +6,9 @@ from simulation.networks.base import BaseNetwork
 class TestNode:
     # pylint: disable=too-few-public-methods
 
-    def __init__(self, unique_id):
+    def __init__(self, unique_id, group=None):
         self.unique_id = unique_id
-        self.group = None
+        self.group = group
 
 
 class NetworksTest(unittest.TestCase):
@@ -27,6 +27,19 @@ class NetworksTest(unittest.TestCase):
         self.assertEqual(network.get_node_count(), 1)
         network.remove_node(TestNode(1))
         self.assertEqual(network.get_node_count(), 0)
+
+    def test_group_update(self):
+        network = BaseNetwork()
+        test_node = TestNode(1, "group_1")
+        network.add_node(test_node)
+        self.assertEqual(
+            network.graph.nodes[test_node.unique_id]["agent_group"], "group_1"
+        )
+        test_node.group = "group_2"
+        network.update_node_group(test_node)
+        self.assertEqual(
+            network.graph.nodes[test_node.unique_id]["agent_group"], "group_2"
+        )
 
 
 if __name__ == "__main__":

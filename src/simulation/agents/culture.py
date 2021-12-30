@@ -3,7 +3,7 @@ from simulation.agents.group import GroupAgent
 
 
 class CultureAgent(GroupAgent):
-    def __init__(self, model, group=None, age=None):
+    def __init__(self, model, group, age=None):
         super().__init__(model=model, group=group, age=age)
 
     def find_peer_in_need(self) -> Agent:
@@ -19,6 +19,3 @@ class CultureAgent(GroupAgent):
         else:
             self.model.agent_acted_non_altruistic(self)
         return None
-
-    def bear_child(self) -> Agent:
-        return CultureAgent(model=self.model, group=self.group, age=0)

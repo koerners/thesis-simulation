@@ -1,7 +1,8 @@
 import string
 from typing import List
 
-from mesa.agent import Agent
+from simulation.agents.eating import EatingAgent
+from simulation.agents.unconditional import UnconditionalAgent
 from simulation.agents.group import GroupAgent
 from simulation.helper.groups import Group
 from simulation.models.altruism import AltruismModel
@@ -41,21 +42,23 @@ class GroupModel(AltruismModel):
         )
 
     def add_agent(self):
-        GroupAgent(self, group=self.random.choice(self.groups).group_id)
+        possible_agents = [EatingAgent, UnconditionalAgent, GroupAgent]
+        agent = self.random.choice(possible_agents)
+        if agent == GroupAgent:
+            agent(self, group=self.random.choice(self.groups).group_id)
+        else:
+            agent(self)
 
     def step(self):
         super().step()
         for agent in self.agents:
-            if self.random.random() < self.migration_rate:
-                self.migrate(agent)
-
-    def migrate(self, agent: Agent):
-        initial_group = agent.group
-        while initial_group == agent.group:
-            agent.group = self.random.choice(self.groups).group_id
+            if agent.group is not None and agent.partner is None:
+                if self.random.random() < self.migration_rate:
+                    agent.migrate()
 
     def get_group_of_agent(self, agent) -> Group:
-        return list(filter(lambda g: g.group_id == agent.group, self.groups))[0]
+        agent_group = list(filter(lambda g: g.group_id == agent.group, self.groups))
+        return None if len(agent_group) == 0 else agent_group[0]
 
     def init_groups(self, number_of_groups):
         self.groups: List[Group] = []

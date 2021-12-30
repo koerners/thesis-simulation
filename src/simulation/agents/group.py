@@ -12,5 +12,8 @@ class GroupAgent(AltruismAgent):
                 return peer
         return None
 
-    def bear_child(self) -> Agent:
-        return GroupAgent(model=self.model, group=self.group, age=0)
+    def migrate(self):
+        for group in self.model.groups:
+            if group.group_id != self.group:
+                self.group = group.group_id
+                self.model.network.update_node_group(self)

@@ -105,7 +105,11 @@ def get_agent_neighbors_by_group(self):
     groups_helper = {}
     if hasattr(self, "groups"):
         for agent in self.schedule.agents:
-            agent_group = self.get_group_of_agent(agent).group_id
+            agent_group = (
+                "None"
+                if agent.group is None
+                else self.get_group_of_agent(agent).group_id
+            )
             if agent_group in groups:
                 groups[agent_group] += self.network.get_nr_neighbors(agent)
                 groups_helper[agent_group] += 1

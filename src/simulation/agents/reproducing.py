@@ -79,4 +79,9 @@ class ReproducingAgent(AgingAgent):
                 self.partner.__class__,
             ]
         )
-        return agent(self.model, age=0)
+        return agent(self.model, age=0, group=self.group)
+
+    def die(self):
+        if self.partner is not None:
+            self.partner.partner = None
+        super().die()
