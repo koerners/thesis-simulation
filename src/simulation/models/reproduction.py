@@ -1,4 +1,3 @@
-
 from simulation.agents.reproducing import ReproducingAgent
 from simulation.models.aging import AgingModel
 
