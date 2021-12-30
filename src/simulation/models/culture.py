@@ -49,9 +49,6 @@ class CultureModel(GroupModel):
     def add_agent(self):
         CultureAgent(self, group=self.random.choice(self.groups).group_id)
 
-    def get_group_of_agent(self, agent) -> Group:
-        return list(filter(lambda g: g.group_id == agent.group, self.groups))[0]
-
     def agent_acted_altruistic(self, agent):
         group = self.get_group_of_agent(agent)
         group.agent_acted_altruistic()
