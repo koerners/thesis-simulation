@@ -1,5 +1,12 @@
+from enum import Enum
+
 from mesa.batchrunner import BatchRunnerMP
+from simulation.models.altruism import AltruismModel
+from simulation.models.greenbeard import GreenBeardModel
+from simulation.models.reputation import ReputationModel
+from simulation.models.kinselection import KinSelectionModel
 from simulation.models.group import GroupModel
+from simulation.models.culture import CultureModel
 
 
 from simulation.models.utils.datacollector import (
@@ -13,6 +20,14 @@ from simulation.utils.save_runs import pre_edit_run_data, save_to_pickle
 from simulation.utils.time import get_current_timestring
 
 RUN_ID = get_current_timestring()
+
+class Models(Enum):
+    BASELINE = AltruismModel
+    GREENBEARD = GreenBeardModel
+    REPUTATION = ReputationModel
+    KINSELECTION = KinSelectionModel
+    GROUP = GroupModel
+    CULTURE = CultureModel
 
 # PARAMETERS
 fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
@@ -77,9 +92,9 @@ if __name__ == "__main__":
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=GroupModel,
+        model_cls=Models.GREENBEARD.value,
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=group_model_params,
+        variable_parameters=greenbeard_model_params,
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,
