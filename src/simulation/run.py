@@ -21,6 +21,7 @@ from simulation.utils.time import get_current_timestring
 
 RUN_ID = get_current_timestring()
 
+
 class Models(Enum):
     BASELINE = AltruismModel
     GREENBEARD = GreenBeardModel
@@ -28,6 +29,7 @@ class Models(Enum):
     KINSELECTION = KinSelectionModel
     GROUP = GroupModel
     CULTURE = CultureModel
+
 
 # PARAMETERS
 fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
