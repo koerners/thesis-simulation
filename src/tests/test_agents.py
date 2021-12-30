@@ -155,7 +155,7 @@ class NetworksTest(unittest.TestCase):
 
     def test_culture(self):
         model = CultureModel(
-            num_agents=10,
+            num_agents=100,
             network_saving_steps=None,
             run_id=None,
             lifeexpectancy=(50, 100),
@@ -167,7 +167,7 @@ class NetworksTest(unittest.TestCase):
             group_number=1,
             migration_rate=0.0,
         )
-        agent = CultureAgent(model, group="A")
+        agent = CultureAgent(model, group="A-1.0")
         self.assertIsInstance(agent, CultureAgent)
         self.assertIsNotNone(agent.group)
         agent.step()
