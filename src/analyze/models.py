@@ -20,6 +20,7 @@ COLOR_MAP = {
     "CultureAgent": color_pallet[2],
     "AltruismAgent": color_pallet[3],
     "UnconditionalAgent": color_pallet[4],
+    "FakeGreenBeardAgent": color_pallet[5],
     "GreenbeardAgent": color_pallet[6],
     "ReputationAgent": color_pallet[7],
     "EatingAgent": color_pallet[8],

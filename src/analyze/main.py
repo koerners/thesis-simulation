@@ -47,6 +47,9 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "foodlimit_multiplicator", line=True
     )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "allow_fake_greenbeards", line=True
+    )
 
     # NEIGHBORS
 
@@ -58,6 +61,9 @@ if __name__ == "__main__":
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_neighbors_by_type", "level_of_sacrifice", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_neighbors_by_type", "allow_fake_greenbeards", line=True
     )
 
     # AGENT TYPES
@@ -85,6 +91,9 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "foodlimit_multiplicator"
     )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "allow_fake_greenbeards"
+    )
 
     # TOTAL AGENTS
 
@@ -97,7 +106,12 @@ if __name__ == "__main__":
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "foodlimit_multiplicator", zoom=1000
     )
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "allow_fake_greenbeards", zoom=1000
+    )
     plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "allow_fake_greenbeards")
 
     # GROUPS AND CULTURE
 
@@ -133,4 +147,7 @@ if __name__ == "__main__":
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "trivers_values", "level_of_sacrifice", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "trivers_values", "allow_fake_greenbeards", line=True, zoom=1000
     )

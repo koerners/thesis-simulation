@@ -170,6 +170,7 @@ class ModelsTest(unittest.TestCase):
             foodlimit_multiplicator=10,
             finding_max=3,
             level_of_sacrifice=0.8,
+            allow_fake_greenbeards=True,
         )
         self.assertIsInstance(model, GreenBeardModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)

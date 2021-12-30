@@ -5,6 +5,7 @@ from simulation.agents.base import BaseAgent
 from simulation.agents.culture import CultureAgent
 from simulation.agents.unconditional import UnconditionalAgent
 from simulation.agents.greenbeard import GreenBeardAgent
+from simulation.agents.greenbeard_fake import FakeGreenBeardAgent
 from simulation.agents.group import GroupAgent
 from simulation.agents.reproducing import ReproducingAgent
 from simulation.agents.eating import EatingAgent
@@ -27,6 +28,7 @@ class NetworksTest(unittest.TestCase):
         model = BaseModel(num_agents=0, network_saving_steps=None, run_id=None)
         agent = BaseAgent(model)
         self.assertIsInstance(agent, BaseAgent)
+        self.assertIsNone(agent.group)
         agent.step()
 
     def test_aging(self):
@@ -121,10 +123,18 @@ class NetworksTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=0,
             level_of_sacrifice=0.8,
+            allow_fake_greenbeards=True,
+
         )
         agent = GreenBeardAgent(model)
+        fake_agent = FakeGreenBeardAgent(model)
         self.assertIsInstance(agent, GreenBeardAgent)
+        self.assertIsInstance(fake_agent, FakeGreenBeardAgent)
+        self.assertTrue(hasattr(agent, "is_greenbeard"))
+        self.assertTrue(hasattr(fake_agent, "is_greenbeard"))
         agent.step()
+        fake_agent.step()
+
 
     def test_group(self):
         model = GroupModel(
@@ -141,6 +151,7 @@ class NetworksTest(unittest.TestCase):
         )
         agent = GroupAgent(model, group="A")
         self.assertIsInstance(agent, GroupAgent)
+        self.assertIsNotNone(agent.group)
         agent.step()
 
     def test_culture(self):
@@ -158,6 +169,7 @@ class NetworksTest(unittest.TestCase):
         )
         agent = CultureAgent(model, group="A")
         self.assertIsInstance(agent, CultureAgent)
+        self.assertIsNotNone(agent.group)
         agent.step()
 
     def test_reputation(self):
