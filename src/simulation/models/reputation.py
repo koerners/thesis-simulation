@@ -19,7 +19,7 @@ class ReputationModel(AltruismModel):
         child_bearing_cost=0,
     ):
 
-        self.average_reputation: float = 0
+        self.average_reputation: float = 0.0
 
         super().__init__(
             num_agents=num_agents,

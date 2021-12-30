@@ -20,7 +20,7 @@ class GreenBeardModel(AltruismModel):
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
-        self.allow_fake_greenbeards = allow_fake_greenbeards
+        self.allow_fake_greenbeards: bool = allow_fake_greenbeards
 
         super().__init__(
             num_agents=num_agents,

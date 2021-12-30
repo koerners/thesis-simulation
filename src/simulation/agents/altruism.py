@@ -21,7 +21,7 @@ class AltruismAgent(EatingAgent):
         if self.current_food > 0:
             self.current_food -= 1
             receiver.current_food += 1
-            self.model.altruistic_action_happend(receiver)
+            self.model.altruistic_action(receiver)
 
     def __determine_max_sacrifice(self) -> int:
         if self.current_food < 1:

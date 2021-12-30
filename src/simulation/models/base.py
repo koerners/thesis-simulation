@@ -73,7 +73,7 @@ class BaseModel(Model):
     def add_agent(self):
         BaseAgent(self)
 
-    def get_agent_by_id(self, agent_id) -> Agent:
+    def get_agent_by_id(self, agent_id: int) -> Agent:
         to_return = None
         agent = list(filter(lambda x: x.unique_id == agent_id, self.schedule.agents))
         try:
@@ -86,7 +86,7 @@ class BaseModel(Model):
     def get_agents_by_id(self, agent_ids: List[int]) -> List[Agent]:
         return list(filter(lambda x: x.unique_id in agent_ids, self.schedule.agents))
 
-    def get_neighbors(self, agent) -> List[Agent]:
+    def get_neighbors(self, agent: Agent) -> List[Agent]:
         agent_ids = self.network.get_neighbors_ids(agent)
         agents = self.get_agents_by_id(agent_ids)
         return agents

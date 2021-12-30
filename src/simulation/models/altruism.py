@@ -1,3 +1,5 @@
+
+from mesa.agent import Agent
 from simulation.agents.eating import EatingAgent
 from simulation.models.eating import EatingModel
 from simulation.agents.unconditional import UnconditionalAgent
@@ -36,7 +38,7 @@ class AltruismModel(EatingModel):
         agent = self.random.choice([EatingAgent, UnconditionalAgent])
         agent(self)
 
-    def altruistic_action_happend(self, receiver):
+    def altruistic_action(self, receiver: Agent):
         if receiver.is_altruist:
             self._altruists_benefits += 1
         else:
