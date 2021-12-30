@@ -1,7 +1,7 @@
 from typing import List
 import string
 from simulation.agents.culture import CultureAgent
-from simulation.helper.groups import CultureGroup, Group
+from simulation.helper.groups import CultureGroup
 from simulation.models.group import GroupModel
 
 
