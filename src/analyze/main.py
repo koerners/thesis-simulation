@@ -111,7 +111,8 @@ if __name__ == "__main__":
     )
     plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
     plot_value_over_time_by_feature(
-        all_run_data, "total_agents", "allow_fake_greenbeards")
+        all_run_data, "total_agents", "allow_fake_greenbeards"
+    )
 
     # GROUPS AND CULTURE
 

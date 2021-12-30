@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -9,7 +8,6 @@ from analyze.colors import get_color_by_value
 from simulation.utils.save_runs import create_dir
 
 from analyze.utils.arrays import pad_array
-
 
 
 def get_steps_data(data, value_to_excert):

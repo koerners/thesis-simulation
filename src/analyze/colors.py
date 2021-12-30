@@ -2,6 +2,7 @@ import random
 
 from palettable.cartocolors.qualitative import Prism_10
 from palettable.cartocolors.qualitative import Vivid_10
+
 # https://jiffyclub.github.io/palettable/
 color_pallet = Prism_10.mpl_colors
 

@@ -124,7 +124,6 @@ class NetworksTest(unittest.TestCase):
             finding_max=0,
             level_of_sacrifice=0.8,
             allow_fake_greenbeards=True,
-
         )
         agent = GreenBeardAgent(model)
         fake_agent = FakeGreenBeardAgent(model)
@@ -134,7 +133,6 @@ class NetworksTest(unittest.TestCase):
         self.assertTrue(hasattr(fake_agent, "is_greenbeard"))
         agent.step()
         fake_agent.step()
-
 
     def test_group(self):
         model = GroupModel(
