@@ -13,16 +13,12 @@ ALL_RUNS = get_saved_runs()
 all_run_data = pd.DataFrame()
 
 
-if __name__ == "__main__":
-
-    all_run_data = all_run_data.append(get_run_data(ALL_RUNS[-1]))
-
-    print(all_run_data)
+def analyze(all_run_data):
 
     # CORRELATIONS
 
     plot_correlations(all_run_data)
-
+    
     # FOODDISTRIBUTION
 
     plot_distribution_over_time_by_feature(
@@ -77,7 +73,7 @@ if __name__ == "__main__":
         all_run_data, "agent_types", "child_bearing_cost"
     )
     plot_distribution_over_time_by_feature(
-        all_run_data, "agent_types", "child_bearing_cost", zoom=1000
+        all_run_data, "agent_types", "child_bearing_cost", zoom=200
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "lifeexpectancy"
@@ -88,7 +84,7 @@ if __name__ == "__main__":
     )
 
     plot_distribution_over_time_by_feature(
-        all_run_data, "agent_types", "level_of_sacrifice", zoom=1000
+        all_run_data, "agent_types", "level_of_sacrifice", zoom=200
     )
 
     plot_distribution_over_time_by_feature(
@@ -106,28 +102,34 @@ if __name__ == "__main__":
 
     # TOTAL AGENTS
 
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "lifeexpectancy")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "lifeexpectancy")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "foodlimit_multiplicator"
     )
     plot_value_over_time_by_feature(
-        all_run_data, "total_agents", "foodlimit_multiplicator", zoom=1000
+        all_run_data, "total_agents", "foodlimit_multiplicator", zoom=200
     )
     plot_value_over_time_by_feature(
-        all_run_data, "total_agents", "allow_fake_greenbeards", zoom=1000
+        all_run_data, "total_agents", "allow_fake_greenbeards", zoom=200
     )
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "child_bearing_cost")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "allow_fake_greenbeards"
     )
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "migration_rate")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "migration_rate")
 
     # GROUPS AND CULTURE
 
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "group_number")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "finding_max")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "group_number")
 
     plot_distribution_over_time_by_feature(
         all_run_data, "groups_culture", "lifeexpectancy", line=True
@@ -168,3 +170,13 @@ if __name__ == "__main__":
     plot_distribution_over_time_by_feature(
         all_run_data, "trivers_values", "migration_rate", line=True
     )
+
+
+
+if __name__ == "__main__":
+
+    all_run_data = all_run_data.append(get_run_data(ALL_RUNS[-1]))
+
+    print(all_run_data)
+
+    analyze(all_run_data)

@@ -179,19 +179,19 @@ def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
 def plot_correlations(df: DataFrame) -> None:
     # plot correlation matrix for give pandas dataframe
     try:
-        df["total_agents"] = get_steps_data(df, "total_agents").apply(lambda x: x[-1])
-        df["food_distribution_factor"] = get_steps_data(df, "food_distribution").apply(
+        df["avg_food_distribution_factor"] = get_steps_data(df, "food_distribution").apply(
             lambda x: (
-                (x[-1].get("below_median") + 1) / (x[-1].get("above_median") + 1)
+                (np.mean([y.get("below_median")
+                 for y in x]) + 1) / (np.mean([y.get("above_median") for y in x]) + 1)
             )
         )
         df["avg_fitness_alt"] = get_steps_data(df, "trivers_values").apply(
-            lambda x: x[-1].get("avg_fitness_alt")
+            lambda x: np.mean([y.get("avg_fitness_alt") for y in x])
         )
         df["avg_fitness_non_alt"] = get_steps_data(df, "trivers_values").apply(
-            lambda x: x[-1].get("avg_fitness_non_alt")
+            lambda x: np.mean([y.get("avg_fitness_non_alt") for y in x])
         )
-
+        df.drop(columns=["agent_limit"], inplace=True)
         corr = df.corr()
 
         fig = px.imshow(corr)

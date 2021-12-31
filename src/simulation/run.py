@@ -1,4 +1,3 @@
-from enum import Enum
 
 from mesa.batchrunner import BatchRunnerMP
 from simulation.models.altruism import AltruismModel
@@ -22,15 +21,6 @@ from simulation.utils.time import get_current_timestring
 RUN_ID = get_current_timestring()
 
 
-class Models(Enum):
-    BASELINE = AltruismModel
-    GREENBEARD = GreenBeardModel
-    REPUTATION = ReputationModel
-    KINSELECTION = KinSelectionModel
-    GROUP = GroupModel
-    CULTURE = CultureModel
-
-
 # PARAMETERS
 fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
 
@@ -47,7 +37,7 @@ reproduction_model_params = {
 eating_model_params = {
     **reproduction_model_params,
     # will be multiplied by the amount of initial agents
-    "foodlimit_multiplicator": [5, 10],
+    "foodlimit_multiplicator": [5],
     # maximum amount of food one agent can find per step
     "finding_max": [3, 5],
     # cost that has to be paid by BOTH parents
@@ -89,14 +79,45 @@ base_reporter = {
 
 extended_reporter = {"steps": get_steps_data}
 
+
+MODELS = {
+    "baseline": {
+        "model": AltruismModel,
+        "params": altruism_model_params,
+    },
+    "greenbeard": {
+        "model": GreenBeardModel,
+        "params": greenbeard_model_params,
+    },
+    "kinselection": {
+        "model": KinSelectionModel,
+        "params": kin_selection_model_params,
+    },
+    "group": {
+        "model": GroupModel,
+        "params": group_model_params,
+    },
+    "culture": {
+        "model": CultureModel,
+        "params": group_model_params,
+    },
+    "reputation": {
+        "model": ReputationModel,
+        "params": altruism_model_params,
+    },
+}
+
+
+
+
 if __name__ == "__main__":
     commandline_args = Commandline()
 
     # BATCH RUNNER
     batch_run = BatchRunnerMP(
-        model_cls=Models.GREENBEARD.value,
+        model_cls=MODELS[commandline_args.model]["model"],
         nr_processes=commandline_args.nr_of_processes,
-        variable_parameters=greenbeard_model_params,
+        variable_parameters=MODELS[commandline_args.model]["params"],
         fixed_parameters=fixed_params,
         iterations=commandline_args.iterations,
         max_steps=commandline_args.max_steps,

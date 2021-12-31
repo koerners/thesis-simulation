@@ -14,15 +14,19 @@
 ## Options
 
 ```
-usage: pipenv run start [-h] [-p PROCESSES] [-i ITERATIONS] [-s STEPS]
+usage: pipenv run start [-h] -m MODEL [-p PROCESSES] [-i ITERATIONS] [-s STEPS]
 
-optional arguments:
-  -h,            --help                     Show this help message and exit
-  -p PROCESSES,  --Processes PROCESSES      Number of processes used
-  -i ITERATIONS, --Iterations ITERATIONS    Number of iterations
-  -s STEPS,      --Steps STEPS              Max steps
+arguments:
+  -h, --help            show this help message and exit
+  -m MODEL, --Model MODEL
+                        Model to run. Options: baseline, greenbeard, kinselection, group, culture, reputation
+  -p PROCESSES, --Processes PROCESSES
+                        Number of processes used
+  -i ITERATIONS, --Iterations ITERATIONS
+                        Number of iterations
+  -s STEPS, --Steps STEPS
+                        Steps the simulation is run
 ```
-
 
 ## Development
 
@@ -32,9 +36,12 @@ Install the development dependencies with ```pipenv install --dev```.
 - Run the linter with ```pipenv run lint```
 - Run tests with ```pipenv run test```
 
-
 ## Structure
+
 ### Models
+
 ![UML-Models](https://github.com/koerners/thesis-simulation/blob/main/uml/classes_Models.png)
+
 ### Agents
+
 ![UML-Models](https://github.com/koerners/thesis-simulation/blob/main/uml/classes_Agents.png)
