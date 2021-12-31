@@ -1,4 +1,3 @@
-
 from mesa.batchrunner import BatchRunnerMP
 from simulation.models.altruism import AltruismModel
 from simulation.models.greenbeard import GreenBeardModel
@@ -106,8 +105,6 @@ MODELS = {
         "params": altruism_model_params,
     },
 }
-
-
 
 
 if __name__ == "__main__":

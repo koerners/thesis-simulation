@@ -6,18 +6,20 @@ class Commandline:
         # Initialize parser
         _parser = argparse.ArgumentParser()
 
-        _parser.add_argument("-m", "--Model", required=True, help="Model to run. \
-            Options: baseline, greenbeard, kinselection, group, culture, reputation")
+        _parser.add_argument(
+            "-m",
+            "--Model",
+            required=True,
+            help="Model to run. \
+            Options: baseline, greenbeard, kinselection, group, culture, reputation",
+        )
 
         # Adding optional argument
-        _parser.add_argument("-p", "--Processes",
-                             help="Number of processes used")
+        _parser.add_argument("-p", "--Processes", help="Number of processes used")
 
         _parser.add_argument("-i", "--Iterations", help="Number of iterations")
 
-        _parser.add_argument(
-            "-s", "--Steps", help="Steps the simulation is run")
-
+        _parser.add_argument("-s", "--Steps", help="Steps the simulation is run")
 
         # Read arguments from command line
         _args = _parser.parse_args()
