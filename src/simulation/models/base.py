@@ -57,8 +57,7 @@ class BaseModel(Model):
 
     def step(self):
 
-        self.network.remove_duplicates(
-            [x.unique_id for x in self.schedule.agents])
+        self.network.remove_duplicates([x.unique_id for x in self.schedule.agents])
 
         self.datacollector.collect(self)
 
@@ -71,7 +70,6 @@ class BaseModel(Model):
             )
 
         self.schedule.step()
-
 
     def add_agent(self):
         BaseAgent(self)
