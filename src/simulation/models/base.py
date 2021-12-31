@@ -2,8 +2,8 @@ from typing import List
 from mesa import Model
 from mesa.agent import Agent
 from mesa.datacollection import DataCollector
-from mesa.time import BaseScheduler, RandomActivation
 from simulation.agents.base import BaseAgent
+from simulation.helper.custom_scheduler import CustomScheduler
 from simulation.models.utils.datacollector import (
     get_agent_groups,
     get_agent_neighbors_by_group,
@@ -27,9 +27,9 @@ class BaseModel(Model):
         super().__init__()
         self.run_id: str = run_id
         self.num_agents: int = num_agents
-        self.schedule: BaseScheduler = self.init_scheduler()
+        self.schedule = CustomScheduler(self)
         self.running: bool = True
-        self.network: BaseNetwork = self.init_social_network()
+        self.network: BaseNetwork = BaseNetwork()
         self.network_saving_steps: int = network_saving_steps
         self.experiment_id: str = hash(self)
         self.datacollector: DataCollector = DataCollector(
@@ -72,34 +72,21 @@ class BaseModel(Model):
 
         self.schedule.step()
 
-
     def add_agent(self):
         BaseAgent(self)
 
     def get_agent_by_id(self, agent_id: int) -> Agent:
-        to_return = None
-        agent = list(filter(lambda x: x.unique_id == agent_id, self.schedule.agents))
-        try:
-            to_return = agent[0]
-        except IndexError:
-            pass
-
-        return to_return
+        if agent_id is None:
+            return None
+        return self.schedule.get_agent_by_id(agent_id)
 
     def get_agents_by_id(self, agent_ids: List[int]) -> List[Agent]:
-        return list(filter(lambda x: x.unique_id in agent_ids, self.schedule.agents))
+        return self.schedule.get_agents_by_id(agent_ids)
 
     def get_neighbors(self, agent: Agent) -> List[Agent]:
         agent_ids = self.network.get_neighbors_ids(agent)
         agents = self.get_agents_by_id(agent_ids)
         return agents
-
-    def init_scheduler(self) -> BaseScheduler:
-        return RandomActivation(self)
-
-    @staticmethod
-    def init_social_network() -> BaseNetwork:
-        return BaseNetwork()
 
     @property
     def agents(self) -> List[Agent]:

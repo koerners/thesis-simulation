@@ -24,7 +24,7 @@ class ReproducingAgent(AgingAgent):
             if not model.genderless
             else Gender.GENDERLESS
         )
-        self.partner: Agent = None
+        self.__partner_id: int = None
         self.can_reproduce: bool = True  # can be overwritten by parent classes
 
     def step(self):
@@ -85,3 +85,11 @@ class ReproducingAgent(AgingAgent):
         if self.partner is not None:
             self.partner.partner = None
         super().die()
+
+    @property
+    def partner(self):
+        return self.model.get_agent_by_id(self.__partner_id)
+
+    @partner.setter
+    def partner(self, partner):
+        self.__partner_id = partner.unique_id if partner is not None else None
