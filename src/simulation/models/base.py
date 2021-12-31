@@ -57,8 +57,7 @@ class BaseModel(Model):
 
     def step(self):
         if len(self.schedule.agents) != len(self.network.graph):
-            self.network.remove_duplicates(
-                [x.unique_id for x in self.schedule.agents])
+            self.network.remove_duplicates([x.unique_id for x in self.schedule.agents])
 
         self.datacollector.collect(self)
 
