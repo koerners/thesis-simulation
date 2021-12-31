@@ -4,7 +4,6 @@ from mesa.time import RandomActivation
 
 
 class CustomScheduler(RandomActivation):
-
     def get_agent_by_id(self, agent_id: int) -> Agent:
         if agent_id not in self._agents.keys():
             return None
