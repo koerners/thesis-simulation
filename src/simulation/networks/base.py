@@ -53,5 +53,6 @@ class BaseNetwork:
         to_delete_from_network = list(
             filter(lambda x: x not in to_keep, self.graph.nodes())
         )
+
         for to_delete in to_delete_from_network:
             self.__graph.remove_node(to_delete)
