@@ -5,9 +5,14 @@ import numpy as np
 from simulation.models.altruism import AltruismModel
 
 problem = {
-    'num_vars': 4,
-    'names': ['finding_max', 'level_of_sacrifice', 'foodlimit_multiplicator', 'child_bearing_cost'],
-    'bounds': [[0, 10], [0, 1], [0, 10], [0, 10]]
+    "num_vars": 4,
+    "names": [
+        "finding_max",
+        "level_of_sacrifice",
+        "foodlimit_multiplicator",
+        "child_bearing_cost",
+    ],
+    "bounds": [[0, 10], [0, 1], [0, 10], [0, 10]],
 }
 
 
@@ -27,8 +32,7 @@ def evaluate_model(params):
 
     for _ in range(10):
         model.step()
-    data_frame = model.datacollector.get_model_vars_dataframe(
-    ).iloc[-1]["total_agents"]
+    data_frame = model.datacollector.get_model_vars_dataframe().iloc[-1]["total_agents"]
     return data_frame
 
 
