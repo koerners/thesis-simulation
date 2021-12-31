@@ -193,7 +193,7 @@ def plot_correlations(df: DataFrame) -> None:
         df["avg_fitness_non_alt"] = get_steps_data(df, "trivers_values").apply(
             lambda x: np.mean([y.get("avg_fitness_non_alt") for y in x])
         )
-        df.drop(columns=["agent_limit"], inplace=True)
+        df.drop(columns=["agent_limit", "foodlimit_multiplicator"], inplace=True)
         corr = df.corr()
 
         fig = px.imshow(corr)
