@@ -19,7 +19,7 @@ usage: pipenv run start [-h] -m MODEL [-p PROCESSES] [-i ITERATIONS] [-s STEPS]
 arguments:
   -h, --help            show this help message and exit
   -m MODEL, --Model MODEL
-                        Model to run. Options: baseline, greenbeard, kinselection, group, culture, reputation
+  Model to run. Options: baseline, greenbeard, kinselection, group, culture, reputation
   -p PROCESSES, --Processes PROCESSES
                         Number of processes used
   -i ITERATIONS, --Iterations ITERATIONS

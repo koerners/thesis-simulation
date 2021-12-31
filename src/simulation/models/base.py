@@ -56,7 +56,12 @@ class BaseModel(Model):
             self.add_agent()
 
     def step(self):
+
+        self.network.remove_duplicates(
+            [x.unique_id for x in self.schedule.agents])
+
         self.datacollector.collect(self)
+
         if (
             self.network_saving_steps is not None
             and self.schedule.steps % self.network_saving_steps == 0
@@ -67,8 +72,6 @@ class BaseModel(Model):
 
         self.schedule.step()
 
-        agent_keys = [x.unique_id for x in self.schedule.agents]
-        self.network.remove_duplicates(agent_keys)
 
     def add_agent(self):
         BaseAgent(self)
