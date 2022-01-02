@@ -40,8 +40,7 @@ def plot_value_over_time_by_feature(
             unique_values = data[feature].unique()
             for value in unique_values:
                 data_frame = data.loc[data[feature] == value]
-                mean = np.mean(
-                    pad_array(np.array(data_frame[value_to_excert])), axis=0)
+                mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
                 if zoom is not None:
                     mean = mean[:zoom]
                 plt.plot(mean, label=value, color=get_color_by_value(value))
@@ -51,8 +50,7 @@ def plot_value_over_time_by_feature(
         if zoom is not None:
             average = average[:zoom]
 
-        plt.plot(average, "--", label="average",
-                 color=get_color_by_value("average"))
+        plt.plot(average, "--", label="average", color=get_color_by_value("average"))
         plt.xlabel("steps")
         plt.ylabel(value_to_excert)
         plt.legend()
@@ -101,8 +99,7 @@ def _plot_distribution_over_time(
     if line is False:
         data_frame[possible].plot.area(
             stacked=True,
-            color=[get_color_by_value(x)
-                   for x in data_frame[possible].columns],
+            color=[get_color_by_value(x) for x in data_frame[possible].columns],
         )
 
     else:
@@ -206,14 +203,11 @@ def plot_correlations(df: DataFrame, drop_columns: List[str]) -> None:
 
         corr2 = df.corr()
 
-        pval = df.corr(method=lambda x, y: pearsonr(x, y)
-                       [1]) - np.eye(*corr2.shape)
+        pval = df.corr(method=lambda x, y: pearsonr(x, y)[1]) - np.eye(*corr2.shape)
 
-        p = pval.applymap(lambda x: ''.join(
-            ['*' for t in [0.01, 0.05, 0.1] if x <= t]))
+        p = pval.applymap(lambda x: "".join(["*" for t in [0.01, 0.05, 0.1] if x <= t]))
         significant_correlations = corr2.round(2).astype(str) + p
-        significant_correlations.to_latex(
-            create_dir("correlations/correlations.tex"))
+        significant_correlations.to_latex(create_dir("correlations/correlations.tex"))
 
     except Exception as e:
         print(f"Error in plot_correlations: {e}")
