@@ -32,6 +32,7 @@ class BaseModel(Model):
         self.network: BaseNetwork = BaseNetwork()
         self.network_saving_steps: int = network_saving_steps
         self.experiment_id: str = hash(self)
+        self.agent_types = []
         self.datacollector: DataCollector = DataCollector(
             {
                 "total_agents": get_total_agent_count,
@@ -56,6 +57,11 @@ class BaseModel(Model):
             self.add_agent()
 
     def step(self):
+        if self.schedule.steps == 1:
+            for agent in self.agents:
+                if agent.__class__ not in self.agent_types:
+                    self.agent_types.append(agent.__class__)
+
         if len(self.schedule.agents) != len(self.network.graph):
             self.network.remove_duplicates([x.unique_id for x in self.schedule.agents])
 

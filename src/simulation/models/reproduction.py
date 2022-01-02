@@ -11,10 +11,12 @@ class ReproductionModel(AgingModel):
         genderless,
         agent_limit,
         run_id,
+        mutation_chance,
     ):
         self.genderless: bool = genderless
         self.agent_limit: int = agent_limit
         self.suitable_mates = []
+        self.mutation_chance = mutation_chance
         super().__init__(
             num_agents=num_agents,
             network_saving_steps=network_saving_steps,

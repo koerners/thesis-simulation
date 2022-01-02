@@ -61,10 +61,12 @@ class ModelsTest(unittest.TestCase):
             lifeexpectancy=(50, 100),
             agent_limit=100,
             genderless=False,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, ReproductionModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
         self.assert_step(model)
+
         self.assert_running(model)
 
     def test_eating(self):
@@ -77,6 +79,7 @@ class ModelsTest(unittest.TestCase):
             genderless=False,
             foodlimit_multiplicator=None,
             finding_max=3,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, EatingModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
@@ -94,6 +97,7 @@ class ModelsTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=3,
             level_of_sacrifice=0.8,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, AltruismModel)
         self.assertEqual(model.schedule.get_agent_count(), 10)
@@ -113,6 +117,7 @@ class ModelsTest(unittest.TestCase):
             level_of_sacrifice=0.8,
             group_number=3,
             migration_rate=1.0,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, GroupModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
@@ -134,6 +139,7 @@ class ModelsTest(unittest.TestCase):
             level_of_sacrifice=0.8,
             group_number=3,
             migration_rate=0.05,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, CultureModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
@@ -154,6 +160,7 @@ class ModelsTest(unittest.TestCase):
             finding_max=3,
             level_of_sacrifice=0.8,
             min_relationship=2,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, KinSelectionModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
@@ -173,6 +180,7 @@ class ModelsTest(unittest.TestCase):
             finding_max=3,
             level_of_sacrifice=0.8,
             allow_fake_greenbeards=True,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, GreenBeardModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)
@@ -191,6 +199,7 @@ class ModelsTest(unittest.TestCase):
             foodlimit_multiplicator=10,
             finding_max=3,
             level_of_sacrifice=0.8,
+            mutation_chance=0,
         )
         self.assertIsInstance(model, ReputationModel)
         self.assertEqual(model.schedule.get_agent_count(), 50)

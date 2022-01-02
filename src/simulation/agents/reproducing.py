@@ -73,12 +73,22 @@ class ReproducingAgent(AgingAgent):
             )
 
     def bear_child(self) -> Agent:
-        agent = self.random.choice(
-            [
-                self.__class__,
-                self.partner.__class__,
-            ]
-        )
+        parent_classes = [
+            self.__class__,
+            self.partner.__class__,
+        ]
+        agent = self.random.choice(parent_classes)
+        if (
+            self.random.uniform(0, 1) < self.model.mutation_chance
+            and len(self.model.agent_types) > 1
+        ):
+            for mutant in self.random.sample(
+                self.model.agent_types, len(self.model.agent_types)
+            ):
+                if mutant not in parent_classes:
+                    agent = mutant
+                    break
+
         return agent(self.model, age=0, group=self.group)
 
     def die(self):

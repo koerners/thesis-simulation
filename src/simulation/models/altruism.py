@@ -15,6 +15,7 @@ class AltruismModel(EatingModel):
         run_id,
         finding_max,
         level_of_sacrifice,
+        mutation_chance,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
@@ -31,6 +32,7 @@ class AltruismModel(EatingModel):
             finding_max=finding_max,
             foodlimit_multiplicator=foodlimit_multiplicator,
             child_bearing_cost=child_bearing_cost,
+            mutation_chance=mutation_chance,
         )
 
     def add_agent(self):

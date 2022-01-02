@@ -31,6 +31,7 @@ reproduction_model_params = {
     **aging_model_params,
     "genderless": [False],
     "agent_limit": [5000],
+    "mutation_chance": [0, 0.05],
 }
 
 eating_model_params = {

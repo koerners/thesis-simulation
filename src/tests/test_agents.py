@@ -53,6 +53,7 @@ class NetworksTest(unittest.TestCase):
             lifeexpectancy=(0, 0),
             agent_limit=5,
             genderless=True,
+            mutation_chance=0,
         )
         agent_1 = ReproducingAgent(model)
         agent_2 = ReproducingAgent(model)
@@ -74,6 +75,7 @@ class NetworksTest(unittest.TestCase):
             genderless=False,
             foodlimit_multiplicator=None,
             finding_max=0,
+            mutation_chance=0,
         )
         agent = EatingAgent(model)
         self.assertIsInstance(agent, EatingAgent)
@@ -90,6 +92,7 @@ class NetworksTest(unittest.TestCase):
             foodlimit_multiplicator=None,
             finding_max=0,
             level_of_sacrifice=0.8,
+            mutation_chance=0,
         )
         agent = UnconditionalAgent(model)
         self.assertIsInstance(agent, UnconditionalAgent)
@@ -107,6 +110,7 @@ class NetworksTest(unittest.TestCase):
             finding_max=0,
             level_of_sacrifice=0.8,
             min_relationship=2,
+            mutation_chance=0,
         )
         agent = KinSelectionAgent(model)
         self.assertIsInstance(agent, KinSelectionAgent)
@@ -124,6 +128,7 @@ class NetworksTest(unittest.TestCase):
             finding_max=0,
             level_of_sacrifice=0.8,
             allow_fake_greenbeards=True,
+            mutation_chance=0,
         )
         agent = GreenBeardAgent(model)
         fake_agent = FakeGreenBeardAgent(model)
@@ -147,6 +152,7 @@ class NetworksTest(unittest.TestCase):
             level_of_sacrifice=0.8,
             group_number=1,
             migration_rate=0.0,
+            mutation_chance=0,
         )
         agent = GroupAgent(model, group="A")
         self.assertIsInstance(agent, GroupAgent)
@@ -166,6 +172,7 @@ class NetworksTest(unittest.TestCase):
             level_of_sacrifice=0.8,
             group_number=1,
             migration_rate=0.0,
+            mutation_chance=0,
         )
         agent = CultureAgent(model, group="A-1.0")
         self.assertIsInstance(agent, CultureAgent)
@@ -183,6 +190,7 @@ class NetworksTest(unittest.TestCase):
             foodlimit_multiplicator=10,
             finding_max=3,
             level_of_sacrifice=0.8,
+            mutation_chance=0,
         )
         agent = ReputationAgent(model)
         self.assertIsInstance(agent, ReputationAgent)

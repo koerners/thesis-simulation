@@ -27,10 +27,4 @@ class EatingAgent(ReproducingAgent):
     def bear_child(self) -> Agent:
         self.current_food -= self.model.child_bearing_cost
         self.partner.current_food -= self.model.child_bearing_cost
-        agent = self.random.choice(
-            [
-                self.__class__,
-                self.partner.__class__,
-            ]
-        )
-        return agent(self.model, age=0, group=self.group)
+        return super().bear_child()

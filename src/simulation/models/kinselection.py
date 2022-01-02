@@ -16,6 +16,7 @@ class KinSelectionModel(AltruismModel):
         finding_max,
         level_of_sacrifice,
         min_relationship,
+        mutation_chance,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
@@ -32,6 +33,7 @@ class KinSelectionModel(AltruismModel):
             foodlimit_multiplicator=foodlimit_multiplicator,
             child_bearing_cost=child_bearing_cost,
             level_of_sacrifice=level_of_sacrifice,
+            mutation_chance=mutation_chance,
         )
 
     def add_agent(self):

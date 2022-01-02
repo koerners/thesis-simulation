@@ -17,6 +17,7 @@ class GreenBeardModel(AltruismModel):
         finding_max,
         level_of_sacrifice,
         allow_fake_greenbeards,
+        mutation_chance,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
@@ -33,6 +34,7 @@ class GreenBeardModel(AltruismModel):
             foodlimit_multiplicator=foodlimit_multiplicator,
             child_bearing_cost=child_bearing_cost,
             level_of_sacrifice=level_of_sacrifice,
+            mutation_chance=mutation_chance,
         )
 
     def add_agent(self):

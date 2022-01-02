@@ -14,6 +14,7 @@ class EatingModel(ReproductionModel):
         agent_limit,
         run_id,
         finding_max,
+        mutation_chance,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
@@ -33,6 +34,7 @@ class EatingModel(ReproductionModel):
             run_id=run_id,
             genderless=genderless,
             agent_limit=agent_limit,
+            mutation_chance=mutation_chance,
         )
 
     def add_agent(self):

@@ -20,6 +20,7 @@ class CultureModel(GroupModel):
         level_of_sacrifice,
         group_number,
         migration_rate,
+        mutation_chance,
         foodlimit_multiplicator=None,
         child_bearing_cost=0,
     ):
@@ -37,6 +38,7 @@ class CultureModel(GroupModel):
             level_of_sacrifice=level_of_sacrifice,
             group_number=group_number,
             migration_rate=migration_rate,
+            mutation_chance=mutation_chance,
         )
 
     def init_groups(self, number_of_groups):
