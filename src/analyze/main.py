@@ -8,16 +8,17 @@ from analyze.models import (
 )
 from analyze.utils.files import get_run_data, get_saved_runs
 
-ALL_RUNS = get_saved_runs()
-
-all_run_data = pd.DataFrame()
-
 
 def analyze(all_run_data):
 
     # CORRELATIONS
 
-    plot_correlations(all_run_data)
+    plot_correlations(all_run_data, drop_columns=[
+                      "agent_limit",
+                      "foodlimit_multiplicator",
+                      "num_agents",
+                      "genderless"
+                      ])
 
     # FOODDISTRIBUTION
 
@@ -102,9 +103,11 @@ def analyze(all_run_data):
 
     # TOTAL AGENTS
 
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "lifeexpectancy")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "lifeexpectancy")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "foodlimit_multiplicator"
     )
@@ -114,16 +117,20 @@ def analyze(all_run_data):
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "allow_fake_greenbeards", zoom=200
     )
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "child_bearing_cost")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "allow_fake_greenbeards"
     )
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "migration_rate")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "migration_rate")
 
     # GROUPS AND CULTURE
 
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "group_number")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "finding_max")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "group_number")
 
     plot_distribution_over_time_by_feature(
         all_run_data, "groups_culture", "lifeexpectancy", line=True
@@ -168,8 +175,12 @@ def analyze(all_run_data):
 
 if __name__ == "__main__":
 
-    all_run_data = all_run_data.append(get_run_data(ALL_RUNS[-1]))
+    ALL_RUNS = get_saved_runs()
 
-    print(all_run_data)
+    data = pd.DataFrame()
 
-    analyze(all_run_data)
+    data = data.append(get_run_data(ALL_RUNS[-1]))
+
+    print(data)
+
+    analyze(data)

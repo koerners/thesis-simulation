@@ -1,13 +1,16 @@
+from typing import List
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import plotly.express as px
-
 from pandas.core.frame import DataFrame
-from analyze.colors import get_color_by_value
 from simulation.utils.save_runs import create_dir
 
+from analyze.colors import get_color_by_value
 from analyze.utils.arrays import pad_array
+
+from scipy.stats import pearsonr
 
 
 def get_steps_data(data, value_to_excert):
@@ -37,7 +40,8 @@ def plot_value_over_time_by_feature(
             unique_values = data[feature].unique()
             for value in unique_values:
                 data_frame = data.loc[data[feature] == value]
-                mean = np.mean(pad_array(np.array(data_frame[value_to_excert])), axis=0)
+                mean = np.mean(
+                    pad_array(np.array(data_frame[value_to_excert])), axis=0)
                 if zoom is not None:
                     mean = mean[:zoom]
                 plt.plot(mean, label=value, color=get_color_by_value(value))
@@ -47,7 +51,8 @@ def plot_value_over_time_by_feature(
         if zoom is not None:
             average = average[:zoom]
 
-        plt.plot(average, "--", label="average", color=get_color_by_value("average"))
+        plt.plot(average, "--", label="average",
+                 color=get_color_by_value("average"))
         plt.xlabel("steps")
         plt.ylabel(value_to_excert)
         plt.legend()
@@ -96,7 +101,8 @@ def _plot_distribution_over_time(
     if line is False:
         data_frame[possible].plot.area(
             stacked=True,
-            color=[get_color_by_value(x) for x in data_frame[possible].columns],
+            color=[get_color_by_value(x)
+                   for x in data_frame[possible].columns],
         )
 
     else:
@@ -176,7 +182,7 @@ def plot_values_over_time(data: DataFrame, value_to_excert: str) -> None:
         clear_figs()
 
 
-def plot_correlations(df: DataFrame) -> None:
+def plot_correlations(df: DataFrame, drop_columns: List[str]) -> None:
     # plot correlation matrix for give pandas dataframe
     try:
         df["avg_food_distribution_factor"] = get_steps_data(
@@ -193,11 +199,21 @@ def plot_correlations(df: DataFrame) -> None:
         df["avg_fitness_non_alt"] = get_steps_data(df, "trivers_values").apply(
             lambda x: np.mean([y.get("avg_fitness_non_alt") for y in x])
         )
-        df.drop(columns=["agent_limit", "foodlimit_multiplicator"], inplace=True)
+        df.drop(columns=drop_columns, inplace=True)
         corr = df.corr()
-
         fig = px.imshow(corr)
-        fig.write_image(create_dir("correlations.png"))
+        fig.write_image(create_dir("correlations/correlations.png"))
+
+        corr2 = df.corr()
+
+        pval = df.corr(method=lambda x, y: pearsonr(x, y)
+                       [1]) - np.eye(*corr2.shape)
+
+        p = pval.applymap(lambda x: ''.join(
+            ['*' for t in [0.01, 0.05, 0.1] if x <= t]))
+        significant_correlations = corr2.round(2).astype(str) + p
+        significant_correlations.to_latex(
+            create_dir("correlations/correlations.tex"))
 
     except Exception as e:
         print(f"Error in plot_correlations: {e}")
