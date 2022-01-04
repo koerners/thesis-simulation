@@ -39,7 +39,7 @@ eating_model_params = {
     # will be multiplied by the amount of initial agents
     "foodlimit_multiplicator": [5],
     # maximum amount of food one agent can find per step
-    "finding_max": [3, 5],
+    "finding_max": [2, 3],
     # cost that has to be paid by BOTH parents
     "child_bearing_cost": [0, 2, 4, 6],  # float_range(0, 3, 0.5),
 }

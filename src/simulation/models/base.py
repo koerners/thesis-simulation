@@ -38,7 +38,6 @@ class BaseModel(Model):
                 "total_agents": get_total_agent_count,
                 "experiment_id": get_experiment_id,
                 "steps": get_steps_data,
-                # "clustering": get_network_clustering,
                 "agent_types": get_current_agent_types,
                 "agent_neighbors_by_type": get_agent_neighbors_by_type,
                 "agent_neighbors_by_group": get_agent_neighbors_by_group,

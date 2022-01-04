@@ -24,7 +24,7 @@ class EatingModel(ReproductionModel):
             else math.inf
         )
         self.current_food: float = self.foodlimit
-        self.finding_max: float = finding_max
+        self.finding_max: int = finding_max
         self.child_bearing_cost: float = child_bearing_cost
 
         super().__init__(

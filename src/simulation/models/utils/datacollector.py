@@ -20,7 +20,6 @@ def get_seed(self) -> int:
 def get_steps_data(self) -> Dict:
     keep = [
         "total_agents",
-        "clustering",
         "agent_types",
         "food_distribution",
         "agent_groups",
