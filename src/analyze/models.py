@@ -207,6 +207,13 @@ def plot_correlations(df: DataFrame, drop_columns: List[str]) -> None:
 
         p = pval.applymap(lambda x: "".join(["*" for t in [0.01, 0.05, 0.1] if x <= t]))
         significant_correlations = corr2.round(2).astype(str) + p
+        significant_correlations.rename(
+            columns=lambda x: "".join([y[0] for y in x.split("_")]), inplace=True
+        )
+        significant_correlations.rename(
+            index=lambda x: x + (" (") + "".join([y[0] for y in x.split("_")]) + ")",
+            inplace=True,
+        )
         significant_correlations.to_latex(create_dir("correlations/correlations.tex"))
 
     except Exception as e:

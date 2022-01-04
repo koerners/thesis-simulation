@@ -20,6 +20,7 @@ def analyze(all_run_data):
             "foodlimit_multiplicator",
             "num_agents",
             "genderless",
+            "experiment_id",
         ],
     )
 
@@ -52,6 +53,9 @@ def analyze(all_run_data):
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "migration_rate", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "finding_max", line=True
     )
 
     # NEIGHBORS
@@ -103,6 +107,7 @@ def analyze(all_run_data):
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "migration_rate"
     )
+    plot_distribution_over_time_by_feature(all_run_data, "agent_types", "finding_max")
 
     # TOTAL AGENTS
 
@@ -167,6 +172,9 @@ def analyze(all_run_data):
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "trivers_values", "migration_rate", line=True
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "trivers_values", "mutation_chance", line=True
     )
 
 
