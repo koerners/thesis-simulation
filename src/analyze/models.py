@@ -72,7 +72,7 @@ def plot_value_over_time_by_feature(
         clear_figs()
 
 
-def _plot_distribution_over_time(
+def plot_distribution_over_time(
     data: DataFrame,
     value_to_excert: str,
     output_path: str = None,
@@ -80,38 +80,41 @@ def _plot_distribution_over_time(
     zoom=None,
 ) -> None:
     # pylint: disable=cell-var-from-loop
+    try:
+        plt.figure().clear()
+        extracted = get_steps_data(data, value_to_excert)
+        data[value_to_excert] = extracted
+        data_frame = pd.DataFrame()
 
-    plt.figure().clear()
-    extracted = get_steps_data(data, value_to_excert)
-    data[value_to_excert] = extracted
-    data_frame = pd.DataFrame()
+        possible = list(extracted[0][0])
 
-    possible = list(extracted[0][0])
+        for pos in possible:
+            data[pos] = data[value_to_excert].apply(
+                lambda x: np.array([y.get(pos, 0) for y in x])
+            )
+            data_frame[pos] = np.mean(np.array(data[pos]), axis=0)
 
-    for pos in possible:
-        data[pos] = data[value_to_excert].apply(
-            lambda x: np.array([y.get(pos, 0) for y in x])
-        )
-        data_frame[pos] = np.mean(np.array(data[pos]), axis=0)
+        if zoom is not None:
+            data_frame = data_frame.head(n=zoom)
+        if line is False:
+            data_frame[possible].plot.area(
+                stacked=True,
+                color=[get_color_by_value(x) for x in data_frame[possible].columns],
+            )
 
-    if zoom is not None:
-        data_frame = data_frame.head(n=zoom)
-    if line is False:
-        data_frame[possible].plot.area(
-            stacked=True,
-            color=[get_color_by_value(x) for x in data_frame[possible].columns],
-        )
+        else:
+            data_frame[possible].plot.line(
+                color=[get_color_by_value(x) for x in data_frame[possible].columns]
+            )
 
-    else:
-        data_frame[possible].plot.line(
-            color=[get_color_by_value(x) for x in data_frame[possible].columns]
-        )
+        plt.xlabel("steps")
+        plt.legend()
+        plt.savefig(output_path)
+    except Exception as e:
+        print("Error in plot_distribution_over_time:", e)
 
-    plt.xlabel("steps")
-    plt.legend()
-    plt.savefig(output_path)
-
-    clear_figs()
+    finally:
+        clear_figs()
 
 
 def plot_distribution_over_time_by_feature(
@@ -134,7 +137,7 @@ def plot_distribution_over_time_by_feature(
             )
             if zoom is not None:
                 path += f"_zoom_{zoom}"
-            _plot_distribution_over_time(
+            plot_distribution_over_time(
                 data=data_frame.reset_index(),
                 value_to_excert=value_to_excert,
                 output_path=create_dir(f"{path}.png"),
@@ -196,8 +199,10 @@ def plot_correlations(df: DataFrame, drop_columns: List[str]) -> None:
         df["avg_fitness_non_alt"] = get_steps_data(df, "trivers_values").apply(
             lambda x: np.mean([y.get("avg_fitness_non_alt") for y in x])
         )
+        df["lifeexpectancy"] = df["lifeexpectancy"].apply(lambda x: x[0])
         df.drop(columns=drop_columns, inplace=True)
         corr = df.corr()
+
         fig = px.imshow(corr)
         fig.write_image(create_dir("correlations/correlations.png"))
 

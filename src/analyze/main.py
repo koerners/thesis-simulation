@@ -2,11 +2,13 @@ import pandas as pd
 
 from analyze.models import (
     plot_correlations,
+    plot_distribution_over_time,
     plot_distribution_over_time_by_feature,
     plot_value_over_time_by_feature,
     plot_values_over_time,
 )
 from analyze.utils.files import get_run_data, get_saved_runs
+from simulation.utils.directory import create_dir
 
 
 def analyze(all_run_data):
@@ -43,6 +45,9 @@ def analyze(all_run_data):
         all_run_data, "food_distribution_by_type", "level_of_sacrifice", line=True
     )
     plot_distribution_over_time_by_feature(
+        all_run_data, "food_distribution_by_type", "level_of_sacrifice", line=True, zoom=200
+    )
+    plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "lifeexpectancy", line=True
     )
     plot_distribution_over_time_by_feature(
@@ -57,6 +62,7 @@ def analyze(all_run_data):
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "finding_max", line=True
     )
+   
 
     # NEIGHBORS
 
@@ -108,6 +114,9 @@ def analyze(all_run_data):
         all_run_data, "agent_types", "migration_rate"
     )
     plot_distribution_over_time_by_feature(all_run_data, "agent_types", "finding_max")
+    plot_distribution_over_time_by_feature(all_run_data, "agent_types", "mutation_chance")
+    plot_distribution_over_time(
+        all_run_data, "agent_types", output_path=create_dir("agent_types_average.png"), line=True)
 
     # TOTAL AGENTS
 
