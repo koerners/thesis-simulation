@@ -130,7 +130,7 @@ if __name__ == "__main__":
         try:
             batch_run.run_all()
             DONE = True
-        #pylint: disable=broad-except
+        # pylint: disable=broad-except
         except Exception as e:
             print(e)
             print("Retrying...")
