@@ -45,7 +45,11 @@ def analyze(all_run_data):
         all_run_data, "food_distribution_by_type", "level_of_sacrifice", line=True
     )
     plot_distribution_over_time_by_feature(
-        all_run_data, "food_distribution_by_type", "level_of_sacrifice", line=True, zoom=200
+        all_run_data,
+        "food_distribution_by_type",
+        "level_of_sacrifice",
+        line=True,
+        zoom=200,
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "lifeexpectancy", line=True
@@ -62,7 +66,6 @@ def analyze(all_run_data):
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "finding_max", line=True
     )
-   
 
     # NEIGHBORS
 
@@ -114,9 +117,15 @@ def analyze(all_run_data):
         all_run_data, "agent_types", "migration_rate"
     )
     plot_distribution_over_time_by_feature(all_run_data, "agent_types", "finding_max")
-    plot_distribution_over_time_by_feature(all_run_data, "agent_types", "mutation_chance")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "mutation_chance"
+    )
     plot_distribution_over_time(
-        all_run_data, "agent_types", output_path=create_dir("agent_types_average.png"), line=True)
+        all_run_data,
+        "agent_types",
+        output_path=create_dir("agent_types_average.png"),
+        line=True,
+    )
 
     # TOTAL AGENTS
 
