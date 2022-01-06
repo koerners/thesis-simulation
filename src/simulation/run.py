@@ -1,21 +1,23 @@
+from signal import SIG_DFL, SIGPIPE, signal
+
 from mesa.batchrunner import BatchRunnerMP
+
 from simulation.models.altruism import AltruismModel
-from simulation.models.greenbeard import GreenBeardModel
-from simulation.models.reputation import ReputationModel
-from simulation.models.kinselection import KinSelectionModel
-from simulation.models.group import GroupModel
 from simulation.models.culture import CultureModel
-
-
-from simulation.models.utils.datacollector import (
-    get_experiment_id,
-    get_seed,
-    get_steps_data,
-    get_total_agent_count,
-)
+from simulation.models.greenbeard import GreenBeardModel
+from simulation.models.group import GroupModel
+from simulation.models.kinselection import KinSelectionModel
+from simulation.models.reputation import ReputationModel
+from simulation.models.utils.datacollector import (get_experiment_id, get_seed,
+                                                   get_steps_data,
+                                                   get_total_agent_count)
 from simulation.utils.commandline import Commandline
 from simulation.utils.save_runs import pre_edit_run_data, save_to_pickle
 from simulation.utils.time import get_current_timestring
+
+# Ignore SIG_PIPE and don't throw exceptions on it... (http://docs.python.org/library/signal.html)
+signal(SIGPIPE, SIG_DFL)
+
 
 RUN_ID = get_current_timestring()
 
@@ -25,7 +27,8 @@ fixed_params = {"network_saving_steps": None, "run_id": RUN_ID}
 
 variable_base_params = {"num_agents": [100]}
 
-aging_model_params = {**variable_base_params, "lifeexpectancy": [(25, 35), (60, 70)]}
+aging_model_params = {**variable_base_params,
+                      "lifeexpectancy": [(25, 35), (60, 70)]}
 
 reproduction_model_params = {
     **aging_model_params,
@@ -109,6 +112,7 @@ MODELS = {
 
 
 if __name__ == "__main__":
+
     commandline_args = Commandline()
 
     # BATCH RUNNER
@@ -130,7 +134,7 @@ if __name__ == "__main__":
         try:
             batch_run.run_all()
             DONE = True
-        #pylint: disable=broad-except
+        # pylint: disable=broad-except
         except Exception as e:
             print(e)
             print("Retrying...")
@@ -139,4 +143,5 @@ if __name__ == "__main__":
     run_data = pre_edit_run_data(run_data)
 
     print(run_data)
-    save_to_pickle(run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")
+    save_to_pickle(
+        run_data, f"{RUN_ID}-{batch_run.model_cls.__name__}/run_data.pkl")
