@@ -125,7 +125,15 @@ if __name__ == "__main__":
         },
     )
 
-    batch_run.run_all()
+    DONE = False
+    while not DONE:
+        try:
+            batch_run.run_all()
+            DONE = True
+        #pylint: disable=broad-except
+        except Exception as e:
+            print(e)
+            print("Retrying...")
 
     run_data = batch_run.get_model_vars_dataframe()
     run_data = pre_edit_run_data(run_data)
