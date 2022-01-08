@@ -199,6 +199,9 @@ def plot_correlations(df: DataFrame, drop_columns: List[str]) -> None:
         df["avg_fitness_non_alt"] = get_steps_data(df, "trivers_values").apply(
             lambda x: np.mean([y.get("avg_fitness_non_alt") for y in x])
         )
+        df["avg_reputation"] = get_steps_data(df, "average_reputation").apply(
+            lambda x: np.mean(x)
+        )
         df["lifeexpectancy"] = df["lifeexpectancy"].apply(lambda x: x[0])
         df.drop(columns=drop_columns, inplace=True)
         corr = df.corr()

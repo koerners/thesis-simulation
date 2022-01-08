@@ -33,6 +33,8 @@ COLOR_MAP = {
     "6": color_pallet[7],
     "7": color_pallet[8],
     "8": color_pallet[9],
+    "25": color_pallet[2],
+    "60": color_pallet[-1],
     # Alphabet
     "A": color_pallet[0],
     "B": color_pallet[1],
