@@ -24,8 +24,7 @@ class Commandline:
         # Read arguments from command line
         _args = _parser.parse_args()
 
-        self._nr_of_processes = int(
-            _args.Processes) if _args.Processes else None
+        self._nr_of_processes = int(_args.Processes) if _args.Processes else None
         self._iterations = int(_args.Iterations) if _args.Iterations else 1
         self._max_steps = int(_args.Steps) if _args.Steps else 100
         self._model = _args.Model
