@@ -16,7 +16,7 @@ COLOR_MAP = {
     "GreenBeardAgent": color_pallet[6],
     "ReputationAgent": color_pallet[7],
     "EatingAgent": color_pallet[8],
-    "KinSelectionAgent": color_pallet[9],
+    "KinSelectionAgent": color_pallet[3],
     # Statistics
     "below_median": color_pallet[2],
     "above_median": color_pallet[-1],

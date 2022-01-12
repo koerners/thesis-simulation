@@ -202,7 +202,9 @@ if __name__ == "__main__":
 
     data = pd.DataFrame()
 
-    data = data.append(get_run_data(ALL_RUNS[-1]))
+    for run in ALL_RUNS:
+        if "kinselection" in run.lower():
+            data = data.append(get_run_data(run))
 
     print(data)
 
