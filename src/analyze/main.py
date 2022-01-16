@@ -202,7 +202,7 @@ def analyze(all_run_data):
 
 if __name__ == "__main__":
     faulthandler.enable()
-    
+
     FILTER_BY = "culture"
 
     ALL_RUNS = get_saved_runs()
