@@ -9,13 +9,14 @@ class CultureAgent(GroupAgent):
     def find_peer_in_need(self) -> Agent:
         group = self.model.get_group_of_agent(self)
         if group is not None:
-            willing_to_help = (
-                self.random.uniform(0, 1)
-                <= group.group_culture
-            )
+            willing_to_help = self.random.uniform(0, 1) <= group.group_culture
             if willing_to_help:
                 for peer in self.model.agents:
-                    if peer != self and peer.current_food < 1 and peer.group == self.group:
+                    if (
+                        peer != self
+                        and peer.current_food < 1
+                        and peer.group == self.group
+                    ):
                         self.model.agent_acted_altruistic(self)
                         return peer
         else:
