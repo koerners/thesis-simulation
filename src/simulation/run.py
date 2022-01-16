@@ -71,7 +71,7 @@ kin_selection_model_params = {
 
 group_model_params = {
     **altruism_model_params,
-    "group_number": [2, 4, 6],
+    "group_number": [1, 3, 5],
     "migration_rate": [0.0, 0.05, 0.15],
 }
 
@@ -131,15 +131,9 @@ if __name__ == "__main__":
         },
     )
 
-    DONE = False
-    while not DONE:
-        try:
-            batch_run.run_all()
-            DONE = True
-        # pylint: disable=broad-except
-        except Exception as e:
-            print(e)
-            print("Retrying...")
+
+    batch_run.run_all()
+
 
     run_data = batch_run.get_model_vars_dataframe()
     run_data = pre_edit_run_data(run_data)

@@ -44,7 +44,7 @@ class GroupModel(AltruismModel):
         )
 
     def add_agent(self):
-        possible_agents = [EatingAgent, UnconditionalAgent, GroupAgent]
+        possible_agents = [UnconditionalAgent, EatingAgent, GroupAgent]
         agent = self.random.choice(possible_agents)
         if agent == GroupAgent:
             agent(self, group=self.random.choice(self.groups).group_id)
@@ -56,7 +56,8 @@ class GroupModel(AltruismModel):
         for agent in self.agents:
             if agent.group is not None and agent.partner is None and agent.age > 15:
                 if self.random.random() < self.migration_rate:
-                    agent.migrate()
+                    if hasattr(agent, "migrate"):
+                        agent.migrate()
 
     def get_group_of_agent(self, agent) -> Group:
         agent_group = list(filter(lambda g: g.group_id == agent.group, self.groups))

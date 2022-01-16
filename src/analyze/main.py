@@ -1,3 +1,4 @@
+import faulthandler
 import pandas as pd
 
 from analyze.models import (
@@ -49,7 +50,7 @@ def analyze(all_run_data):
         "food_distribution_by_type",
         "level_of_sacrifice",
         line=True,
-        zoom=200,
+        zoom=500,
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "food_distribution_by_type", "lifeexpectancy", line=True
@@ -90,7 +91,10 @@ def analyze(all_run_data):
         all_run_data, "agent_types", "child_bearing_cost"
     )
     plot_distribution_over_time_by_feature(
-        all_run_data, "agent_types", "child_bearing_cost", zoom=200
+        all_run_data, "agent_types", "child_bearing_cost", zoom=500
+    )
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "child_bearing_cost", zoom=1500
     )
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "lifeexpectancy"
@@ -101,7 +105,7 @@ def analyze(all_run_data):
     )
 
     plot_distribution_over_time_by_feature(
-        all_run_data, "agent_types", "level_of_sacrifice", zoom=200
+        all_run_data, "agent_types", "level_of_sacrifice", zoom=500
     )
 
     plot_distribution_over_time_by_feature(
@@ -139,10 +143,10 @@ def analyze(all_run_data):
         all_run_data, "total_agents", "foodlimit_multiplicator"
     )
     plot_value_over_time_by_feature(
-        all_run_data, "total_agents", "foodlimit_multiplicator", zoom=200
+        all_run_data, "total_agents", "foodlimit_multiplicator", zoom=500
     )
     plot_value_over_time_by_feature(
-        all_run_data, "total_agents", "allow_fake_greenbeards", zoom=200
+        all_run_data, "total_agents", "allow_fake_greenbeards", zoom=500
     )
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "child_bearing_cost")
@@ -204,13 +208,16 @@ def analyze(all_run_data):
 
 
 if __name__ == "__main__":
+    faulthandler.enable()
+    
+    FILTER_BY = "culture"
 
     ALL_RUNS = get_saved_runs()
 
     data = pd.DataFrame()
 
     for run in ALL_RUNS:
-        if "kinselection" in run.lower():
+        if FILTER_BY is None or FILTER_BY in run.lower():
             data = data.append(get_run_data(run), ignore_index=True)
 
     print(data)
