@@ -18,6 +18,6 @@ class CultureAgent(GroupAgent):
                     if peer != self and peer.current_food < 1 and peer.group == self.group:
                         self.model.agent_acted_altruistic(self)
                         return peer
-        else:
-            self.model.agent_acted_non_altruistic(self)
+            else:
+                self.model.agent_acted_non_altruistic(self)
         return None
