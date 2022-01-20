@@ -14,8 +14,7 @@ class BaseNetwork:
 
     def add_node(self, node):
         self.__graph.add_node(
-            node.unique_id, agent_type=type(
-                node).__name__, agent_group=node.group
+            node.unique_id, agent_type=type(node).__name__, agent_group=node.group
         )
 
     def remove_node(self, node):
@@ -28,12 +27,10 @@ class BaseNetwork:
         try:
             self.__graph[donor.unique_id][receiver.unique_id]["altruism"] += 1
         except KeyError:
-            self.__graph.add_edge(
-                donor.unique_id, receiver.unique_id, altruism=1)
+            self.__graph.add_edge(donor.unique_id, receiver.unique_id, altruism=1)
 
     def add_node_connection(self, node_1, node_2, relatedness: int):
-        self.__graph.add_edge(
-            node_1.unique_id, node_2.unique_id, weight=relatedness)
+        self.__graph.add_edge(node_1.unique_id, node_2.unique_id, weight=relatedness)
 
     def get_neighbors_ids(self, node) -> List[int]:
         try:

@@ -49,7 +49,9 @@ class NetworksTest(unittest.TestCase):
         network.add_node(receiver)
         network.node_helped_node(donor, receiver)
         network.node_helped_node(receiver, donor)
-        self.assertEqual(network.graph[donor.unique_id][receiver.unique_id]["altruism"], 2)
+        self.assertEqual(
+            network.graph[donor.unique_id][receiver.unique_id]["altruism"], 2
+        )
 
 
 if __name__ == "__main__":
