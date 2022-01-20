@@ -41,6 +41,16 @@ class NetworksTest(unittest.TestCase):
             network.graph.nodes[test_node.unique_id]["agent_group"], "group_2"
         )
 
+    def test_node_helped_node(self):
+        network = BaseNetwork()
+        donor = TestNode(1)
+        receiver = TestNode(2)
+        network.add_node(donor)
+        network.add_node(receiver)
+        network.node_helped_node(donor, receiver)
+        network.node_helped_node(receiver, donor)
+        self.assertEqual(network.graph[donor.unique_id][receiver.unique_id]["altruism"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()
