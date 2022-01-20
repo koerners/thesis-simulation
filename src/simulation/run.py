@@ -54,7 +54,7 @@ altruism_model_params = {
     # Percentage of food the agent is willing to sacrifice
     # 1.0 might leave the agent to starve without food
     # 0.x gives x percent to other agents but minimum 1 if the agent can afford it without starving
-    "level_of_sacrifice": [0.2, 0.5, 0.8, 1.0],
+    "level_of_sacrifice": [0.2, 0.5, 1.0],
 }
 
 

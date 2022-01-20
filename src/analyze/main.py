@@ -14,6 +14,8 @@ from simulation.utils.directory import create_dir
 
 def analyze(all_run_data):
 
+
+
     # CORRELATIONS
 
     plot_correlations(
@@ -87,6 +89,15 @@ def analyze(all_run_data):
     )
 
     # AGENT TYPES
+
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "group_number", zoom=1500
+    )
+
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "group_number"
+    )
+
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "child_bearing_cost"
     )
@@ -120,7 +131,8 @@ def analyze(all_run_data):
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "migration_rate"
     )
-    plot_distribution_over_time_by_feature(all_run_data, "agent_types", "finding_max")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_types", "finding_max")
     plot_distribution_over_time_by_feature(
         all_run_data, "agent_types", "mutation_chance"
     )
@@ -133,9 +145,11 @@ def analyze(all_run_data):
 
     # TOTAL AGENTS
 
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "finding_max")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "finding_max")
     plot_value_over_time_by_feature(all_run_data, "total_agents", "genderless")
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "lifeexpectancy")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "lifeexpectancy")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "foodlimit_multiplicator"
     )
@@ -145,16 +159,20 @@ def analyze(all_run_data):
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "allow_fake_greenbeards", zoom=500
     )
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "child_bearing_cost")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "child_bearing_cost")
     plot_value_over_time_by_feature(
         all_run_data, "total_agents", "allow_fake_greenbeards"
     )
-    plot_value_over_time_by_feature(all_run_data, "total_agents", "migration_rate")
+    plot_value_over_time_by_feature(
+        all_run_data, "total_agents", "migration_rate")
 
     # GROUPS AND CULTURE
 
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "finding_max")
-    plot_distribution_over_time_by_feature(all_run_data, "agent_groups", "group_number")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "finding_max")
+    plot_distribution_over_time_by_feature(
+        all_run_data, "agent_groups", "group_number")
 
     plot_distribution_over_time_by_feature(
         all_run_data, "groups_culture", "lifeexpectancy", line=True
