@@ -40,8 +40,7 @@ class ReproducingAgent(AgingAgent):
 
     def reproduce(self):
         child = self.bear_child()
-        self.model.network.add_node_connection(
-            self, child, Relationship.CHILD.value)
+        self.model.network.add_node_connection(self, child, Relationship.CHILD.value)
         self.model.network.add_node_connection(
             self.partner, child, Relationship.CHILD.value
         )
@@ -89,9 +88,15 @@ class ReproducingAgent(AgingAgent):
                 if mutant not in parent_classes:
                     agent = mutant
                     break
-        if hasattr(self.model, "groups") and agent.__name__ in ["GroupAgent", "CultureAgent"]:
-            group = self.group if self.group is not None else self.random.choice(
-                self.model.groups).group_id
+        if hasattr(self.model, "groups") and agent.__name__ in [
+            "GroupAgent",
+            "CultureAgent",
+        ]:
+            group = (
+                self.group
+                if self.group is not None
+                else self.random.choice(self.model.groups).group_id
+            )
         else:
             group = None
         return agent(self.model, age=0, group=group)
