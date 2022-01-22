@@ -15,6 +15,7 @@ matplotlib = "*"
 scipy = "*"
 kaleido = "*"
 palettable = "*"
+lxml = "*"
 
 [scripts]
 start="python src/simulation/run.py"

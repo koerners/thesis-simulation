@@ -12,6 +12,9 @@ class ReputationAgent(AltruismAgent):
             if peer != self and peer.current_food < 1:
                 if self.calculate_help_decision(peer):
                     self.reputation += 1
+                    self.model.network.update_attribute(
+                        self, "reputation", self.reputation
+                    )
                     return peer
         return None
 

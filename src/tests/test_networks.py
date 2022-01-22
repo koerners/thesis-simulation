@@ -41,6 +41,15 @@ class NetworksTest(unittest.TestCase):
             network.graph.nodes[test_node.unique_id]["agent_group"], "group_2"
         )
 
+    def test_set_attribute(self):
+        network = BaseNetwork()
+        test_node = TestNode(1)
+        network.add_node(test_node)
+        network.update_attribute(test_node, "test_attribute", "test_value")
+        self.assertEqual(
+            network.graph.nodes[test_node.unique_id]["test_attribute"], "test_value"
+        )
+
     def test_node_helped_node(self):
         network = BaseNetwork()
         donor = TestNode(1)

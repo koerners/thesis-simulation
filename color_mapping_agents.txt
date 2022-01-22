@@ -1,0 +1,9 @@
+GroupAgent #1D6996
+CultureAgent #38A6A5
+AltruismAgent #0F8554
+UnconditionalAgent #73AF48
+FakeGreenBeardAgent #EDAD08
+GreenBeardAgent #E17C05
+ReputationAgent #CC503E
+EatingAgent #94346E
+KinSelectionAgent #0F8554
