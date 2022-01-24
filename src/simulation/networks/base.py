@@ -15,7 +15,10 @@ class BaseNetwork:
     def add_node(self, node):
         group = node.group if node.group is not None else "none"
         self.__graph.add_node(
-            node.unique_id, agent_type=type(node).__name__, agent_group=group
+            node.unique_id,
+            agent_type=type(node).__name__,
+            agent_group=group,
+            times_helped=0,
         )
 
     def remove_node(self, node):
@@ -28,6 +31,9 @@ class BaseNetwork:
 
     def update_attribute(self, node, attribute: str, value):
         self.__graph.nodes[node.unique_id][attribute] = value
+
+    def get_attribute(self, node, attribute: str):
+        return self.__graph.nodes[node.unique_id][attribute]
 
     def node_helped_node(self, donor, receiver):
         try:
