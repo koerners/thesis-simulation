@@ -33,7 +33,7 @@ Install the development dependencies with ```pipenv install --dev```.
 - Run tests with ```pipenv run test```
 
 ## Structure
-
+These diagrams are updated automatically by the pipeline when a new commit is pushed to the main branch.
 ### Models
 
 ![UML-Models](https://github.com/koerners/thesis-simulation/blob/main/uml/classes_Models.png)
