@@ -2,7 +2,7 @@
 
 [![Lint and Test](https://github.com/koerners/thesis-simulation/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/koerners/thesis-simulation/actions/workflows/pytest.yml)
 
-## Background
+## Purpose
 The most popular theories regarding the evolution of altruistic traits in humans are put to the test in a series of cross-generational agent-based simulations that mimic natural selection according to Darwin's three principles of inheritance, variation, and selection. The focus is put on the environmental circumstances that may have led to the evolution of altruism according to each of these theories.
 
 ## Setup
